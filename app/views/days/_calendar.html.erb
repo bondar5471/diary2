@@ -1,0 +1,18 @@
+<ul class="calendar">
+    
+  <div class="months">
+  <%  @day_months.each do |month_name, select_days|  %>
+  
+  <div id="month">
+      <p class="month-name"><%= month_name.strftime('%B, %Y') %></p> 
+    <table>
+    <% (1..days_in_month(month_name.month,month_name.year)).each do |day| %>  
+      <td>
+        <%= display_day(day, select_days) %> 
+      </td>  
+    <% end %> 
+    </table>
+  </div>
+  <% end %>
+  </div> 
+</ul>
