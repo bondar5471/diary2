@@ -66,53 +66,81 @@ function notValidTask () {
   }
 //drag and drop  
 $(document).on('turbolinks:load', function() {
-  $("#dropnotice").click(function(){ 
-  var board = document.getElementById('dropnotice');
+  document.onmousedown = function(e) {
 
-  board.onmousedown = function(e) {
+    var dragElement = e.target;
+  
+    if (!dragElement.classList.contains('draggable')) return;
+  
+    var shiftX, shiftY;
+  
+    startDrag(e.clientX, e.clientY);
+  
+    document.onmousemove = function(e) {
+      moveAt(e.clientX, e.clientY);
+    };
+  
+    dragElement.onmouseup = function() {
+      finishDrag();
+    };
 
-  var coords = getCoords(board);
-  var shiftX = e.pageX - coords.left;
-  var shiftY = e.pageY - coords.top;
+    function startDrag(clientX, clientY) {
+  
+      shiftX = clientX - dragElement.getBoundingClientRect().left;
+      shiftY = clientY - dragElement.getBoundingClientRect().top;
+  
+      dragElement.style.position = 'fixed';
+  
+      document.body.appendChild(dragElement);
+  
+      moveAt(clientX, clientY);
+    };
+  
+    function finishDrag() {
+      // конец переноса, перейти от fixed к absolute-координатам
+      dragElement.style.top = parseInt(dragElement.style.top) + pageYOffset + 'px';
+      dragElement.style.position = 'absolute';
+  
+      document.onmousemove = null;
+      dragElement.onmouseup = null;
+    }
+  
+    function moveAt(clientX, clientY) {
+      var newX = clientX - shiftX;
+      var newY = clientY - shiftY;
+      var newBottom = newY + dragElement.offsetHeight;
+      if (newBottom > document.documentElement.clientHeight) {
+        var docBottom = document.documentElement.getBoundingClientRect().bottom;
+        var scrollY = Math.min(docBottom - newBottom, 10);
+        if (scrollY < 0) scrollY = 0;
+  
+        window.scrollBy(0, scrollY);
+  
+        newY = Math.min(newY, document.documentElement.clientHeight - dragElement.offsetHeight);
+      }
+  
+      if (newY < 0) {
+        var scrollY = Math.min(-newY, 10);
+        if (scrollY < 0) scrollY = 0;
+  
+        window.scrollBy(0, -scrollY);
+        newY = Math.max(newY, 0);
+      }
 
-  board.style.position = 'absolute';
-  document.body.appendChild(board);
-  moveAt(e);
-
-  board.style.zIndex = 1000;
-
-  function moveAt(e) {
-    board.style.left = e.pageX - shiftX + 'px';
-    board.style.top = e.pageY - shiftY + 'px';
-  }
-
-  document.onmousemove = function(e) {
-    moveAt(e);
-  };
-
-  board.onmouseup = function() {
-    document.onmousemove = null;
-    board.onmouseup = null;
-  };
-
-}
-
-board.ondragstart = function() {
-  return false;
-};
-
-function getCoords(elem) {
-  var box = elem.getBoundingClientRect();
-  return {
-    top: box.top + pageYOffset,
-    left: box.left + pageXOffset
-  };
-}})
-})
+      if (newX < 0) newX = 0;
+      if (newX > document.documentElement.clientWidth - dragElement.offsetWidth) {
+        newX = document.documentElement.clientWidth - dragElement.offsetWidth;
+      }
+  
+      dragElement.style.left = newX + 'px';
+      dragElement.style.top = newY + 'px';
+    }
+    return false;
+  }})
 //create notice
 $(document).on('turbolinks:load', function() {
 
-  $(".sendnotice").click(function(e){
+  $("#sendnotice").click(function(e){
     e.preventDefault();
     var nottitle = document.getElementById("notice_title").value; 
     var nottext = document.getElementById("notice_text").value;
@@ -123,9 +151,10 @@ $(document).on('turbolinks:load', function() {
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: { notice: { text: nottext , title: nottitle}},
+        data: { notice: { title: nottitle, text: nottext}},
         success: function(data) {
-          debugger;
+          $('#notice_text').css('border-color','seagreen');
+          $('#notice_title').css('border-color','seagreen');
           var noticetitle = document.createElement('p');
           noticetitle.innerText = data.title;
 
@@ -145,12 +174,13 @@ $(document).on('turbolinks:load', function() {
           $('#notice_text').val('');
                     
         },
-        error:  
-        $('#notice_title', 'notice_text').each(function(){
-          if(!$(this).val() || $(this).val() == ""){
+        error: 
+        $('#notice_title').each(function(){
+          debugger;
+          if(!$('#notice_title').val() == "" || $('#notice_text').val() == ""){
             $(this).css('border-color','red');
+            $('#notice_text').css('border-color','red');
             send = false;
-            alert('Field is empty!');
             }
         })
     });

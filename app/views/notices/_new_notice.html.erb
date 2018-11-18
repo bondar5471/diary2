@@ -1,9 +1,9 @@
-<div id="dropnotice">
+<div id="dropnotice", class="draggable">
    <div id="noticelist">
    <% Notice.all.each do |notice| %> 
     <p><%= notice.title %></p>
     <p><%= notice.text %></p>            
-    <p><%= link_to 'Destroy', notice_path(notice), data: {:confirm => 'Are you sure?'}, :method => :delete %></p>  
+    <p><%= link_to 'Destroy', notice_path(notice), :method => :delete, remote: true %></p>  
   <%end%>
   </div>
 <%= form_for Notice.create do |f| %>
@@ -12,8 +12,7 @@
   <b>Body</b>
   <p id="text"><%= f.text_area :text %></p>
   <p>Add notice</p>
-<div class="sendnotice"><%= f.submit 'Create', class: 'btn btn-success' %></div>
+  <%= f.submit 'Create', class: 'btn btn-success', id: 'sendnotice' %>
 <%end%>
 </div>
-
-
+   
