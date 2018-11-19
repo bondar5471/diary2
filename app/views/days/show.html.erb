@@ -6,8 +6,9 @@
 	<b><%= @day.successful %></b>
 	<br>
 	<p>Report on day</p>
-	<b><%= @day.report %></b>
+	<b id="container_report"><span><%= @day.report %></span></b>
 	<br>
+	<!-- <%= button_to "Save edit", day_path(@day), method: "patch", remote: true, form_class: "update" %> -->
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">

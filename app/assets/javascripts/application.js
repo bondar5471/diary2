@@ -68,31 +68,21 @@ function notValidTask () {
 $(document).on('turbolinks:load', function() {
   document.onmousedown = function(e) {
 
-    var dragElement = e.target;
-  
-    if (!dragElement.classList.contains('draggable')) return;
-  
+    var dragElement = e.target;  
+    if (!dragElement.classList.contains('draggable')) return;  
     var shiftX, shiftY;
-  
     startDrag(e.clientX, e.clientY);
-  
     document.onmousemove = function(e) {
       moveAt(e.clientX, e.clientY);
     };
-  
     dragElement.onmouseup = function() {
       finishDrag();
     };
-
     function startDrag(clientX, clientY) {
-  
       shiftX = clientX - dragElement.getBoundingClientRect().left;
       shiftY = clientY - dragElement.getBoundingClientRect().top;
-  
       dragElement.style.position = 'fixed';
-  
       document.body.appendChild(dragElement);
-  
       moveAt(clientX, clientY);
     };
   
@@ -100,7 +90,6 @@ $(document).on('turbolinks:load', function() {
       // конец переноса, перейти от fixed к absolute-координатам
       dragElement.style.top = parseInt(dragElement.style.top) + pageYOffset + 'px';
       dragElement.style.position = 'absolute';
-  
       document.onmousemove = null;
       dragElement.onmouseup = null;
     }
@@ -113,16 +102,13 @@ $(document).on('turbolinks:load', function() {
         var docBottom = document.documentElement.getBoundingClientRect().bottom;
         var scrollY = Math.min(docBottom - newBottom, 10);
         if (scrollY < 0) scrollY = 0;
-  
         window.scrollBy(0, scrollY);
-  
         newY = Math.min(newY, document.documentElement.clientHeight - dragElement.offsetHeight);
       }
   
       if (newY < 0) {
         var scrollY = Math.min(-newY, 10);
         if (scrollY < 0) scrollY = 0;
-  
         window.scrollBy(0, -scrollY);
         newY = Math.max(newY, 0);
       }
@@ -186,4 +172,43 @@ $(document).on('turbolinks:load', function() {
     });
   });
 });
+//click p on input text
+window.onload = function() {
+  document.getElementById('container_report').onclick = function(event) {
+      var span, input, text;
+      var containerReport = document.getElementById('container_report');
+      event = event || window.event;
+      span = event.target || event.srcElement;
+      if (span && span.tagName.toUpperCase() === "SPAN") {
+        debugger;
+          span.style.display = "none";
+          text = span.innerHTML;
+          input = document.createElement("input");
+          input.type = "text";
+          input.value = text;
+          input.name = "day[report]";
+          input.size = Math.max(text.length);
+          span.parentNode.insertBefore(input, span);
+
+          var btnedit  = document.createElement("BUTTON"); 
+          btnedit.innerHTML = "Save";
+          btnedit.type = "submit";
+          btnedit.className = "btn btn-success";
+          btnedit.name = "commit";
+          btnedit.setAttribute ("data-disable-with", "Edit")
+
+
+          containerReport.appendChild(btnedit);
+          input.focus();
+          input.onblur = function() {
+              span.parentNode.removeChild(input);
+              span.innerHTML = input.value == "" ? "&nbsp;" : input.value;
+              span.style.display = "";
+          
+
+          };
+      }
+  };
+};
+
 
