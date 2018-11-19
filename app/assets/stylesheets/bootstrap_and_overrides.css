@@ -63,3 +63,7 @@ footer{
   background-color: #038cd1bb;
   border-radius: 6px;
 }
+.btn.btn-success {
+  height: 40px;
+  width: 70px;
+}

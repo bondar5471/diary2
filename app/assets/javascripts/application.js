@@ -16,6 +16,7 @@
 //= require activestorage
 //= require turbolinks
 
+
 //create task
 $(document).on('turbolinks:load', function() {
 
@@ -173,7 +174,7 @@ $(document).on('turbolinks:load', function() {
   });
 });
 //click p on input text
-window.onload = function() {
+$(document).on('turbolinks:load', function() {
   document.getElementById('container_report').onclick = function(event) {
       var span, input, text;
       var containerReport = document.getElementById('container_report');
@@ -209,6 +210,67 @@ window.onload = function() {
           };
       }
   };
+});
+//drop doard trello
+$(document).on('turbolinks:load', function() {
+function dragStart(event) {
+  debugger;
+	event.dataTransfer.setData("Text", event.target.id);
 };
 
+function dragEnter(event) {
+	event.preventDefault();
+	if (event.target.className == "taskColumn") {
+		event.target.style.border = "1px dotted rgb(255,0,0)";
+	} else if (event.target.className == "taskDiv") {
+		event.target.style.backgroundColor = "grey";
+	}
+};
 
+function dragLeave(event) {
+	event.preventDefault();
+	event.target.style.border = "";
+	event.target.style.backgroundColor = "";
+};
+
+function dragOver(event) {
+	event.preventDefault();
+};
+
+function swapTasks(node1, node2) {
+	node1.parentNode.replaceChild(node1, node2);
+	node1.parentNode.insertBefore(node2, node1);
+}
+
+function drop(event) {
+	event.preventDefault();
+	if (event.target.className == "taskColumn") {
+		var data = event.dataTransfer.getData("Text");
+		event.target.appendChild(document.getElementById(data));
+
+		event.target.style.border = "";
+	} else if (event.target.className == "taskDiv") {
+		var data = event.dataTransfer.getData("Text");
+		swapTasks(document.getElementById(data), document.getElementById(event.target.id));
+		var curDateTime = new Date();
+		console.log("Task: " + data + " " + curDateTime.getHours() + ":" + curDateTime.getMinutes() + ":" + curDateTime.getSeconds());
+		event.target.style.border = "";
+		event.target.style.backgroundColor = "";
+	} else {
+		console.log('Not a drop target');
+	}
+};
+
+var taskDivs = document.querySelectorAll('.taskDiv');
+[].forEach.call(taskDivs, function(divs) {
+	divs.addEventListener('dragstart', dragStart, false);
+});
+
+var targetDivs = document.querySelectorAll('.taskColumn');
+[].forEach.call(targetDivs, function(columns) {
+	columns.addEventListener('dragenter', dragEnter, false);
+	columns.addEventListener('dragleave', dragLeave, false);
+	columns.addEventListener('dragover', dragOver, false);
+	columns.addEventListener('drop', drop, false);
+})
+});

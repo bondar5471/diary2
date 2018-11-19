@@ -2,11 +2,10 @@
   <h2>Day</h2>
 	<%= @day.date.try(:strftime, '%B %d, %Y') %>
 	<br>
-	<p>Success of the day</p>
-	<b><%= @day.successful %></b>
-	<br>
-	<p>Report on day</p>
-	<b id="container_report"><span><%= @day.report %></span></b>
+	<b>Success of the day</b>
+	<p><%= @day.successful %></p>
+	<b>Report on day</b>
+	<p id="container_report"><span><%= @day.report %></span></p>
 	<br>
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
@@ -25,9 +24,23 @@
 	</div>
 	<br>
 	<div class="element_control_day">
-	  <%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %>
-	  <%= button_to "Delete", day_path, method: :delete, :class => "btn btn-danger" %>
-    </div>
-	<br>
-	<%= link_to  "Back", days_path %>
+	  <span><%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %></span>
+	  <span><%= button_to "Delete", day_path, method: :delete, :class => "btn btn-danger" %></span>
+	  <span><%= link_to  "Back", days_path %></span>
+  </div>
+	<div class="board">
+			<div class="taskColumn" id="todo">
+				<div class="colHdr" dragabble="true"><strong>TO DO</strong></div>
+				<div class="taskDiv" draggable="true" id="dragtarget1"><span><strong>Task 1</strong></span></div>
+				<div class="taskDiv" draggable="true" id="dragtarget2"><span><strong>Task 2</strong></span></div>
+				<div class="taskDiv" draggable="true" id="dragtarget3"><span><strong>Task 3</strong></span></div>
+					
+			</div>
+			<div class="taskColumn" id="doing">
+				<div class="colHdr"><strong>DOING</strong></div>
+			</div>
+			<div class="taskColumn" id="done">
+				<div class="colHdr"><strong>DONE</strong></div>
+			</div>
+		</div>
 </div>

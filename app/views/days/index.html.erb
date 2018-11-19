@@ -1,6 +1,8 @@
 <div class="row" >
 <h2>All day</h2>
-<br>
+<div class="notices">
+  <%= render "notices/new_notice" %>
+</div>
 <%= render  "calendar" %>
 <span class="btn btn-default btn-lg" ><%= link_to "New day", new_day_path %></span>
 </div>
