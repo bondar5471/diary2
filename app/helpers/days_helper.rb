@@ -14,9 +14,10 @@ module DaysHelper
 
   def display_day(day_compar, days)
     day_detected = days.detect { |d| day_compar == d.date.day }
+
     if day_detected
       color = day_detected.successful ? 'green' : 'red'
-      "<div class=\"#{color}\">#{day_detected.date.day} </div>".html_safe
+      "<a href='/days/#{days[0]['id']}'><div class=\"#{color}\">#{day_detected.date.day} </div></a>".html_safe
     else
       day_compar
     end
