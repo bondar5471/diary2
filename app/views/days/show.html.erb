@@ -1,7 +1,6 @@
 <div class="container">
-  <h2>Day</h2>
-	<%= @day.date.try(:strftime, '%B %d, %Y') %>
-	<br>
+	<div class="container_day">
+	<p><%= @day.date.try(:strftime, '%B %d, %Y') %></p>
 	<b>Success of the day</b>
 	<p><%= @day.successful %></p>
 	<b>Report on day</b>
@@ -9,19 +8,20 @@
 	<br>
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
+	</div>	
 		<div id="tasklist">
 		<% @day.tasks.each do |task| %>
 		<p><%= task.list %></p>
 		<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
 		<p></p>
 		<%end%>
-	    </div>
+	  </div>
 		<p>Add tasks on day</p>
 		<input type="text" name="task" id="task"/>
 		<hr>
 		<div class="sendtask"><button >Add task</button></div>
 	</div>
-	</div>
+
 	<br>
 	<div class="element_control_day">
 	  <span><%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %></span>
@@ -34,7 +34,7 @@
 				<div class="taskDiv" draggable="true" id="dragtarget1"><span><strong>Task 1</strong></span></div>
 				<div class="taskDiv" draggable="true" id="dragtarget2"><span><strong>Task 2</strong></span></div>
 				<div class="taskDiv" draggable="true" id="dragtarget3"><span><strong>Task 3</strong></span></div>
-					
+			  <div class="footer_card"><%= link_to  "Create card"%></div>	
 			</div>
 			<div class="taskColumn" id="doing">
 				<div class="colHdr"><strong>DOING</strong></div>
@@ -43,4 +43,5 @@
 				<div class="colHdr"><strong>DONE</strong></div>
 			</div>
 		</div>
+  </div>
 </div>

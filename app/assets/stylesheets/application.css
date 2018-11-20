@@ -87,7 +87,6 @@ footer{
   margin: 1px;
 } 
 
-
 .green {
   height: 22px;
   width: 22px;
@@ -145,16 +144,16 @@ ul.calendar {
 .taskColumn {
   float: left;
 	width: 300px;
-	background-color: rgba(51, 147, 236, 0.5);
+	background-color: rgb(187, 222, 255);
 	margin-right: 10px;
-	border: 1px solid #aaa;
+	border: 1px solid rgba(0, 17, 37, 0.568);
 	border-radius: 3px;
 	padding-bottom: 20px;
 	min-height: 60px;
 }
 
 .taskDiv {
-	background-color: rgba(29, 101, 235, 0.363);
+	background-color:#fff;
 	margin: 2px 6px 4px 6px;
 	min-height: 1.6rem;
 	border-radius: 2px;
@@ -169,9 +168,10 @@ ul.calendar {
 .colHdr {
 	top: 0;
 	height: 1.8rem;
-	line-height: 1.8rem;
+  line-height: 1.8rem;
+  color: #17394d;
 	position: relative;
-	background-color: lightgray;
+	background-color: rgb(130, 188, 255);
 	margin-bottom: 30px;
 	padding: 2px 0px 0px 6px;
 }
@@ -186,7 +186,7 @@ ul.calendar {
 }
 
 .dragOver {
-	border: 1px dotted rgb(255, 0, 0);
+	border: 2px dotted rgb(0, 26, 255);
 }
 
 .taskDivTopMargin {
@@ -200,4 +200,12 @@ ul.calendar {
 	line-height: 50px;
 	padding-left: 15px;
 	background-color: rgb(30, 100, 222);
+}
+.footer_card {
+  border-radius: 0 0 3px 3px;
+  color: #6b808c;
+  display: block;
+  flex: 0 0 auto;
+  padding: 8px;
+  position: relative;
 }

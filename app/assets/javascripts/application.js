@@ -188,7 +188,7 @@ $(document).on('turbolinks:load', function() {
           input.type = "text";
           input.value = text;
           input.name = "day[report]";
-          input.size = Math.max(text.length);
+          input.size = Math.max(text.length + text.length*0.5);
           span.parentNode.insertBefore(input, span);
 
           var btnedit  = document.createElement("BUTTON"); 
