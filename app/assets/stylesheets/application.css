@@ -132,3 +132,13 @@ ul.calendar {
 .notices {
   float: right;
 }
+/*card*/
+.card.card-body {
+  display: block;
+  border: #000 1px solid;
+  margin-bottom: 7px;
+}
+.col-3 {
+  display: inline-block; 
+  padding-left: 0px;   
+  }

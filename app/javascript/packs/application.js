@@ -8,7 +8,6 @@
 // layout file, like app/views/layouts/application.html.erb
 import Vue from 'vue/dist/vue.esm'
 import App from '../app.vue'
-console.log('Hello World from Webpacker')
 
 document.addEventListener("turbolinks:load", function() {
   var element = document.querySelector("#boards")
@@ -16,9 +15,10 @@ document.addEventListener("turbolinks:load", function() {
     const app = new Vue ({
       el: element,
       data: {
-        lists: JSON.parse(element.dataset.lists)  
+        lists: JSON.parse(element.dataset.lists)
+
       }, 
-      template: "<App :original_lists='list' />",   
+      template: "<App :original_lists='lists' />",   
       components: { App }
     }) 
   }

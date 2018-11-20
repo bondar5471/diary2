@@ -67,3 +67,13 @@ footer{
   height: 40px;
   width: 70px;
 }
+.col-3 {
+  background-color: rgb(145, 145, 145);
+  display: inline-block; 
+  margin-left: 10px; 
+  border-radius: 7px;
+  }
+.board {
+  display: inline-block;
+  overflow-x: auto;
+}  
