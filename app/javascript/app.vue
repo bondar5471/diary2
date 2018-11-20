@@ -1,7 +1,7 @@
 <template>
   <draggable class="board">
     <div v-for="list in original_lists" class="col-3" :key="list.id">
-      <h3> {{list.name}} </h3>
+      <h4> {{list.name}} </h4>
       <hr/>
       <draggable v-model="list.cards" :options="{group: 'cards'}">
         <div v-for="(card, index) in list.cards" :key="card.id" class="card card-body">
