@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CardsController < ApplicationController
-  before_action :set_card, only: %i[show edit update destroy]
+  before_action :set_card, only: %i[show edit update destroy move]
 
   def index
     @cards = Card.all
@@ -47,6 +47,11 @@ class CardsController < ApplicationController
       format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def move
+    @card.update(card_params)
+    render action: :show
   end
 
   private

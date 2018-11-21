@@ -163,7 +163,6 @@ $(document).on('turbolinks:load', function() {
         },
         error: 
         $('#notice_title').each(function(){
-          debugger;
           if(!$('#notice_title').val() == "" || $('#notice_text').val() == ""){
             $(this).css('border-color','red');
             $('#notice_text').css('border-color','red');
@@ -181,7 +180,6 @@ $(document).on('turbolinks:load', function() {
       event = event || window.event;
       span = event.target || event.srcElement;
       if (span && span.tagName.toUpperCase() === "SPAN") {
-        debugger;
           span.style.display = "none";
           text = span.innerHTML;
           input = document.createElement("input");
