@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :card do
     list nil
-    name "MyString"
+    name 'MyString'
     position 1
   end
 end

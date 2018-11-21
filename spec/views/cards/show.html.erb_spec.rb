@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "cards/show", type: :view do
+RSpec.describe 'cards/show', type: :view do
   before(:each) do
     @card = assign(:card, Card.create!(
-      :list => nil,
-      :name => "Name",
-      :position => 2
-    ))
+                            list: nil,
+                            name: 'Name',
+                            position: 2
+                          ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(//)
     expect(rendered).to match(/Name/)
