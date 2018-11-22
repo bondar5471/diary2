@@ -21,6 +21,7 @@
 $(document).on('turbolinks:load', function() {
 
   $(".sendtask").click(function(){  
+    debugger;
     var task = document.getElementById("task").value; 
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');
@@ -88,7 +89,6 @@ $(document).on('turbolinks:load', function() {
     };
   
     function finishDrag() {
-      // конец переноса, перейти от fixed к absolute-координатам
       dragElement.style.top = parseInt(dragElement.style.top) + pageYOffset + 'px';
       dragElement.style.position = 'absolute';
       document.onmousemove = null;
@@ -126,7 +126,6 @@ $(document).on('turbolinks:load', function() {
   }})
 //create notice
 $(document).on('turbolinks:load', function() {
-
   $("#sendnotice").click(function(e){
     e.preventDefault();
     var nottitle = document.getElementById("notice_title").value; 

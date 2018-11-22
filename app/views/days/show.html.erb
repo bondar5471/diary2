@@ -8,23 +8,23 @@
 	<br>
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
-	</div>	
 		<div id="tasklist">
 		<% @day.tasks.each do |task| %>
 		<p><%= task.list %></p>
 		<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
 		<p></p>
 		<%end%>
-	  </div>
+	    </div>
 		<p>Add tasks on day</p>
 		<input type="text" name="task" id="task"/>
 		<hr>
 		<div class="sendtask"><button >Add task</button></div>
 	</div>
+	</div>
 	<br>
 	<div class="element_control_day">
 	  <span><%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %></span>
-	  <span><%= button_to "Delete", day_path, method: :delete, :class => "btn btn-danger" %></span>
+	  <span><%= button_to "Delete day", day_path, method: :delete, :class => "btn btn-danger" %></span>
 	  <span><%= link_to  "Back", days_path %></span>
   </div>
   </div>
