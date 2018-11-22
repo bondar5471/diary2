@@ -79,11 +79,11 @@ footer{
   display: inline-block;
   background: #87CEEB;
   text-align: center;
-  font-size: 15px;
+  font-size: 17px;
   height: 24px;
   width: 24px;
-  border: 1px solid rgb(19, 19, 19);
-  color: #000;
+  border: 1px solid rgb(167, 167, 167);
+  color: rgb(0, 16, 104);
   margin: 1px;
 } 
 
@@ -135,11 +135,13 @@ ul.calendar {
 /*card*/
 .card.card-body {
   display: block;
-  border: #000 1px solid;
+  border: rgb(83, 83, 83) 1px solid;
+  border-radius: 5px;
   margin-bottom: 7px;
 }
 .col-3 {
-  text-align: center;
+  border: #1100fd88 2px solid;
+  border-radius: 7px;
   vertical-align: top;
   display: inline-block; 
   padding: 10px;   
