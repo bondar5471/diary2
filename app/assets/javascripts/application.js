@@ -21,7 +21,6 @@
 $(document).on('turbolinks:load', function() {
 
   $(".sendtask").click(function(){  
-    debugger;
     var task = document.getElementById("task").value; 
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');

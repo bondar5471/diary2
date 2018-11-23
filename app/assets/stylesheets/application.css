@@ -156,3 +156,23 @@ ul.calendar {
   width: 100%;
   white-space: nowrap;
 }
+/*globalcalendar*/
+#globalcalendar {
+  background-color: #4abdf7;
+  border-collapse: separate;
+  border: 2px solid black;
+  border-radius: 15px;
+  height: 250px;
+  width: 250px;
+  padding: 10px;
+}
+td.daycell {
+  padding: 5px;
+  border: 1px solid lightgray;
+  text-align: center;
+  background-color: #99ddff;
+  
+}
+th.calendarhead {
+  padding: 3px;
+}
