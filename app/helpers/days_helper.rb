@@ -10,6 +10,7 @@ module DaysHelper
   def formated_date(date)
     date.strftime('%B %d, %Y')
   end
+
   def display_day(day_number, days)
     day_detected = days.detect { |d| day_number == d.date.day }
     if day_detected
