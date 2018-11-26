@@ -138,6 +138,7 @@ ul.calendar {
   border: rgb(83, 83, 83) 1px solid;
   border-radius: 5px;
   margin-bottom: 7px;
+  background-color: rgba(189, 195, 253);
 }
 .col-3 {
   border: #1100fd88 2px solid;
@@ -160,9 +161,9 @@ ul.calendar {
 #globalcalendar {
   background-color: #4abdf7;
   border-collapse: separate;
-  border: 2px solid black;
+  border: 1px solid rgb(39, 66, 92);
   border-radius: 15px;
-  height: 250px;
+  height: 255px;
   width: 250px;
   padding: 10px;
 }

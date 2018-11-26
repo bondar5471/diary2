@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :notices, only: %i[new create destroy]
   resources :days do
     resources :tasks, only: %i[new create destroy]
+    member do
+      delete :destroy_on_month
+    end
   end
   root to: 'days#index'
 end

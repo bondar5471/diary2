@@ -1,5 +1,4 @@
 <div class="row" >
-<h2>Diary</h2>
 <div id="globalcalendar">
 <% start_date = params.fetch(:start_date, Date.today).to_date %>
 <% date_range = (start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
@@ -19,7 +18,8 @@
     <% date_range.each_slice(7) do |week| %>
     <tr>    
     <% week.each do |day| %>
-    <td class="daycell"><div><%=day.strftime('%d')%></div></td>    
+    <td class="daycell"><div><%=day.strftime('%d')%></div>    
+    </td>   
     <%end%>
     </tr>
     <%end%> 

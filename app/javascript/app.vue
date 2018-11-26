@@ -5,7 +5,7 @@
       <draggable v-model="list.cards" :options="{group: 'cards'}" @change="cardMoved">
         <div v-for="(card, index) in list.cards" :key="card.id" class="card card-body">
           {{card.name}}
-          <button v-on:click="cardRemove(card.id)" class="btn btn-danger">&times;</button>
+          <button v-on:click="cardRemove(card.id)" class="btn btn-danger">Delete</button>
         </div>
       </draggable>
       <div  class="list">
@@ -87,9 +87,10 @@ methods: {
 
 <style scoped>
  .btn.btn-danger {
-   height: 50px;
-   width: 50px;
+   height: 30px;
+   width: 70px;
    margin: 5px;
+   text-align: center;
 
  }
 </style>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DaysController < ApplicationController
-  before_action :set_day, only: %i[show edit update destroy]
+  before_action :set_day, only: %i[show edit update destroy destroy_on_month]
   respond_to :html, :json
   def index
     @days = Day.order(:date)
@@ -44,6 +44,12 @@ class DaysController < ApplicationController
       flash[:error] = 'Something went wrong'
       redirect_to days_url
     end
+  end
+
+  def destroy_on_month
+    Day.where('date < ?', 30.days.ago).destroy_all
+    flash[:success] = 'DELETED ALL DAYS FROM THE CURRENT MONTH.'
+    redirect_to days_path
   end
 
   private
