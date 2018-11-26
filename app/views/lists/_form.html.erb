@@ -2,7 +2,6 @@
   <% if list.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(list.errors.count, "error") %> prohibited this list from being saved:</h2>
-
       <ul>
       <% list.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,15 +12,11 @@
 
   <div class="field">
     <%= form.label :name %>
+    <br>
     <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :position %>
-    <%= form.number_field :position %>
-  </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <br>
+    <%= form.submit "New list", class: 'btn btn-primary' %>
   </div>
 <% end %>
