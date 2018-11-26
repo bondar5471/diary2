@@ -47,8 +47,7 @@ class DaysController < ApplicationController
   end
 
   def destroy_on_month
-    Day.where('date < ?', 30.days.ago).destroy_all
-    flash[:success] = 'DELETED ALL DAYS FROM THE CURRENT MONTH.'
+    Day.where('date < ?', 1.month.ago.end_of_month).destroy_all
     redirect_to days_path
   end
 

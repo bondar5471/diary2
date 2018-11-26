@@ -25,7 +25,7 @@
 	<div class="element_control_day">
 	  <span><%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %></span>
 	  <span><%= button_to "Delete day", day_path, method: :delete, :class => "btn btn-danger" %></span>
-	  <span><%= button_to "Delete all days from the current month", destroy_on_month_day_path, :method => "delete",:class => "btn btn-danger", :title => "Delete all previous days from the current month" %></span> 	  
+	  <span><%= button_to "Delete all days to the current month", destroy_on_month_day_path, :method => "delete",:class => "btn btn-danger", :title => "Delete all days before 1 #{Date.current.strftime('%B')}" %></span> 	  
 	  <span><%= link_to  "Back", days_path %></span>
   </div>
   </div>

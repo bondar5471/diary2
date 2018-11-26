@@ -138,6 +138,7 @@ ul.calendar {
   border: rgb(83, 83, 83) 1px solid;
   border-radius: 5px;
   margin-bottom: 7px;
+  padding: 4px;
   background-color: rgba(189, 195, 253);
 }
 .col-3 {
@@ -166,6 +167,7 @@ ul.calendar {
   height: 255px;
   width: 250px;
   padding: 10px;
+  margin: 20px;
 }
 td.daycell {
   padding: 5px;
