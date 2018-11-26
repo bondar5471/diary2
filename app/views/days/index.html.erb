@@ -3,7 +3,6 @@
 <div id="globalcalendar">
 <% start_date = params.fetch(:start_date, Date.today).to_date %>
 <% date_range = (start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
-
 <%= link_to  "Prev", start_date: date_range.first - 1.day %>
 <b><%= I18n.t("date.month_names")[start_date.month] %><%=start_date.year%></b>
 <%= link_to  "Next", start_date: date_range.last + 1.day %>
@@ -18,11 +17,9 @@
   </thead>
   <tbody>
     <% date_range.each_slice(7) do |week| %>
-    <tr>
-    
+    <tr>    
     <% week.each do |day| %>
-    <td class="daycell"><div><%=day.strftime('%d')%></div></td>
-    
+    <td class="daycell"><div><%=day.strftime('%d')%></div></td>    
     <%end%>
     </tr>
     <%end%> 

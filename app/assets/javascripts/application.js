@@ -171,6 +171,7 @@ $(document).on('turbolinks:load', function() {
   });
 });
 //click p on input text
+window.onload = function(){ 
 $(document).on('turbolinks:load', function() {
   document.getElementById('container_report').onclick = function(event) {
       var span, input, text;
@@ -207,3 +208,4 @@ $(document).on('turbolinks:load', function() {
       }
   };
 });
+};
