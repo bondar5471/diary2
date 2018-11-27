@@ -1,9 +1,9 @@
 <div class="container">
 	<div class="container_day">
 	<p><%= @day.date.try(:strftime, '%B %d, %Y') %></p>
-	<b>Success of the day</b>
-	<p><%= @day.successful %></p>
-	<b>Report on day</b>
+	<p>Success of the day</p>
+	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : 'uccess glyphicon glyphicon-remove'%>"><% @day.successful %></p>
+	<p>Report on day</p>
 	<p id="container_report"><span><%= @day.report %></span></p>
 	<br>
 	<h2>Tasks on day</h2>
@@ -25,7 +25,7 @@
 	<div class="element_control_day">
 	  <span><%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %></span>
 	  <span><%= button_to "Delete day", day_path, method: :delete, :class => "btn btn-danger" %></span>
-	  <span><%= button_to "Delete all days to the current month", destroy_on_month_day_path, :method => "delete",:class => "btn btn-danger", :title => "Delete all days before 1 #{Date.current.strftime('%B')}" %></span> 	  
+	  <span><%= button_to "Delete all days to the current month", destroy_on_month_day_path, :method => "delete",:class => "btn btn-danger", :title => "Delete all days before 1 #{Date.current.strftime('%B')}", data: { confirm: "Do you want to delete all days before the current month?" } %></span> 	  
 	  <span><%= link_to  "Back", days_path %></span>
   </div>
   </div>
