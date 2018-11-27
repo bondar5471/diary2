@@ -125,6 +125,7 @@ ul.calendar {
   width: 250px;
   padding: 15px;
   cursor: pointer;
+  margin-right: -20px;
 }
 #dropnotice table tr td {
   text-align: center;
