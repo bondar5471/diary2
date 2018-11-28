@@ -2,7 +2,7 @@
 	<div class="container_day">
 	<p><%= @day.date.try(:strftime, '%B %d, %Y') %></p>
 	<p>Success of the day</p>
-	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : 'uccess glyphicon glyphicon-remove'%>"><% @day.successful %></p>
+	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : '	glyphicon glyphicon-minus'%>"><%= @day.successful %></p>
 	<p>Report on day</p>
 	<p id="container_report"><span><%= @day.report %></span></p>
 	<br>

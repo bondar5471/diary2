@@ -16,6 +16,7 @@ class DaysController < ApplicationController
 
   def create
     @day = Day.new(day_params)
+    # @day.skip_report_validation = true
     if @day.save
       flash[:success] = 'Day create.'
       redirect_to @day
@@ -32,6 +33,7 @@ class DaysController < ApplicationController
       flash[:success] = 'Day update.'
       redirect_to @day
     else
+      flash[:error] = 'Date and Report must be filled.'
       render :edit
     end
   end

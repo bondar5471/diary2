@@ -15,8 +15,9 @@
 //= require jquery_ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 //= require twitter/bootstrap
+//= require_tree .
+
 
 
 //create task

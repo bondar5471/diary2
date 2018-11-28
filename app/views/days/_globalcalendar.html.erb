@@ -18,12 +18,10 @@
 			<tr>    
 				<% week.each do |day| %>
 					<% @days.each do |day_date|%>
-					<%if day_date.date.strftime('%B %d, %Y') ==  day.strftime('%B %d, %Y')%>
-						<td class="daycell"><div class="<%=day_date.successful ? 'green' : 'red'%>"><%=link_to "#{day.strftime('%d')}", day_date, :method=>'get'%></div></td>
-					  <%end%>
-					  <%end%>
-					<%else%>
-						<td class="daycell"><div><%=day.strftime('%d')%></div></td>
+					  <%if day_date.date.strftime('%B %d, %Y') ==  day.strftime('%B %d, %Y')%>
+						  <td class="daycell"><div class="<%=day_date.successful ? 'green' : 'red'%> <%=day_date.successful.nil? ? 'blue' : 'green'%>"><%=link_to "#{day.strftime('%d')}", day_date, :method=>'get'%></div></td>
+						<%end%>
+					<%end%>
 				<%end%>
 			</tr>
 			<%end%> 
