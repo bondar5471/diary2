@@ -60,8 +60,9 @@ footer{
   
 }
 .month-name {
-  background-color: #038cd1bb;
-  border-radius: 6px;
+  font-size: 10px;
+  text-align: center;
+  
 }
 .btn.btn-success {
   height: 40px;

@@ -91,39 +91,48 @@ footer{
 }
 #month {
   display: inline-block;
-  width: 182px;
-  height: 120px;
-  margin: 20px;
+  width: 100px;
+  height: 125px;
+
+}
+.calendar tr {
+  margin: 0px;
 }
 .calendar td{
   display: inline-block;
   background: #87CEEB;
   text-align: center;
-  font-size: 17px;
-  height: 24px;
-  width: 24px;
+  font-size: 9px;
+  height: 12px;
+  width: 12px;
   border: 1px solid rgb(167, 167, 167);
   color: rgb(0, 16, 104);
   margin: 1px;
 } 
+ul.calendar {
+  padding-left: 0px;
+  width: 1245px;
+  margin-left: -40px;
+
+}
 
 .green {
-  height: 22px;
-  width: 22px;
+  height: 10px;
+  width: 10px;
   background-color: #4cae4c;
 }
 .red {
-  height: 22px;
-  width: 22px;
+  height: 10px;
+  width: 10px;
   background-color: #d43f3a;
 }
 .blue{
-  height: 22px;
-  width: 22px;
+  height: 10px;
+  width: 10px;
   background-color:#87fafa;
 }
 ul.calendar {
-  margin-bottom: 60px;
+  margin-bottom: 160px;
 }
 /*boar notice*/
 #dropnotice {

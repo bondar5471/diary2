@@ -4,7 +4,7 @@
   <%  @day_months.each do |month_name, select_days|  %>
   
   <div id="month">
-      <!-- <p class="month-name"><%= month_name.strftime('%B, %Y') %></p>  -->
+      <p class="month-name"><%= month_name.strftime('%b') %></p> 
     <table>
     <% (1..days_in_month(month_name.month,month_name.year)).each do |day| %>  
       <td>

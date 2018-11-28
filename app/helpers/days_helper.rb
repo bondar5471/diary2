@@ -16,9 +16,9 @@ module DaysHelper
     if day_detected
       color = day_detected.successful ? 'green' : 'red'
       colorday = day_detected.successful.nil? ? 'blue' : 'green'
-      "<a href='/days/#{day_detected['id']}'><div class=\"#{color} #{colorday}\" title='#{formated_date(day_detected.date)} \"#{color}\"'>#{day_detected.date.day}</div></a>".html_safe
+      "<a href='/days/#{day_detected['id']}'><div class=\"#{color} #{colorday}\" title='#{formated_date(day_detected.date)}, successfull #{day_detected.successful}'></div></a>".html_safe
     else
-      "<a href='/days/new'><div title='New day'>#{day_number}</div></a>".html_safe
+      "<a href='/days/new'><div title='New day'></div></a>".html_safe
     end
   end
 end
