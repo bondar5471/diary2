@@ -72,6 +72,8 @@ body {
   background-color: #E0FFFF;
   box-sizing: border-box;
   height: 100%;
+  position: relative;
+  overflow-y:scroll;
   width: 100%;
 }    
 
@@ -214,4 +216,19 @@ td.daycell {
 }
 th.calendarhead {
   padding: 3px;
+}
+
+@media (min-width: 320px) and (max-width:767px) {
+  ul.calendar {
+    display: block;
+    margin: 0px;
+    padding-left: 25%;
+    height: 100%;
+    width: 0px;
+
+  }
+  #dropnotice {
+    display: none;
+  }
+
 }
