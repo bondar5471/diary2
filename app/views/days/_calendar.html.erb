@@ -5,7 +5,7 @@
   
   <div id="month">
       <p class="month-name"><%= month_name.strftime('%b') %></p> 
-    <table>
+    <table class="gitcal">
     <% (1..days_in_month(month_name.month,month_name.year)).each do |day| %>  
       <td>
         <%= display_day(day, select_days) %> 

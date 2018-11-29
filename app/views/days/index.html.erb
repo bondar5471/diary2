@@ -1,6 +1,4 @@
+<h4>Total number of tasks <%=Task.all.count%></h4>
 <%= render  "calendar" %>
-<div class="notices">
-  <%= render "notices/new_notice" %> 
-</div>
 <span class="mobilebutton"><%= button_to "New day", new_day_path, :method => "get", :class => "btn btn-primary" %></span>
 <!-- <%= render "globalcalendar" %> -->
