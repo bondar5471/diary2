@@ -3,6 +3,7 @@
 class DaysController < ApplicationController
   before_action :set_day, only: %i[show edit update destroy destroy_on_month]
   respond_to :html, :json
+  # before_action :authenticate_user!
   def index
     @days = Day.order(:date)
     @day_months = @days.group_by { |day| day.date.beginning_of_month }

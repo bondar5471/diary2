@@ -29,7 +29,6 @@
             <li><%= link_to "Boards", lists_path  %></li>
             <li><%= link_to "Info", "/path3"  %></li>
           </ul>
-        
         </div>
       </div>
     </div>
@@ -38,6 +37,12 @@
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
           <%= bootstrap_flash %>
+          <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+          <% end %>
           <%= yield %>
         </div>
       </div>

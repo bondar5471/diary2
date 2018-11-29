@@ -228,12 +228,21 @@ td.daycell {
 th.calendarhead {
   padding: 3px;
 }
+/*show day*/
+#tasklist{
+  width: 50%;
+  height: 300px;
+  overflow-y: auto;
+}
+/*tips*/
+.tips {
+  display: inline-flex;
+}
 /*mobile style*/
-@media (min-width: 320px) and (max-width:767px) {
+@media (min-width: 320px) and (max-width:1245px) {
   ul.calendar {
     display: block;
-    margin: 0px;
-    padding-left: 25%;
+    padding-left: 15%;
     height: 100%;
     width: 0px;
     border: #b0b5bb 0px solid;
@@ -243,10 +252,4 @@ th.calendarhead {
     display: none;
   }
 
-}
-/*show day*/
-#tasklist{
-  width: 50%;
-  height: 300px;
-  overflow-y: auto;
 }
