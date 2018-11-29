@@ -41,6 +41,19 @@ table a {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   
 }
+ul.nav.navbar-nav li {
+  border: cadetblue 2px solid;
+  border-radius: 5px;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+button.navbar-toggle{
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  padding-left: 13px;
+  padding-right: 0px;
+}
 /*body*/
 body{
   color: #000;
