@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   devise_for :user
   resources :notices, only: %i[new create destroy]
   resources :days do
-    resources :tasks, only: %i[index new create destroy]
+    resources :tasks
     member do
       delete :destroy_on_month
     end
