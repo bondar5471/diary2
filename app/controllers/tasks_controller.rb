@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
   end
-  
+
   def create
     @task = @day.tasks.create(task_params)
     if @task.persisted?
