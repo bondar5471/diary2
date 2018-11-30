@@ -12,16 +12,25 @@
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
-		<% @day.tasks.each do |task| %>
-		<p><%= task.list %></p>
-		<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
-		<p></p>
+		
+		<%Task.all.each do |task|%>
+			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
+				<p><b><%= task.list %></b> <%= (task.dateend+1.day - task.datebeggin).to_i%> days to task</p>
+				<p><i><%=task.datebeggin.strftime('%b %d')%></i> - <i><%=task.dateend.strftime('%b %d')%></i></p>
+				<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
+				<p></p>
+		<%end%>
 		<%end%>
 	    </div>
 		<p>Add tasks on day</p>
 		<input type="text" name="task" id="task"/>
+		<br>
+		<p>Date start task</p>
+		<input type="date" name="datebeggin" id="datebeggin"/>
+		<p>Date finish task</p>
+		<input type="date" name="dateend" id="dateend"/>
 		<hr>
-		<div class="sendtask"><button >Add task</button></div>
+		<div class="sendtask"><button>Add task</button></div>
 	</div>
     </div>
 	<br>

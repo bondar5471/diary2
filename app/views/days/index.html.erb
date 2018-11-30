@@ -1,12 +1,14 @@
-<h4>Total number of tasks <%=Task.all.count%></h4>
+<h4>Total amount of tasks <%=Task.all.count%></h4>
+<div class="tips">
+		<div class="red center"></div>
+		<i> -success day</i>
+		<div class="green center"></div>
+		<i> -not success day</i>
+		<div class="blue center"></div>
+		<i> -day not set</i>
+</div>
 <%= render  "calendar" %>
+
 <!-- <span class="mobilebutton"><%= button_to "New day", new_day_path, :method => "get", :class => "btn btn-primary" %></span> -->
 <!-- <%= render "globalcalendar" %> -->
-<div class="tips">
-    <div class="red"></div>
-    <ins>-success day</ins>
-    <div class="green"></div>
-    <ins>-not success day</ins>
-    <div class="blue"></div>
-    <ins>-day not set</ins>
-</div>
+

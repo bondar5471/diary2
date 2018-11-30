@@ -28,14 +28,17 @@ $(document).on('turbolinks:load', function() {
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');
     var idDay = $(current_day).attr('data-day_id');
+    var datebeggin = document.getElementById("datebeggin").value;
+    var dateend = document.getElementById("dateend").value;
 
     $.ajax({
         url: "/days/:day_id/tasks".replace(":day_id", idDay),
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: ({ task: { list: task } }),
+        data: { task: { list: task, datebeggin: datebeggin, dateend: dateend} },
         success: function(data) {
+          debugger;
           addNewTask(data, container);           
         },
         error:  
@@ -45,19 +48,31 @@ $(document).on('turbolinks:load', function() {
 });
 
 function addNewTask(task, tasksListDiv) {
+  debugger;
   $('#task').css('border-color','seagreen');
+  $('#datebeggin').css('border-color','seagreen');
+  $('#dateend').css('border-color','seagreen');
   var link = document.createElement('a');
   link.innerHTML = "delete task";
   link.setAttribute ("data-method", "delete");
   link.href = ("/days/:day_id/tasks/".replace(":day_id", task.day_id) + task.id);
   link.setAttribute("data-remote", "true");
+  
+  var dateparagraph = document.createElement('p')
+  dateparagraph.innerHTML = task.datebeggin;
+
+  var dateendparagraph = document.createElement('p')
+  dateendparagraph.innerHTML = task.dateend;
 
   var paragraph = document.createElement('p')
   paragraph.innerText = task.list;
+ 
 
   tasksListDiv.appendChild(paragraph);
   tasksListDiv.appendChild(link);
   $('#task').val('');
+  $('#datebeggin').val('');
+  $('#dateend').val('');
 }
 function notValidTask () {
   $('#task').each(function(){
@@ -67,6 +82,20 @@ function notValidTask () {
       alert('Task field is empty!');
       }
     })
+    $('#datebeggin').each(function(){
+      if(!$(this).val() || $(this).val() == ""){
+        $(this).css('border-color','red');
+        send = false;
+        alert('Date start field is empty!');
+        }
+      })
+    $('#dateend').each(function(){
+      if(!$(this).val() || $(this).val() == ""){
+        $(this).css('border-color','red');
+        send = false;
+        alert('Date finish field is empty!');
+        }
+      })
   }
 //drag and drop  
 $(document).on('turbolinks:load', function() {

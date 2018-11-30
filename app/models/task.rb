@@ -3,4 +3,6 @@
 class Task < ApplicationRecord
   belongs_to :day, required: false
   validates :list, presence: true
+  validates :datebeggin, presence: true
+  validates :dateend, presence: true
 end

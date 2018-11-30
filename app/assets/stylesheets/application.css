@@ -236,7 +236,13 @@ th.calendarhead {
 }
 /*tips*/
 .tips {
+  margin-bottom: 10px;
+  padding: 3px;
+  border: #b0b5bb 1px solid;
   display: inline-flex;
+}
+.center {
+  margin: auto;
 }
 /*mobile style*/
 @media (min-width: 320px) and (max-width:1245px) {

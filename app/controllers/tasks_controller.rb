@@ -5,6 +5,10 @@ class TasksController < ApplicationController
 
   before_action :find_day
 
+  def index
+    @tasks = Task.all
+  end
+  
   def create
     @task = @day.tasks.create(task_params)
     if @task.persisted?
@@ -30,6 +34,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:list)
+    params.require(:task).permit(:list, :datebeggin, :dateend)
   end
 end
