@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   respond_to :json
 
   before_action :find_day
-  before_action :find_task, only: [:edit, :update, :destroy]
+  before_action :find_task, only: %i[edit update destroy]
 
   def index
     @tasks = Task.all
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @task.destroy
     respond_to do |format|
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
   def find_day
     @day = Day.find(params[:day_id])
   end
-  
+
   def find_task
     @task = Task.find(params[:id])
   end
