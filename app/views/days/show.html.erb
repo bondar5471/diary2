@@ -12,18 +12,19 @@
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
-		
+		<div class="onetask">
 		<%Task.all.each do |task|%>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
-				<p><b><%= task.list %></b> <%= (task.dateend+1.day - task.datebeggin).to_i%> days to task</p>
+				<p><b><%= task.list %></b><u> days to task <%= (task.dateend+1.day - task.datebeggin).to_i%></u></p>
 				<p><i><%=task.datebeggin.strftime('%b %d')%></i> - <i><%=task.dateend.strftime('%b %d')%></i></p>
 				<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal ">
 					edit
-				  </button>
-				<p></p>
+					</button>
+				<p></p>	
 		<%end%>
 		<%end%>
+	</div>
 	    </div>
 		<p>Add tasks on day</p>
 		<input type="text" name="task" id="task"/>
@@ -50,15 +51,31 @@
 	  <div class="modal-content">
 		<div class="modal-header">
 		  <h5 class="modal-title" id="exampleModalLabel">Edit task</h5>
-		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-		  </button>
 		</div>
-		<div class="modal-body">   
+		<div class="modal-body">
+			<% Task.all.each do |task|%>
+			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
+				<%= form_for([@day, task]) do |f| %>
+				<div class="field">
+					<p>Task</p>
+					<%= f.text_area :list %>
+					<br>
+					<p>Start</p>
+					<%= f.date_field :datebeggin %>
+					<br>
+					<p>Finish</p>
+					<%= f.date_field :dateend %>
+					<br>
+				</div>
+				<div class="actions">
+					<%= f.submit 'Edit', class: 'btn btn-warning'%>
+				</div>
+			<% end %> 
+			<%end%>	 
+			<%end%> 
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary">Save</button>
 		</div>
 	  </div>
 	</div>

@@ -96,6 +96,14 @@ function notValidTask () {
         alert('Date finish field is empty!');
         }
       })
+      $('#dateend').each(function(){
+        debugger;
+        if($('#datebeggin').val() > $(this).val()){
+          $('#dateend').css('border-color','red');
+          send = false;
+          alert('Date not valid!');
+          }
+        })  
   }
 //drag and drop  
 $(document).on('turbolinks:load', function() {

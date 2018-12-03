@@ -88,6 +88,12 @@ footer{
 
 
 }
+
+/*task*/
+
+.field{
+  border: #7d7d7e 2px solid;
+}
 /*calendar*/
 .months {
   display: inline;
