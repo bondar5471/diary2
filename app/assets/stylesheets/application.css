@@ -62,10 +62,9 @@ p { color: #000;
       padding: 10px;
       height: 50px;
       width: 100px;
+      text-align: center;
       cursor: pointer;
       margin: 5px;
-      border-color: darkcyan;
-      border-style: solid; 
   }
  
 body {
@@ -93,6 +92,14 @@ footer{
 
 .field{
   border: #7d7d7e 2px solid;
+}
+.btnedittask {
+  height: 40px;
+  width: 50px;
+  border: #7d7d7e 2px solid;
+  background-color: rgb(252, 227, 1);
+  text-align: center;
+
 }
 /*calendar*/
 .months {
@@ -237,7 +244,7 @@ th.calendarhead {
 /*show day*/
 #tasklist{
   width: 50%;
-  height: 300px;
+  height: 400px;
   overflow-y: auto;
 }
 /*tips*/

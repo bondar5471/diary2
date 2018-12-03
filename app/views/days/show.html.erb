@@ -15,11 +15,11 @@
 		<div class="onetask">
 		<%Task.all.each do |task|%>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
-				<p><b><%= task.list %></b><u> days to task <%= (task.dateend+1.day - task.datebeggin).to_i%></u></p>
+				<p><b><%= task.list %> </b><u style="color:#660000"><%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task</u></p>
 				<p><i><%=task.datebeggin.strftime('%b %d')%></i> - <i><%=task.dateend.strftime('%b %d')%></i></p>
 				<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal ">
-					edit
+				<button class="btnedittask" data-toggle="modal" data-target="#editModal ">
+					Edit
 					</button>
 				<p></p>	
 		<%end%>
@@ -50,7 +50,7 @@
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title" id="exampleModalLabel">Edit task</h5>
+			<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
 		</div>
 		<div class="modal-body">
 			<% Task.all.each do |task|%>
@@ -68,7 +68,7 @@
 					<br>
 				</div>
 				<div class="actions">
-					<%= f.submit 'Edit', class: 'btn btn-warning'%>
+					<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
 				</div>
 			<% end %> 
 			<%end%>	 
