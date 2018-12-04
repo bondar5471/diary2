@@ -1,13 +1,12 @@
 <div class="container">
-	<div class="notices">
-	  <%= render "notices/new_notice" %> 
-	</div>
 	<div class="container_day">
 	<p><%= @day.date.try(:strftime, '%B %d, %Y') %></p>
 	<p>Success of the day</p>
 	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : '	glyphicon glyphicon-minus'%>"><%= @day.successful %></p>
 	<p>Report on day</p>
-	<p id="container_report"><span><%= @day.report %></span></p>
+	<div id="container_report" data-day_id="<%= @day.id %>"><%= @day.report %>
+		<button class="btn btn-warning" data-toggle="modal" data-target="#editDay ">Edit</button>
+	</div>
 	<br>
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
@@ -39,14 +38,13 @@
     </div>
 	<br>
 	<div class="element_control_day">
-	  <span><%= button_to "Edit day", edit_day_path, :method => "get", :class => "btn btn-warning" %></span>
 	  <span><%= button_to "Delete day", day_path, method: :delete, :class => "btn btn-danger" %></span>
 	  <span><%= link_to  "Back", days_path %></span>
   </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal edit task -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content">
@@ -74,6 +72,29 @@
 			<% end %> 
 			<%end%>	 
 			<%end%> 
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+	</div>
+	<!-- Modal edit day -->
+<div class="modal fade" id="editDay" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title" id="exampleModalLabel">Edit</h4>
+		</div>
+		<div class="modal-body">
+			<%= form_for @day do |f| %>
+				<p>Mark if the day was successful</p>
+				<%= f.check_box :successful %>
+				<p>Edit report day</p>
+				<%= f.text_area :report %>
+			<br> 
+				<%= f.submit 'Edit', class: 'btn btn-warning'%>
+			<%end%>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
