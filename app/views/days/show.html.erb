@@ -6,18 +6,17 @@
 	<p>Report on day</p>
 	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report"><%= @day.report %></div>
 	<br>
-	<h2>Tasks on day</h2>
+	<h3>Tasks on day</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
 		<%Task.all.each do |task|%>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
 			<div class="onetask">	
-			<p><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b><u style="color:#660000"><%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task</u>
+			<p title="<%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task"><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
 				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
 				  <span class="glyphicon glyphicon-trash"></span>
 				<%end%>
 				</p>
-				<p><i><%=task.datebeggin.strftime('%b %d')%></i> - <i><%=task.dateend.strftime('%b %d')%></i>
 				</p>
 				<p></p>
 			</div>	
@@ -28,12 +27,12 @@
 		<div id="taskform" autofocus>	
 		<p>Add tasks on day </p>
 		<span class="glyphicon glyphicon-remove icoremove" id="hideform"></span>
-		<input type="text" name="task" id="task" autofocus/>
+		<input type="text" name="task" id="task" autofocus />
 		<br>
 		<p>Date start task</p>
-		<input type="date" name="datebeggin" id="datebeggin"/>
+		<input type="date" name="datebeggin" id="datebeggin" value="<%=@day.date%>"/>
 		<p>Date finish task</p>
-		<input type="date" name="dateend" id="dateend"/>
+		<input type="date" name="dateend" id="dateend" value="<%=@day.date%>"/>
 		<hr>
 		<div class="sendtask"><button>Add task</button></div>
 	  </div>

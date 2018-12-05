@@ -53,23 +53,38 @@ function addNewTask(task, tasksListDiv) {
   $('#datebeggin').css('border-color','seagreen');
   $('#dateend').css('border-color','seagreen');
   var link = document.createElement('a');
-  link.innerHTML = "delete task";
+  link.className = "glyphicon glyphicon-trash"
   link.setAttribute ("data-method", "delete");
   link.href = ("/days/:day_id/tasks/".replace(":day_id", task.day_id) + task.id);
   link.setAttribute("data-remote", "true");
   
+  var checkbox = document.createElement("input")
+  checkbox.type="checkbox";
+  checkbox.className = "check";
+  checkbox.style.display = "inline-block";
+
   var dateparagraph = document.createElement('p')
   dateparagraph.innerHTML = task.datebeggin;
+  //dateparagraph.style.display = "inline-block";
 
   var dateendparagraph = document.createElement('p')
   dateendparagraph.innerHTML = task.dateend;
+  //dateendparagraph.style.display = "inline-block";
 
   var paragraph = document.createElement('p')
   paragraph.innerText = task.list;
+  paragraph.style.fontWeight = "bold";
+  paragraph.style.display = "inline-block";
+  
+  var onetask = document.createElement('div')
+  onetask.className = "onetask";
  
+  onetask.appendChild(checkbox);
+  onetask.appendChild(paragraph);
+  onetask.appendChild(link);
 
-  tasksListDiv.appendChild(paragraph);
-  tasksListDiv.appendChild(link);
+  tasksListDiv.appendChild(onetask);
+
   $('#task').val('');
   $('#datebeggin').val('');
   $('#dateend').val('');
