@@ -6,10 +6,6 @@ class TasksController < ApplicationController
   before_action :find_day
   before_action :find_task, only: %i[edit update destroy]
 
-  def index
-    @tasks = Task.all
-  end
-
   def create
     @task = @day.tasks.create(task_params)
     if @task.persisted?
@@ -38,7 +34,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to @day }
+      format.html { redirect_to request.referrer }
       format.json { head :list }
     end
   end

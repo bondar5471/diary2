@@ -78,6 +78,9 @@ function addNewTask(task, tasksListDiv) {
   
   var onetask = document.createElement('div')
   onetask.className = "onetask";
+  onetask.className = "bluetask";
+  onetask.style.borderRadius = "5px";
+  onetask.style.marginTop = "4px";
  
   onetask.appendChild(checkbox);
   onetask.appendChild(paragraph);

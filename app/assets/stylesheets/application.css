@@ -51,11 +51,14 @@ p { color: #000;
   display: none;
   width: 50%;
   border: #5e5e5e 2px solid;
+  border-radius: 5px;
   padding: 6px;
+  margin-top: 5px;
 }  
 .icoremove {
   margin-right: 15px;
   float: right;
+  font-size: 20px;
 }
 /*day show*/
 #container_report {
@@ -73,7 +76,6 @@ p { color: #000;
       background-color: #87fafa;
       border: none;
       text-align: center;
-      font-size: 28px;
       padding: 10px;
       height: 50px;
       width: 100px;
@@ -322,3 +324,12 @@ input[type=checkbox]:checked + b.line-through{
 b.line-through {
   cursor: pointer;
 }
+ .greentask {
+   background-color: #4cae4c88
+ }
+ .redtask {
+   background-color: #d43f3a8c
+ }
+ .bluetask {
+   background-color: #4abdf779
+ }

@@ -1,3 +1,3 @@
  var id = <%= @task.id %>;
-  $('[data-task-id="'+ id +'"]').fadeOut(900);
+  $('[data-task-id="'+ id +'"]').remove();
   alert('Task destroy!');

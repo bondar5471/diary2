@@ -9,9 +9,10 @@
 	<h3>Tasks on day</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
-		<%Task.all.each do |task|%>
+		<%Task.all.sort_by(&:created_at).each do |task|%>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
-			<div class="onetask">	
+		
+			<div class="onetask <%= task.dateend > @day.date ? 'greentask' : 'redtask'%>">	
 			<p title="<%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task"><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
 				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
 				  <span class="glyphicon glyphicon-trash"></span>
