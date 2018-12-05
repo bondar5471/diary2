@@ -1,14 +1,22 @@
 <h4>Total amount of tasks <%=Task.all.count%></h4>
 <div class="tips">
 		<div class="red center"></div>
-		<i> -success day</i>
+		<i>&nbsp; - success day&nbsp;</i>
 		<div class="green center"></div>
-		<i> -not success day</i>
+		<i>&nbsp; - not success day&nbsp;</i>
 		<div class="blue center"></div>
-		<i> -day not set</i>
+		<i>&nbsp; - day not set&nbsp;</i>
 </div>
+
+<!-- <p><b>Task on year</b></p>
+<%Task.all.each do |task|%>
+<%if (task.dateend + 1.day - task.datebeggin).to_i == Date.today.end_of_year.yday%> 
+<p><%=task.list%></p>
+<p><%=task.datebeggin%></p>
+<p><%=task.dateend%></p>
+<%end%>
+<%end%> -->
+
 <%= render  "calendar" %>
 
-<!-- <span class="mobilebutton"><%= button_to "New day", new_day_path, :method => "get", :class => "btn btn-primary" %></span> -->
-<!-- <%= render "globalcalendar" %> -->
 

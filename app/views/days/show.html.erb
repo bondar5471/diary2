@@ -4,29 +4,31 @@
 	<p>Success of the day</p>
 	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : '	glyphicon glyphicon-minus'%>"><%= @day.successful %></p>
 	<p>Report on day</p>
-	<div id="container_report" data-day_id="<%= @day.id %>"><%= @day.report %>
-		<button class="btn btn-warning" data-toggle="modal" data-target="#editDay ">Edit</button>
-	</div>
+	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report"><%= @day.report %></div>
 	<br>
 	<h2>Tasks on day</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
-		<div class="onetask">
 		<%Task.all.each do |task|%>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
-				<p><b><%= task.list %> </b><u style="color:#660000"><%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task</u></p>
-				<p><i><%=task.datebeggin.strftime('%b %d')%></i> - <i><%=task.dateend.strftime('%b %d')%></i></p>
-				<%= link_to "delete task", day_task_path(task.day, task), remote: true, method: :delete %>
-				<button class="btnedittask" data-toggle="modal" data-target="#editModal ">
-					Edit
-					</button>
-				<p></p>	
+			<div class="onetask">	
+			<p><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b><u style="color:#660000"><%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task</u>
+				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+				  <span class="glyphicon glyphicon-trash"></span>
+				<%end%>
+				</p>
+				<p><i><%=task.datebeggin.strftime('%b %d')%></i> - <i><%=task.dateend.strftime('%b %d')%></i>
+				</p>
+				<p></p>
+			</div>	
 		<%end%>
 		<%end%>
-	</div>
-	    </div>
-		<p>Add tasks on day</p>
-		<input type="text" name="task" id="task"/>
+			</div>
+			<button type="button" id="taskButton" class="btn btn-secondary">Add task</button>
+		<div id="taskform" autofocus>	
+		<p>Add tasks on day </p>
+		<span class="glyphicon glyphicon-remove icoremove" id="hideform"></span>
+		<input type="text" name="task" id="task" autofocus/>
 		<br>
 		<p>Date start task</p>
 		<input type="date" name="datebeggin" id="datebeggin"/>
@@ -34,6 +36,7 @@
 		<input type="date" name="dateend" id="dateend"/>
 		<hr>
 		<div class="sendtask"><button>Add task</button></div>
+	  </div>
 	</div>
     </div>
 	<br>
@@ -55,6 +58,7 @@
 			<% Task.all.each do |task|%>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
 				<%= form_for([@day, task]) do |f| %>
+				<div class="modaltask">
 				<div class="field">
 					<p>Task</p>
 					<%= f.text_area :list %>
@@ -69,6 +73,7 @@
 				<div class="actions">
 					<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
 				</div>
+			</div>
 			<% end %> 
 			<%end%>	 
 			<%end%> 
@@ -79,6 +84,7 @@
 	  </div>
 	</div>
 	</div>
+	
 	<!-- Modal edit day -->
 <div class="modal fade" id="editDay" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

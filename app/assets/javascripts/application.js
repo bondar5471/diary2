@@ -79,21 +79,18 @@ function notValidTask () {
     if(!$(this).val() || $(this).val() == ""){
       $(this).css('border-color','red');
       send = false;
-      alert('Task field is empty!');
       }
     })
     $('#datebeggin').each(function(){
       if(!$(this).val() || $(this).val() == ""){
         $(this).css('border-color','red');
         send = false;
-        alert('Date start field is empty!');
         }
       })
     $('#dateend').each(function(){
       if(!$(this).val() || $(this).val() == ""){
         $(this).css('border-color','red');
         send = false;
-        alert('Date finish field is empty!');
         }
       })
       $('#dateend').each(function(){
@@ -101,7 +98,7 @@ function notValidTask () {
         if($('#datebeggin').val() > $(this).val()){
           $('#dateend').css('border-color','red');
           send = false;
-          alert('Date not valid!');
+          alert("End date less than start date")
           }
         })  
   }
@@ -210,3 +207,18 @@ $(document).on('turbolinks:load', function() {
     });
   });
 });
+//vicible form task
+$(document).on('turbolinks:load', function() {
+$("#taskButton").click(function(e){
+  e.preventDefault();
+  $("#taskform").show();
+  $("#taskButton").toggle();
+});
+});
+$(document).on('turbolinks:load', function() {
+  $("#hideform").click(function(){
+    $("#taskform").hide();
+    $("#taskButton").show();
+    
+  });
+  });
