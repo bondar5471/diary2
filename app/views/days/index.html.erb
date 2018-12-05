@@ -1,4 +1,4 @@
-<h4>Total amount of tasks <%=Task.all.count%></h4>
+	<h4>Total amount of tasks <%=Task.all.count%></h4>
 <div class="tips">
 		<div class="red center"></div>
 		<i>&nbsp; - success day&nbsp;</i>
@@ -7,16 +7,8 @@
 		<div class="blue center"></div>
 		<i>&nbsp; - day not set&nbsp;</i>
 </div>
-
-<!-- <p><b>Task on year</b></p>
-<%Task.all.each do |task|%>
-<%if (task.dateend + 1.day - task.datebeggin).to_i == Date.today.end_of_year.yday%> 
-<p><%=task.list%></p>
-<p><%=task.datebeggin%></p>
-<p><%=task.dateend%></p>
-<%end%>
-<%end%> -->
-
 <%= render  "calendar" %>
-
+<!-- 
+<%Day.all.where(successful: true).count/Date.today.end_of_year.yday*100%> -->
+ 
 
