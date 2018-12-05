@@ -1,14 +1,11 @@
-	<h4>Total amount of tasks <%=Task.all.count%></h4>
+<h4>Total amount of tasks <%=Task.all.count%></h4>
 <div class="tips">
-		<div class="redtd center"></div>
-		<i>&nbsp; - success day&nbsp;</i>
-		<div class="greentd center"></div>
-		<i>&nbsp; - not success day&nbsp;</i>
-		<div class="bluetd center"></div>
-		<i>&nbsp; - day not set&nbsp;</i>
+	<div class="redtd center"></div>
+	<i>&nbsp; - success day&nbsp;</i>
+	<div class="greentd center"></div>
+	<i>&nbsp; - not success day&nbsp;</i>
+	<div class="bluetd center"></div>
+	<i>&nbsp; - day not set&nbsp;</i>
 </div>
-<%= render  "calendar" %>
-<!-- 
-<%Day.all.where(successful: true).count/Date.today.end_of_year.yday*100%> -->
- 
 
+<%= render  "calendar",collection: @days, cached: true %>
