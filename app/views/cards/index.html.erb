@@ -14,6 +14,7 @@
 
   <tbody>
     <% @cards.each do |card| %>
+    <% cache card do %>
       <tr>
         <td><%= card.list %></td>
         <td><%= card.name %></td>
@@ -22,6 +23,7 @@
         <td><%= link_to 'Edit', edit_card_path(card) %></td>
         <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

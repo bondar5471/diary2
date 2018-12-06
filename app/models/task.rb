@@ -6,7 +6,7 @@ class DateValidator < ActiveModel::Validator
   end
 end
 class Task < ApplicationRecord
-  belongs_to :day, required: false
+  belongs_to :day, required: false, touch: true
   validates_with DateValidator
   validates :list, presence: true
   validates :datebeggin, presence: true

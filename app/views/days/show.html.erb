@@ -10,6 +10,7 @@
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
 		<%Task.all.sort_by(&:created_at).each do |task|%>
+		<% cache task do %>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
 		
 			<div class="onetask <%= task.dateend > @day.date ? 'greentask' : 'redtask'%>">	
@@ -21,6 +22,7 @@
 				</p>
 				<p></p>
 			</div>	
+		<%end%>
 		<%end%>
 		<%end%>
 			</div>
@@ -72,6 +74,9 @@
 				</div>
 				<div class="actions">
 					<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
+					<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+				  <span class="glyphicon glyphicon-trash"></span>
+				<%end%>
 				</div>
 			</div>
 			<% end %> 
