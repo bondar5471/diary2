@@ -3,9 +3,8 @@
 FactoryBot.define do
   factory :task do
     list 'Mytext'
-    day ''
-  end
-  factory :invalid_task, class: 'Task' do
-    list nil
+    day
+    datebeggin '2018-10-18'
+    dateend '2018-10-18'
   end
 end
