@@ -16,14 +16,13 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
-  describe "PATH #update" do
-    
+  describe 'PATH #update' do
   end
-  describe "DELETE #destroy" do
+  describe 'DELETE #destroy' do
     before { task }
     it 'delete day' do
       expect { delete :destroy, params: { day_id: day, id: task, format: :json } }
-      .to change(Task, :count).by(-1)
+        .to change(Task, :count).by(-1)
     end
   end
 end

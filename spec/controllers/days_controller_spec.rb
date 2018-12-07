@@ -37,7 +37,7 @@ RSpec.describe DaysController, type: :controller do
       expect(response).to render_template :new
     end
   end
-  
+
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'save the new day the database' do
@@ -45,8 +45,8 @@ RSpec.describe DaysController, type: :controller do
       end
       it 'redirects to show view' do
         post :create, params: { day: attributes_for(:day) }
-        expect(response).to redirect_to :action => :show,
-                                        :id => assigns(:day).id
+        expect(response).to redirect_to action: :show,
+                                        id: assigns(:day).id
       end
     end
   end
