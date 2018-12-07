@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ListsController, type: :controller do
   let(:list) { create(:list) }
-  
+
   describe 'GET #new' do
     before { get :new }
     it 'assign a new List to @list' do
@@ -19,12 +19,12 @@ RSpec.describe ListsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'save the new list the database' do
-        expect { post :create, params: {  list: attributes_for(:list), format: :json } }.to change{ List.count }.by(1)
+        expect { post :create, params: {  list: attributes_for(:list), format: :json } }.to change { List.count }.by(1)
       end
     end
   end
 
-  describe "PATCH #update" do
+  describe 'PATCH #update' do
     context 'valid attributes' do
       it 'assign the requested list @list' do
         patch :update, params: { id: list, list: attributes_for(:list) }

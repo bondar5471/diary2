@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-
 RSpec.describe CardsController, type: :controller do
   let(:list) { create(:list) }
   let(:card) { create(:card) }
