@@ -10,9 +10,9 @@
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
 		<%Task.all.sort_by(&:created_at).each do |task|%>
-			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
-			<div class="onetask <%= task.dateend > @day.date ? 'greentask' : 'redtask'%> <%= task.completed == "completed" ? 'silvertask': ''%>">	
-			<p title="<%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task , <%= task.task_type%>"><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
+			<% if (task.date_begin..task.date_end).to_a.include?(@day.date)%>
+			<div class="onetask <%= task.date_end > @day.date ? 'greentask' : 'redtask'%> <%= task.completed == "completed" ? 'silvertask': ''%>">	
+			<p title="<%= (task.date_end+1.day - task.date_begin).to_i%>  days to task , <%= task.task_type%>"><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
 				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
 				  <span class="glyphicon glyphicon-trash"></span>
 				<%end%>
@@ -30,9 +30,9 @@
 		<input type="text" name="task" id="task" autofocus />
 		<br>
 		<p>Date start task</p>
-		<input type="date" name="datebeggin" id="datebeggin" value="<%=@day.date%>"/>
+		<input type="date" name="date_begin" id="date_begin" value="<%=@day.date%>"/>
 		<p>Date finish task</p>
-		<input type="date" name="dateend" id="dateend" value="<%=@day.date%>"/>
+		<input type="date" name="date_end" id="date_end" value="<%=@day.date%>"/>
 		<p>Type task</p>
 		<%= select("task","type", Task.task_types.keys {|p| [ p.type ] })%>	
 		<hr>
@@ -57,7 +57,7 @@
 		</div>
 		<div class="modal-body">
 			<% Task.all.each do |task|%>
-			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
+			<% if (task.date_begin..task.date_end).to_a.include?(@day.date)%>
 				<%= form_for([@day, task]) do |f| %>
 				<div class="modaltask">
 				<div class="field">
@@ -65,10 +65,10 @@
 					<%= f.text_area :list %>
 					<br>
 					<p>Start</p>
-					<%= f.date_field :datebeggin %>
+					<%= f.date_field :date_begin %>
 					<br>
 					<p>Finish</p>
-					<%= f.date_field :dateend %>
+					<%= f.date_field :date_end %>
 					<p>Type</p>
 					<%= f.select :task_type, Task.task_types.keys %>
 					<p>Completed</p>

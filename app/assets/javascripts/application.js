@@ -30,8 +30,8 @@ $(document).on('turbolinks:load', function() {
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');
     var idDay = $(current_day).attr('data-day_id');
-    var datebeggin = document.getElementById("datebeggin").value;
-    var dateend = document.getElementById("dateend").value;
+    var date_begin = document.getElementById("date_begin").value;
+    var date_end = document.getElementById("date_end").value;
     var type_task = document.getElementById("task_type").value
     debugger;
     $.ajax({
@@ -39,7 +39,7 @@ $(document).on('turbolinks:load', function() {
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: { task: { list: task, datebeggin: datebeggin, dateend: dateend, task_type: type_task} },
+        data: { task: { list: task, date_begin: date_begin, date_end: date_end, task_type: type_task} },
         success: function(data) {
           addNewTask(data, container);           
         },
@@ -52,8 +52,8 @@ $(document).on('turbolinks:load', function() {
 function addNewTask(task, tasksListDiv) {
   debugger;
   $('#task').css('border-color','seagreen');
-  $('#datebeggin').css('border-color','seagreen');
-  $('#dateend').css('border-color','seagreen');
+  $('#date_begin').css('border-color','seagreen');
+  $('#date_end').css('border-color','seagreen');
   var link = document.createElement('a');
   link.className = "glyphicon glyphicon-trash"
   link.setAttribute ("data-method", "delete");
@@ -66,10 +66,10 @@ function addNewTask(task, tasksListDiv) {
   checkbox.style.display = "inline-block";
 
   var dateparagraph = document.createElement('p')
-  dateparagraph.innerHTML = task.datebeggin;
+  dateparagraph.innerHTML = task.date_begin;
 
-  var dateendparagraph = document.createElement('p')
-  dateendparagraph.innerHTML = task.dateend;
+  var date_endparagraph = document.createElement('p')
+  date_endparagraph.innerHTML = task.date_end;
 
   var paragraph = document.createElement('p')
   paragraph.innerText = task.list;
@@ -89,8 +89,8 @@ function addNewTask(task, tasksListDiv) {
   tasksListDiv.appendChild(onetask);
 
   $('#task').val('');
-  $('#datebeggin').val('');
-  $('#dateend').val('');
+  $('#date_begin').val('');
+  $('#date_end').val('');
 }
 function notValidTask () {
   $('#task').each(function(){
@@ -99,21 +99,21 @@ function notValidTask () {
       send = false;
       }
     })
-    $('#datebeggin').each(function(){
+    $('#date_begin').each(function(){
       if(!$(this).val() || $(this).val() == ""){
         $(this).css('border-color','red');
         send = false;
         }
       })
-    $('#dateend').each(function(){
+    $('#date_end').each(function(){
       if(!$(this).val() || $(this).val() == ""){
         $(this).css('border-color','red');
         send = false;
         }
       })
-      $('#dateend').each(function(){
-        if($('#datebeggin').val() > $(this).val()){
-          $('#dateend').css('border-color','red');
+      $('#date_end').each(function(){
+        if($('#date_begin').val() > $(this).val()){
+          $('#date_end').css('border-color','red');
           send = false;
           alert("End date less than start date")
           }
