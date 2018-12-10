@@ -6,5 +6,6 @@ FactoryBot.define do
     day
     datebeggin '2018-10-18'
     dateend '2018-10-18'
+    task_type 'day'
   end
 end
