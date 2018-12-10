@@ -13,7 +13,7 @@
 		<% cache task do %>
 			<% if (task.datebeggin..task.dateend).to_a.include?(@day.date)%>
 		
-			<div class="onetask <%= task.dateend > @day.date ? 'greentask' : 'redtask'%>">	
+			<div class="onetask <%= task.dateend > @day.date ? 'greentask' : 'redtask'%> <%= task.completed == "completed" ? 'silvertask': ''%>">	
 			<p title="<%= (task.dateend+1.day - task.datebeggin).to_i%>  days to task , <%= task.task_type%>"><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
 				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
 				  <span class="glyphicon glyphicon-trash"></span>
@@ -74,6 +74,8 @@
 					<%= f.date_field :dateend %>
 					<p>Type</p>
 					<%= f.select :task_type, Task.task_types.keys %>
+					<p>Completed</p>
+					<%= f.select :completed, Task.completeds.keys %>
 					<br>
 				</div>
 				<div class="actions">
