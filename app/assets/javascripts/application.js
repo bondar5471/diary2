@@ -25,21 +25,22 @@
 $(document).on('turbolinks:load', function() {
 
   $(".sendtask").click(function(){  
+    debugger;
     var task = document.getElementById("task").value; 
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');
     var idDay = $(current_day).attr('data-day_id');
     var datebeggin = document.getElementById("datebeggin").value;
     var dateend = document.getElementById("dateend").value;
-
+    var type_task = document.getElementById("task_type").value
+    debugger;
     $.ajax({
         url: "/days/:day_id/tasks".replace(":day_id", idDay),
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: { task: { list: task, datebeggin: datebeggin, dateend: dateend} },
+        data: { task: { list: task, datebeggin: datebeggin, dateend: dateend, task_type: type_task} },
         success: function(data) {
-          debugger;
           addNewTask(data, container);           
         },
         error:  
@@ -66,11 +67,9 @@ function addNewTask(task, tasksListDiv) {
 
   var dateparagraph = document.createElement('p')
   dateparagraph.innerHTML = task.datebeggin;
-  //dateparagraph.style.display = "inline-block";
 
   var dateendparagraph = document.createElement('p')
   dateendparagraph.innerHTML = task.dateend;
-  //dateendparagraph.style.display = "inline-block";
 
   var paragraph = document.createElement('p')
   paragraph.innerText = task.list;
@@ -113,7 +112,6 @@ function notValidTask () {
         }
       })
       $('#dateend').each(function(){
-        debugger;
         if($('#datebeggin').val() > $(this).val()){
           $('#dateend').css('border-color','red');
           send = false;
