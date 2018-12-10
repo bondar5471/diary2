@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CardsController, type: :controller do
-  let(:list) { create(:list) }
+  let!(:list) { create(:list) }
   let(:card) { create(:card) }
 
   describe 'GET #index' do
@@ -20,20 +20,21 @@ RSpec.describe CardsController, type: :controller do
     it 'assign a new card to @card' do
       expect(assigns(:card)).to be_a_new(Card)
     end
-    it 'test http status' do
+    it 'test http status not valid ' do
       post :create, params: { list_id: list, card: attributes_for(:card), format: :json }
       expect(response).to have_http_status(422)
     end
   end
-  # describe 'POST #create' do
-  #   context 'with valid attributes' do
-  #     it 'saves a new card in the database' do
-  #       expect { post :create, params: { list_id: list, card: attributes_for(:card), format: :json } }.to change(list.cards, :count).by(1)
-  #     end
-  #     it 'test http status' do
-  #       post :create, params: { list_id: list, card: attributes_for(:card), card_id: card, format: :html }
-  #       expect(response).to redirect_to card_path
-  #     end
-  #   end
-  # end
+  describe 'POST #create' do
+    let(:list) { create(:list) }
+    context 'with valid attributes' do
+      it 'saves a new task in the database' do
+        expect { post :create, params: { card: attributes_for(:card), list_id: list, format: :json } }.to change(list.cards, :count).by(1)
+      end
+      it 'test http status invalid field' do
+        post :create, params: { list_id: list, card: attributes_for(:card), format: :json }
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
 end

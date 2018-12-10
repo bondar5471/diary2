@@ -15,7 +15,7 @@ RSpec.describe ListsController, type: :controller do
       expect(response).to have_http_status(:created)
     end
   end
-
+  
   describe 'POST #create' do
     context 'with valid params' do
       it 'save the new list the database' do

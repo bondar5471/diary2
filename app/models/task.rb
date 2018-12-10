@@ -5,4 +5,6 @@ class Task < ApplicationRecord
   validates :list, presence: true
   validates :datebeggin, presence: true
   validates :dateend, presence: true
+
+  enum completed: [:in_progress, :completed]
 end

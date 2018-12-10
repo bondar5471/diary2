@@ -50,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:list, :datebeggin, :dateend)
+    params.require(:task).permit(:list, :datebeggin, :dateend,:completed)
   end
 end
