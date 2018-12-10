@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_10_094324) do
+ActiveRecord::Schema.define(version: 2018_12_10_151453) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "list_id"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2018_12_10_094324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "day_id"
-    t.date "datebeggin"
-    t.date "dateend"
+    t.date "date_begin"
+    t.date "date_end"
     t.integer "completed", default: 0
     t.integer "task_type"
   end
