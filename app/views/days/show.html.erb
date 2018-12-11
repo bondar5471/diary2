@@ -26,7 +26,7 @@
 			<button type="button" id="taskButton" class="btn btn-secondary">Add task</button>
 		<div id="taskform" autofocus>	
 		<p>Add tasks on day </p>
-		<span class="glyphicon glyphicon-remove icoremove" id="hideform"></span>
+		<span id="hideform" class="glyphicon glyphicon-remove icoremove"></span>
 		<input type="text" name="task" id="task" autofocus />
 		<br>
 		<p>Date start task</p>
@@ -36,7 +36,7 @@
 		<p>Type task</p>
 		<%= select("task","type", Task.task_types.keys {|p| [ p.type ] })%>	
 		<hr>
-		<div class="sendtask"><button>Add task</button></div>
+		<div class="sendtask"><button>Add</button></div>
 	  </div>
 	</div>
     </div>

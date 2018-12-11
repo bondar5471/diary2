@@ -227,7 +227,7 @@ ul.calendar {
   border-radius: 5px;
   margin-bottom: 7px;
   padding: 4px;
-  background-color: rgba(189, 195, 253);
+  background-color: rgb(189, 195, 253);
 }
 .col-3 {
   border: #1100fd88 2px solid;
