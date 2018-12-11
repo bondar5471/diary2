@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-feature 'Delete task', '
-In order to remove task
-I want to be able to delete answers, of which I am the author
-' do
+feature 'Delete task' do
   given!(:day) { create(:day) }
   given!(:task) { create(:task, day: day) }
 
