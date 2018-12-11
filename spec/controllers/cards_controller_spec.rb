@@ -34,10 +34,10 @@ RSpec.describe CardsController, type: :controller do
       end
     end
   end
-  describe "PATCH #move" do
+  describe 'PATCH #move' do
     it 'Change position card after drag and drop' do
       patch :update, params: { id: card, card: attributes_for(:card) }
-      expect(assigns(:card)).to eq card 
+      expect(assigns(:card)).to eq card
     end
     it 'render template' do
       patch :update, params: { id: card, card: attributes_for(:card) }
