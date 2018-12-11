@@ -39,4 +39,14 @@ RSpec.describe ListsController, type: :controller do
       expect { delete :destroy, params: { id: list } }.to change(List, :count).by(-1)
     end
   end
+  describe "PATCH #move" do
+    it 'Change position card' do
+      patch :update, params: { id: list, list: attributes_for(:list) }
+      expect(assigns(:list)).to eq list 
+    end
+    it 'render template' do
+      patch :update, params: { id: list, list: attributes_for(:list) }
+      expect(response).to have_http_status(302)
+    end
+  end
 end

@@ -17,7 +17,6 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
-
     respond_to do |format|
       if @card.save
         format.html { redirect_to @card, notice: 'Card was successfully created.' }

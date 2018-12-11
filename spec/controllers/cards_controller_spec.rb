@@ -20,21 +20,28 @@ RSpec.describe CardsController, type: :controller do
     it 'assign a new card to @card' do
       expect(assigns(:card)).to be_a_new(Card)
     end
-    it 'test http status not valid ' do
-      post :create, params: { list_id: list, card: attributes_for(:card), format: :json }
-      expect(response).to have_http_status(422)
-    end
   end
   describe 'POST #create' do
-    let(:list) { create(:list) }
-    context 'with valid attributes' do
-      it 'saves a new task in the database' do
-        expect { post :create, params: { card: attributes_for(:card), list_id: list, format: :json } }.to change(list.cards, :count).by(1)
+    context 'with invalid attributes' do
+      it 'saves a new card in the database' do
+        expect do
+          post :create, params: { card: attributes_for(:card), list_id: list, format: :json }
+        end.to change(list.cards, :count).by(1)
       end
-      it 'test http status invalid field' do
-        post :create, params: { list_id: list, card: attributes_for(:card), format: :json }
-        expect(response).to have_http_status(422)
+      it 'status test after create' do
+        post :create, params: { card: attributes_for(:card), list_id: list, format: :json }
+        expect(response).to have_http_status(201)
       end
+    end
+  end
+  describe "PATCH #move" do
+    it 'Change position card after drag and drop' do
+      patch :update, params: { id: card, card: attributes_for(:card) }
+      expect(assigns(:card)).to eq card 
+    end
+    it 'render template' do
+      patch :update, params: { id: card, card: attributes_for(:card) }
+      expect(response).to have_http_status(302)
     end
   end
 end
