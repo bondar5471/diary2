@@ -12,11 +12,11 @@ module DaysHelper
   end
 
   def display_day(day_number, days)
-    day_detected = days.detect { |d| day_number == d.date.day }
-    if day_detected
-      color = day_detected.successful ? 'greentd' : 'redtd'
-      colorday = day_detected.successful.nil? ? 'bluetd' : 'greentd'
-      "<a href='/days/#{day_detected['id']}'><div class=\"#{color} #{colorday}\" title='#{formated_date(day_detected.date)}'></div></a>".html_safe
+    detected_day = days.detect { |day| day_number == day.date.day }
+    if detected_day
+      color = detected_day.successful ? 'greentd' : 'redtd'
+      colorday = detected_day.successful.nil? ? 'bluetd' : 'greentd'
+      "<a href='/days/#{detected_day['id']}'><div class=\"#{color} #{colorday}\" title='#{formated_date(detected_day.date)}'></div></a>".html_safe
     else
       "<a href='/days/new'><div title='New day'></div></a>".html_safe
     end

@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :card do
-    list
     name 'MyString'
     position 1
+    list
     list_id 1
   end
 end

@@ -25,7 +25,6 @@
 $(document).on('turbolinks:load', function() {
 
   $(".sendtask").click(function(){  
-    debugger;
     var task = document.getElementById("task").value; 
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');
@@ -33,7 +32,6 @@ $(document).on('turbolinks:load', function() {
     var date_begin = document.getElementById("date_begin").value;
     var date_end = document.getElementById("date_end").value;
     var type_task = document.getElementById("task_type").value
-    debugger;
     $.ajax({
         url: "/days/:day_id/tasks".replace(":day_id", idDay),
         type: "POST",
@@ -50,7 +48,6 @@ $(document).on('turbolinks:load', function() {
 });
 
 function addNewTask(task, tasksListDiv) {
-  debugger;
   $('#task').css('border-color','seagreen');
   $('#date_begin').css('border-color','seagreen');
   $('#date_end').css('border-color','seagreen');
@@ -64,12 +61,6 @@ function addNewTask(task, tasksListDiv) {
   checkbox.type="checkbox";
   checkbox.className = "check";
   checkbox.style.display = "inline-block";
-
-  var dateparagraph = document.createElement('p')
-  dateparagraph.innerHTML = task.date_begin;
-
-  var date_endparagraph = document.createElement('p')
-  date_endparagraph.innerHTML = task.date_end;
 
   var paragraph = document.createElement('p')
   paragraph.innerText = task.list;
@@ -92,21 +83,21 @@ function addNewTask(task, tasksListDiv) {
   $('#date_begin').val('');
   $('#date_end').val('');
 }
-function notValidTask () {
+function notValidTask() {
   $('#task').each(function(){
-    if(!$(this).val() || $(this).val() == ""){
+    if(!$(this).val() || $(this).val() === ""){
       $(this).css('border-color','red');
       send = false;
       }
     })
     $('#date_begin').each(function(){
-      if(!$(this).val() || $(this).val() == ""){
+      if(!$(this).val() || $(this).val() === ""){
         $(this).css('border-color','red');
         send = false;
         }
       })
     $('#date_end').each(function(){
-      if(!$(this).val() || $(this).val() == ""){
+      if(!$(this).val() || $(this).val() === ""){
         $(this).css('border-color','red');
         send = false;
         }
@@ -215,7 +206,7 @@ $(document).on('turbolinks:load', function() {
         },
         error: 
         $('#notice_title').each(function(){
-          if(!$('#notice_title').val() == "" || $('#notice_text').val() == ""){
+          if(!$('#notice_title').val() === "" || $('#notice_text').val() === ""){
             $(this).css('border-color','red');
             $('#notice_text').css('border-color','red');
             send = false;
@@ -240,7 +231,6 @@ $(document).on('turbolinks:load', function() {
   });
   });
   $(document).on('turbolinks:load', function() {
-    debugger;	
     var ctx = document.getElementById("myChart").getContext('2d');
     var success = document.getElementById("success").innerText;
     var notsuccess = document.getElementById("notsuccess").innerText;
@@ -269,8 +259,48 @@ $(document).on('turbolinks:load', function() {
           title: {
             display: true,
             text: 'Success of the year',
-            fontSize: 40
+            fontSize: 20
           }
         }
     })
-  })
+  });
+
+// window.onload = function(){ 
+//   $(document).on('turbolinks:load', function() {
+//     document.getElementById('container_report').onclick = function(event) {
+//       var span, input, text;
+//    
+//       var containerReport = document.getElementById('container_report');
+//       event = event || window.event;
+//       span = event.target || event.srcElement;
+//       if (span && span.tagName.toUpperCase() === "SPAN") {
+//           span.style.display = "none";
+//           text = span.innerHTML;
+//           input = document.createElement("input");
+//           input.type = "text";
+//           input.value = text;
+//           input.name = "day[report]";
+//           input.size = Math.max(text.length + text.length*0.5);
+//           span.parentNode.insertBefore(input, span);
+
+//           var btnedit  = document.createElement("BUTTON"); 
+//           btnedit.innerHTML = "Save";
+//           btnedit.type = "submit";
+//           btnedit.className = "btn btn-success";
+//           btnedit.name = "commit";
+//           btnedit.setAttribute ("data-disable-with", "Edit")
+
+
+//           containerReport.appendChild(btnedit);
+//           input.focus();
+//           input.onblur = function() {
+//               span.parentNode.removeChild(input);
+//               span.innerHTML = input.value === "" ? "&nbsp;" : input.value;
+//               span.style.display = "";
+          
+
+//         };
+//       }
+//   };
+// });
+// };

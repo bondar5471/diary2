@@ -9,6 +9,22 @@
 </div>
 
 <%= render  "calendar", collection: @days, cached: true %>
-<%if (Day.all.count > 0)%>
-<canvas id="myChart"></canvas>
-<%end%>
+
+<button class="btn btn-info" data-toggle="modal" data-target="#successYear">Success Year</button>
+<div class="modal fade" id="successYear" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h4 class="modal-title" id="exampleModalLabel">Year</h4>
+		</div>
+		<div class="modal-body">
+			<%if (Day.count.positive?)%>
+      <canvas id="myChart"></canvas>
+      <%end%>
+		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-info" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+  </div>

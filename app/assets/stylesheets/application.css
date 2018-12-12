@@ -23,28 +23,28 @@
 /*all text*/
 
 h1 {
-    color: #000;
-    font-family: 'Courier New', Courier, monospace               
-  }
+  color: #000;
+  font-family: 'Courier New', Courier, monospace               
+}
 h2 {
-    color: #000;
-    font-family: 'Courier New', Courier, monospace
-  }
+  color: #000;
+  font-family: 'Courier New', Courier, monospace
+}
 p { color: #000;
-    font-family: 'Courier New', Courier, monospace  
-  }
+  font-family: 'Courier New', Courier, monospace  
+}
 
-  td {
-    margin: 10px;
-  }
+td {
+  margin: 10px;
+}
 
-  tr {
-    margin: 10px;
-  }
-  link {
-    display: block;
-    visibility: visible;
-  }
+tr {
+  margin: 10px;
+}
+link {
+  display: block;
+  visibility: visible;
+}
 
 /*task form*/
 #taskform {
@@ -71,27 +71,13 @@ p { color: #000;
   overflow-y: auto;
 
 }
-  button {
-      border-radius: 10px;
-      background-color: #87fafa;
-      border: none;
-      text-align: center;
-      padding: 10px;
-      height: 50px;
-      width: 100px;
-      text-align: center;
-      cursor: pointer;
-      margin: 5px;
-  }
  
-body {
-  
+body {  
   background-color: #E0FFFF;
   box-sizing: border-box;
   height: 100%;
   width: 100%;
   position: relative;
-  
 }    
 
 footer{
@@ -101,8 +87,6 @@ footer{
   border-top: 2px solid #99ddff;
   height: 50px;
   margin-top: 100px;
-
-
 }
 
 /*task*/
@@ -125,12 +109,10 @@ footer{
   border: #5e5e5e 1px solid;
   background-color: #7d7d7e; 
   text-align: center;
-
 }
 /*calendar*/
 .months {
   display: inline;
-
 }
 table.gitcal{
 border-collapse: collapse;
@@ -142,16 +124,15 @@ font-size: xx-small;
   width: 100px;
   height: 125px;
   margin-right: -6px;
-
 }
 .calendar tr {
-  margin: 0px;
+  margin: 0;
 }
 .calendar td{
   display: inline-block;
   background: #87CEEB;
   text-align: center;
-  font-size: 0px;
+  font-size: 0;
   height: 12px;
   width: 12px;
   border: 1px solid rgb(167, 167, 167);
@@ -159,7 +140,7 @@ font-size: xx-small;
   margin: 1px;
 } 
 ul.calendar {
-  padding-left: 0px;
+  padding-left: 0;
   width: 1245px;
   margin-left: -40px;
   padding-left: 33px;
@@ -205,7 +186,6 @@ ul.calendar {
 #noticelist{
  background-color: #3a78d431;
  border-radius: 5px;
-
 }
 #new_notice{
   border: #000, solid, 1px;
@@ -237,7 +217,6 @@ ul.calendar {
   padding: 10px;   
   }
 .board{
- 
   overflow-x: auto;
 }  
 .container-full {
@@ -262,8 +241,7 @@ td.daycell {
   padding: 5px;
   border: 1px solid lightgray;
   text-align: center;
-  background-color: #99ddff;
-  
+  background-color: #99ddff; 
 }
 th.calendarhead {
   padding: 3px;
@@ -302,14 +280,12 @@ th.calendarhead {
     display: block;
     padding-left: 15%;
     height: 100%;
-    width: 0px;
-    border: #b0b5bb 0px solid;
-
+    width: 0;
+    border: #b0b5bb 0 solid;
   }
   #dropnotice {
     display: none;
   }
-
 }
 /*text decoration for task*/
 
