@@ -7,7 +7,7 @@ RSpec.describe CardsController, type: :controller do
   let(:card) { create(:card) }
 
   describe 'GET #index' do
-    let(:card) { create_list(:card, 2) }
+    let(:card) { create_list(:cards, 2) }
 
     before { get :index }
 
@@ -22,14 +22,11 @@ RSpec.describe CardsController, type: :controller do
     end
   end
   describe 'POST #create' do
-    context 'with invalid attributes' do
-      it 'saves a new card in the database' do
+    context 'with valid attributes' do
+      it 'saves a new card in the database responce status' do
         expect do
           post :create, params: { card: attributes_for(:card), list_id: list, format: :json }
         end.to change(list.cards, :count).by(1)
-      end
-      it 'status test after create' do
-        post :create, params: { card: attributes_for(:card), list_id: list, format: :json }
         expect(response).to have_http_status(201)
       end
     end

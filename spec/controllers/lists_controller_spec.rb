@@ -10,7 +10,7 @@ RSpec.describe ListsController, type: :controller do
     it 'assign a new List to @list' do
       expect(assigns(:list)).to be_a_new(List)
     end
-    it 'test http status' do
+    it 'status should be created' do
       post :create, params: { list: attributes_for(:list), list_id: list, format: :json }
       expect(response).to have_http_status(:created)
     end
@@ -36,7 +36,7 @@ RSpec.describe ListsController, type: :controller do
   describe 'DELETE #destroy' do
     before { list }
     it 'delete day' do
-      expect { delete :destroy, params: { id: list } }.to change(List, :count).by(-1)
+      expect { delete :destroy, params: { id: list.id } }.to change(List, :count).by(-1)
     end
   end
   describe 'PATCH #move' do

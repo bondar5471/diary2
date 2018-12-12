@@ -31,13 +31,13 @@ $(document).on('turbolinks:load', function() {
     var idDay = $(current_day).attr('data-day_id');
     var date_begin = document.getElementById("date_begin").value;
     var date_end = document.getElementById("date_end").value;
-    var type_task = document.getElementById("task_type").value
+    var type_task = document.getElementById("task_duration").value
     $.ajax({
         url: "/days/:day_id/tasks".replace(":day_id", idDay),
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: { task: { list: task, date_begin: date_begin, date_end: date_end, task_type: type_task} },
+        data: { task: { list: task, date_begin: date_begin, date_end: date_end, duration: type_task} },
         success: function(data) {
           addNewTask(data, container);           
         },

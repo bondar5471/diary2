@@ -1,15 +1,13 @@
-<h4>Total amount of tasks <%=Task.all.count%></h4>
+<h4>Total amount of tasks <%=Task.count%></h4>
 <div class="tips">
 	<div class="greentd center" ></div>
-	<i>&nbsp;<div id="success"><%=Day.all.where(successful: true).count%></div>success day&nbsp;</i>
+	<i>&nbsp;<div id="success"><%=Day.successful.count%></div>success day&nbsp;</i>
 	<div class="redtd center"></div>
-	<i>&nbsp;<div id="notsuccess"><%=Day.all.where(successful: false).count%></div>not success day&nbsp;</i>
+	<i>&nbsp;<div id="notsuccess"><%=Day.unsuccessful.count%></div>not success day&nbsp;</i>
 	<div class="bluetd center"></div>
-	<i>&nbsp;<div id="notset"><%=Day.all.where(successful: nil).count%></div>day not set&nbsp;</i>
+	<i>&nbsp;<div id="notset"><%=Day.not_set.count%></div>day not set&nbsp;</i>
 </div>
-
 <%= render  "calendar", collection: @days, cached: true %>
-
 <button class="btn btn-info" data-toggle="modal" data-target="#successYear">Success Year</button>
 <div class="modal fade" id="successYear" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -27,4 +25,4 @@
 		</div>
 	  </div>
 	</div>
-  </div>
+</div>

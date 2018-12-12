@@ -2,17 +2,23 @@
 	<div class="container_day">
 	<p><%= formated_date(@day.date) %></p>
 	<p>Success of the day</p>
-	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-minus'%>"><% @day.successful %></p>
+	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-minus'%>">
+		<% @day.successful %>
+	</p>
 	<p id='report'>Report on day</p>
-	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report"><%= @day.report %></div>
+	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report">
+		<%= @day.report %>
+	</div>
 	<br>
 	<h3>Tasks on day</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist">
 		<%Task.all.sort_by(&:created_at).each do |task|%>
 			<% if (task.date_begin..task.date_end).include?(@day.date)%>
-			<div class="onetask <%= task.date_end > @day.date ? 'greentask' : 'redtask'%> <%= task.completed == "completed" ? 'silvertask': ''%>">	
-			<p title="<%= (task.date_end+1.day - task.date_begin).to_i%>  days to task , <%= task.task_type%>"><input type="checkbox" name="taskOff" value="1" class="check"/><b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
+			<div class="onetask <%= task.date_end > @day.date ? 'greentask' : 'redtask'%> <%= task.status == "status" ? 'silvertask': ''%>">	
+			<p title="<%= (task.date_end+1.day - task.date_begin).to_i%>  days to task , <%= task.duration%>">
+				<input type="checkbox" name="taskOff" value="1" class="check"/>
+				<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
 				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
 				  <span class="glyphicon glyphicon-trash"></span>
 				<%end%>
@@ -33,7 +39,7 @@
 		<p>Date finish task</p>
 		<input type="date" name="date_end" id="date_end" value="<%=@day.date%>"/>
 		<p>Type task</p>
-		<%= select("task","type", Task.task_types.keys {|p| [ p.type ] })%>	
+		<%= select("task","duration", Task.durations.keys {|p| [ p.type ] })%>	
 		<hr>
 		<div class="sendtask"><button>Add</button></div>
 	  </div>
@@ -51,9 +57,9 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content">
-		<div class="modal-header">
-			<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
-		</div>
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
+			</div>
 		<div class="modal-body">
 			<% Task.all.each do |task|%>
 			<% if (task.date_begin..task.date_end).include?(@day.date)%>
@@ -69,9 +75,9 @@
 					<p>Finish</p>
 					<%= f.date_field :date_end %>
 					<p>Type</p>
-					<%= f.select :task_type, Task.task_types.keys %>
-					<p>Completed</p>
-					<%= f.select :completed, Task.completeds.keys %>
+					<%= f.select :duration, Task.durations.keys %>
+					<p>status</p>
+					<%= f.select :status, Task.statuses.keys %>
 					<br>
 				</div>
 				<div class="actions">
@@ -90,7 +96,7 @@
 		</div>
 	  </div>
 	</div>
-	</div>
+</div>
 	
 	<!-- Modal edit day -->
 <div class="modal fade" id="editDay" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -114,4 +120,4 @@
 		</div>
 	  </div>
 	</div>
-  </div>
+</div>

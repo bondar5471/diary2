@@ -5,8 +5,8 @@ class Task < ApplicationRecord
   validates :list, presence: true
   validates :date_begin, presence: true
   validates :date_end, presence: true
-  validates :task_type, presence: true
+  validates :duration, presence: true
 
-  enum completed: %i[in_progress completed]
-  enum task_type: %i[year month week day]
+  enum status: %i[in_progress status]
+  enum duration: %i[year month week day]
 end

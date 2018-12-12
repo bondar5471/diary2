@@ -14,7 +14,7 @@ feature 'Create task on day', '
     fill_in 'task',	with: 'Mytext'
     fill_in 'date_begin', with: I18n.l(Date.today)
     fill_in 'date_end', with: I18n.l(Date.today)
-    select 'day', from: 'task_type'
+    select 'day', from: 'task_duration'
     sleep 1
     click_on 'Add'
     within '#tasklist' do
@@ -43,7 +43,7 @@ feature 'Create task on day', '
     fill_in 'task',	with: ''
     fill_in 'date_begin', with: I18n.l(Date.today)
     fill_in 'date_end', with: I18n.l(Date.today)
-    select 'day', from: 'task_type'
+    select 'day', from: 'task_duration'
     sleep 1
     click_on 'Add'
     within '#tasklist' do
