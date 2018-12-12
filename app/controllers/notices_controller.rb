@@ -7,9 +7,9 @@ class NoticesController < ApplicationController
   def create
     @notice = Notice.create(notice_params)
     if @notice.persisted?
-      render json: @notice, status: 200
+      render json: @notice, status: :ok
     else
-      render json: @notice, status: 422
+      render json: @notice, status: :unprocessable_entity
     end
   end
 

@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="container_day">
-	<p><%= @day.date.try(:strftime, '%B %d, %Y') %></p>
+	<p><%= formated_date(@day.date) %></p>
 	<p>Success of the day</p>
-	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : '	glyphicon glyphicon-minus'%>"><%= @day.successful %></p>
+	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : '	glyphicon glyphicon-minus'%>"><% @day.successful %></p>
 	<p>Report on day</p>
 	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report"><%= @day.report %></div>
 	<br>

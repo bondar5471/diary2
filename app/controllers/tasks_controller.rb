@@ -9,9 +9,9 @@ class TasksController < ApplicationController
   def create
     @task = @day.tasks.create(task_params)
     if @task.persisted?
-      render json: @task, status: 200
+      render json: @task, status: :ok
     else
-      render json: @task, status: 422
+      render json: @task, status: :unprocessable_entity
     end
   end
 
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to request.referrer }
+      format.html { redirect_to request.referer }
       format.json { head :list }
     end
   end
