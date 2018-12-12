@@ -7,6 +7,6 @@ class Task < ApplicationRecord
   validates :date_end, presence: true
   validates :duration, presence: true
 
-  enum status: %i[in_progress status]
+  enum status: %i[in_progress finished]
   enum duration: %i[year month week day]
 end

@@ -15,7 +15,8 @@
 		<div id="tasklist">
 		<%Task.all.sort_by(&:created_at).each do |task|%>
 			<% if (task.date_begin..task.date_end).include?(@day.date)%>
-			<div class="onetask <%= task.date_end > @day.date ? 'greentask' : 'redtask'%> <%= task.status == "status" ? 'silvertask': ''%>">	
+			<div class="onetask <%= task.date_end > @day.date ? 'greentask' : 'redtask'%>
+			<%= task.status == "finished" ? 'silvertask': ''%>">	
 			<p title="<%= (task.date_end+1.day - task.date_begin).to_i%>  days to task , <%= task.duration%>">
 				<input type="checkbox" name="taskOff" value="1" class="check"/>
 				<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
@@ -28,7 +29,7 @@
 		<%end%>
 		<%end%>
 			</div>
-			<button type="button" id="taskButton" class="btn btn-secondary">Add task</button>
+			<button type="button" id="taskButton" class="btn btn-primary">Add task</button>
 		<div id="taskform" autofocus>	
 		<p>Add tasks on day </p>
 		<span id="hideform" class="glyphicon glyphicon-remove icoremove"></span>
@@ -41,7 +42,7 @@
 		<p>Type task</p>
 		<%= select("task","duration", Task.durations.keys {|p| [ p.type ] })%>	
 		<hr>
-		<div class="sendtask"><button>Add</button></div>
+		<div class="sendtask"><button class="btn btn-primary">Add</button></div>
 	  </div>
 	</div>
     </div>
@@ -92,7 +93,7 @@
 			<%end%> 
 		</div>
 		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 		</div>
 	  </div>
 	</div>
@@ -116,7 +117,7 @@
 			<%end%>
 		</div>
 		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 		</div>
 	  </div>
 	</div>
