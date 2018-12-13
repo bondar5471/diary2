@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ListsController, type: :controller do
   let(:list) { create(:list) }
-
+  before { sign_in_user }
   describe 'GET #new' do
     before { get :new }
     it 'assign a new List to @list' do

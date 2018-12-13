@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe TasksController, type: :controller do
   let!(:day) { create(:day) }
   let!(:task) { create(:task) }
-  let(:user) { create(:user) }
+  before { sign_in_user }
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves a new task in the database' do

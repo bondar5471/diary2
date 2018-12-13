@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe CardsController, type: :controller do
   let!(:list) { create(:list) }
   let(:card) { create(:card) }
+  before { sign_in_user }
 
   describe 'GET #index' do
     let(:card) { create_list(:cards, 2) }
