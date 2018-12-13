@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'Create task on day','
+feature 'Create task on day', '
 	click the add task button.
 	open the form enter valid data,
 	click the add task button
@@ -10,14 +10,14 @@ feature 'Create task on day','
   given(:day) { create(:day) }
   given!(:user) { create(:user) }
 
-  before {
+  before do
     visit new_user_session_path
     fill_in 'user_email',	with: user.email
     fill_in 'user_password', with: user.password
     click_on 'Log in'
     visit day_path(day)
     click_on 'Add task'
-  }
+  end
 
   scenario 'click on create task on day', js: true do
     fill_in 'task',	with: 'Mytext'

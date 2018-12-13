@@ -39,7 +39,6 @@ RSpec.describe DaysController, type: :controller do
   end
 
   describe 'POST #create' do
-   
     context 'with valid attributes' do
       it 'save the new day the database' do
         expect { post :create, params: { day: attributes_for(:day) } }.to change(Day, :count).by(1)
