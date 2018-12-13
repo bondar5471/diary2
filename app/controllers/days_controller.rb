@@ -15,7 +15,7 @@ class DaysController < ApplicationController
   end
 
   def create
-    @day = Day.new(day_params)
+    @day = Day.new(day_params.merge(user: current_user))
     if @day.save
       flash[:success] = 'Day create.'
       redirect_to @day
@@ -33,7 +33,7 @@ class DaysController < ApplicationController
   end
 
   def update
-    if @day.update(day_params)
+    if @day.update(day_params.merge(user: current_user))
       respond_to do |format|
         format.html { redirect_to @day }
         format.js

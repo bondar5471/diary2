@@ -1,6 +1,10 @@
 AllCops:
   Exclude:
     - config/initializers/secret_token.rb
+    - node_modules/node-sass/src/libsass/contrib/libsass.spec
+    - config/initializers/devise.rb
+    - node_modules/node-sass/src/libsass/extconf.rb
+    
 
 Rails:
   Enabled: true

@@ -7,4 +7,5 @@ class Day < ApplicationRecord
   scope :successful, -> { where(successful: true) }
   scope :unsuccessful, -> { where(successful: false) }
   scope :not_set, -> { where(successful: nil) }
+  belongs_to :user
 end

@@ -2,6 +2,7 @@
 
 class Task < ApplicationRecord
   belongs_to :day, required: false, touch: true
+  belongs_to :user
   validates :list, presence: true
   validates :date_begin, presence: true
   validates :date_end, presence: true

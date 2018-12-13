@@ -8,13 +8,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-dates = Date.today.beginning_of_year - 1.day
+dates = Time.zone.today.beginning_of_year - 1.day
 Day.destroy_all
-Date.today.end_of_year.yday.times do
+Time.zone.today.end_of_year.yday.times do
   Day.create!(
     date: dates += 1.day,
     successful: nil,
-    report: nil
+    report: nil,
+    user_id: nil
   )
 end
 p "Created #{Day.count} days"

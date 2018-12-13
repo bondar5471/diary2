@@ -16,7 +16,7 @@ class ListsController < ApplicationController
   def edit; end
 
   def create
-    @list = List.new(list_params)
+    @list = List.new(list_params.merge(user: current_user))
 
     respond_to do |format|
       if @list.save

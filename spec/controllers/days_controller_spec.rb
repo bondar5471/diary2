@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe DaysController, type: :controller do
-  let(:day) { create(:day) }
+  let!(:day) { create(:day, user: create(:user)) }
 
   describe 'GET #index' do
     let(:days) { create_list(:day, 2) }
@@ -39,14 +39,14 @@ RSpec.describe DaysController, type: :controller do
   end
 
   describe 'POST #create' do
+    sign_in_user
     context 'with valid attributes' do
       it 'save the new day the database' do
         expect { post :create, params: { day: attributes_for(:day) } }.to change(Day, :count).by(1)
       end
       it 'redirects to show view' do
         post :create, params: { day: attributes_for(:day) }
-        expect(response).to redirect_to action: :show,
-                                        id: assigns(:day).id
+        expect(response).to redirect_to action: :show, id: assigns(:day).id
       end
     end
   end

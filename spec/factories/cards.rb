@@ -6,5 +6,6 @@ FactoryBot.define do
     position 1
     list
     list_id 1
+    user
   end
 end
