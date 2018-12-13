@@ -82,6 +82,7 @@ GEM
     commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    database_cleaner (1.7.0)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -275,6 +276,7 @@ DEPENDENCIES
   chart-js-rails
   chromedriver-helper
   coffee-rails (~> 4.2)
+  database_cleaner
   devise
   factory_bot_rails
   jbuilder (~> 2.5)

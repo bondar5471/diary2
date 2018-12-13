@@ -8,7 +8,7 @@ feature 'Create task on day','
 	click the add task button
 ' do
   given(:day) { create(:day) }
-  given(:user) { create(:user) }
+  given!(:user) { create(:user) }
 
   before {
     visit new_user_session_path

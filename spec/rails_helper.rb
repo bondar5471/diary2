@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'selenium/webdriver'
 require 'support/controller_macros'
+require 'database_cleaner'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -37,6 +38,17 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
   config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
