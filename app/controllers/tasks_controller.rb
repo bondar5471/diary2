@@ -23,7 +23,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
+    if @task.update(task_params.merge(user: current_user))
       respond_to do |format|
         format.html { redirect_to @day }
         format.js
@@ -50,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:list, :date_begin, :date_end, :status, :duration)
+    params.require(:task).permit(:list, :date_end, :status, :duration)
   end
 end

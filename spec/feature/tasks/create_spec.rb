@@ -21,7 +21,6 @@ feature 'Create task on day', '
 
   scenario 'click on create task on day', js: true do
     fill_in 'task',	with: 'Mytext'
-    fill_in 'date_begin', with: Time.zone.today
     fill_in 'date_end', with: Time.zone.today
     select 'day', from: 'task_duration'
     sleep 1
@@ -44,7 +43,6 @@ feature 'Create task on day', '
 
   scenario 'not create invalid task', js: true do
     fill_in 'task',	with: ''
-    fill_in 'date_begin', with: Time.zone.today
     fill_in 'date_end', with: Time.zone.today
     select 'day', from: 'task_duration'
     sleep 1

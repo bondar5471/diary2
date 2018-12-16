@@ -3,7 +3,7 @@
 require 'rails_helper'
 feature 'Delete task' do
   given!(:day) { create(:day) }
-  given!(:task) { create(:task, day: day) }
+  given(:task) { create(:task, day: day) }
   given(:user) { create(:user) }
   before do
     visit new_user_session_path

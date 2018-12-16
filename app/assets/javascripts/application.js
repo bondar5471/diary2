@@ -21,23 +21,50 @@
 
 
 
+$(document).on('turbolinks:load', function() {
+   $("#task_duration").on('change', function() {
+    var selectorDuration = document.getElementById('task_duration').value
+    if(selectorDuration == "year") {
+      document.getElementById('task_year').style.display = 'block';
+    } else {
+      document.getElementById('task_year').style.display = 'none';
+    }
+    if(selectorDuration == "month") {
+      document.getElementById('date_month').style.display = 'block';
+      document.getElementById('task_year').style.display = 'block';
+    } else {
+      document.getElementById('date_month').style.display = 'none';
+    }
+    if(selectorDuration == "week") {
+      document.getElementById('task_week').style.display = 'block';
+      document.getElementById('date_month').style.display = 'block';
+      document.getElementById('task_year').style.display = 'block';
+    } else {
+      document.getElementById('task_week').style.display = 'none';
+    }
+  })
+});
 //create task
 $(document).on('turbolinks:load', function() {
 
   $(".sendtask").click(function(){  
+    debugger;
     var task = document.getElementById("task").value; 
     var current_day = $(this).parents('.task-container');
     var container = document.getElementById('tasklist');
     var idDay = $(current_day).attr('data-day_id');
-    var date_begin = document.getElementById("date_begin").value;
     var date_end = document.getElementById("date_end").value;
     var type_task = document.getElementById("task_duration").value
+    var taskYear = document.getElementById('task_year').value
+    var taskMoth = document.getElementById('date_month').value
+    var taskWeek = document.getElementById('task_week').value
     $.ajax({
         url: "/days/:day_id/tasks".replace(":day_id", idDay),
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: { task: { list: task, date_begin: date_begin, date_end: date_end, duration: type_task} },
+        data: { task: { list: task, date_end: date_end, duration: type_task},
+        dataTask:{task_year: taskYear, date_month: taskMoth, task_week: taskWeek} },
         success: function(data) {
           addNewTask(data, container);           
         },
@@ -49,7 +76,6 @@ $(document).on('turbolinks:load', function() {
 
 function addNewTask(task, tasksListDiv) {
   $('#task').css('border-color','seagreen');
-  $('#date_begin').css('border-color','seagreen');
   $('#date_end').css('border-color','seagreen');
   var link = document.createElement('a');
   link.className = "glyphicon glyphicon-trash"
@@ -57,11 +83,6 @@ function addNewTask(task, tasksListDiv) {
   link.href = ("/days/:day_id/tasks/".replace(":day_id", task.day_id) + task.id);
   link.setAttribute("data-remote", "true");
   
-  var checkbox = document.createElement("input")
-  checkbox.type="checkbox";
-  checkbox.className = "check";
-  checkbox.style.display = "inline-block";
-
   var paragraph = document.createElement('p')
   paragraph.innerText = task.list;
   paragraph.style.fontWeight = "bold";
@@ -71,17 +92,16 @@ function addNewTask(task, tasksListDiv) {
   onetask.className = "onetask";
   onetask.className = "bluetask";
   onetask.style.borderRadius = "5px";
-  onetask.style.marginTop = "4px";
+  onetask.style.marginTop = "2px";
+  onetask.style.paddingLeft = "6px";
  
-  onetask.appendChild(checkbox);
   onetask.appendChild(paragraph);
   onetask.appendChild(link);
 
   tasksListDiv.appendChild(onetask);
 
   $('#task').val('');
-  $('#date_begin').val('');
-  $('#date_end').val('');
+
 }
 function notValidTask() {
   $('#task').each(function(){
@@ -90,25 +110,12 @@ function notValidTask() {
       send = false;
       }
     })
-    $('#date_begin').each(function(){
-      if(!$(this).val() || $(this).val() === ""){
-        $(this).css('border-color','red');
-        send = false;
-        }
-      })
     $('#date_end').each(function(){
       if(!$(this).val() || $(this).val() === ""){
         $(this).css('border-color','red');
         send = false;
         }
-      })
-      $('#date_end').each(function(){
-        if($('#date_begin').val() > $(this).val()){
-          $('#date_end').css('border-color','red');
-          send = false;
-          alert("End date less than start date")
-          }
-        })  
+      }) 
   }
 //drag and drop  
 $(document).on('turbolinks:load', function() {
@@ -168,53 +175,7 @@ $(document).on('turbolinks:load', function() {
     }
     return false;
   }})
-//create notice
-$(document).on('turbolinks:load', function() {
-  $("#sendnotice").click(function(e){
-    e.preventDefault();
-    var nottitle = document.getElementById("notice_title").value; 
-    var nottext = document.getElementById("notice_text").value;
-    var containernotice = document.getElementById('noticelist');
 
-    $.ajax({
-        url: "/notices",
-        type: "POST",
-        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-        dataType: "json",
-        data: { notice: { title: nottitle, text: nottext}},
-        success: function(data) {
-          $('#notice_text').css('border-color','seagreen');
-          $('#notice_title').css('border-color','seagreen');
-          var noticetitle = document.createElement('p');
-          noticetitle.innerText = data.title;
-
-          var noticetext = document.createElement('p');
-          noticetext.innerText = data.text;
-
-          var link = document.createElement('a');
-          link.innerHTML = "Destroy";
-          link.href = ("/notices/:id".replace(":id", data.id));
-          link.setAttribute ("data-method", "delete");
-          link.setAttribute("data-remote", "true");
-
-          containernotice.appendChild(noticetitle);
-          containernotice.appendChild(noticetext);
-          containernotice.appendChild(link);
-          $('#notice_title').val('');
-          $('#notice_text').val('');
-                    
-        },
-        error: 
-        $('#notice_title').each(function(){
-          if(!$('#notice_title').val() === "" || $('#notice_text').val() === ""){
-            $(this).css('border-color','red');
-            $('#notice_text').css('border-color','red');
-            send = false;
-            }
-        })
-    });
-  });
-});
 //vicible form task
 $(document).on('turbolinks:load', function() {
 $("#taskButton").click(function(e){
@@ -264,43 +225,3 @@ $(document).on('turbolinks:load', function() {
         }
     })
   });
-
-// window.onload = function(){ 
-//   $(document).on('turbolinks:load', function() {
-//     document.getElementById('container_report').onclick = function(event) {
-//       var span, input, text;
-//    
-//       var containerReport = document.getElementById('container_report');
-//       event = event || window.event;
-//       span = event.target || event.srcElement;
-//       if (span && span.tagName.toUpperCase() === "SPAN") {
-//           span.style.display = "none";
-//           text = span.innerHTML;
-//           input = document.createElement("input");
-//           input.type = "text";
-//           input.value = text;
-//           input.name = "day[report]";
-//           input.size = Math.max(text.length + text.length*0.5);
-//           span.parentNode.insertBefore(input, span);
-
-//           var btnedit  = document.createElement("BUTTON"); 
-//           btnedit.innerHTML = "Save";
-//           btnedit.type = "submit";
-//           btnedit.className = "btn btn-success";
-//           btnedit.name = "commit";
-//           btnedit.setAttribute ("data-disable-with", "Edit")
-
-
-//           containerReport.appendChild(btnedit);
-//           input.focus();
-//           input.onblur = function() {
-//               span.parentNode.removeChild(input);
-//               span.innerHTML = input.value === "" ? "&nbsp;" : input.value;
-//               span.style.display = "";
-          
-
-//         };
-//       }
-//   };
-// });
-// };

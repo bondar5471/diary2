@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :cards, dependent: :destroy
+  def creator_of?(thing)
+    id == thing.user_id
+  end
 end

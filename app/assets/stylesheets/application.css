@@ -276,6 +276,9 @@ th.calendarhead {
 
 /*mobile style*/
 @media (min-width: 320px) and (max-width:1245px) {
+  .row {
+    padding-left: 100px;
+  }
   ul.calendar {
     display: block;
     padding-left: 15%;
@@ -310,4 +313,14 @@ b.line-through {
   background-color: #5e5e5e; 
   border-color: #7d7d7e;
   text-decoration: line-through;
+}
+
+#task_year {
+  display: none;
+}
+#date_month {
+  display: none;
+}
+#task_week {
+  display: none;
 }
