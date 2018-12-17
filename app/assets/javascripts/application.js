@@ -20,29 +20,94 @@
 //= require_tree .
 
 
-
+//hide selectors
 $(document).on('turbolinks:load', function() {
    $("#task_duration").on('change', function() {
     var selectorDuration = document.getElementById('task_duration').value
     if(selectorDuration == "year") {
-      document.getElementById('task_year').style.display = 'block';
+      document.getElementById('task_year').style.display = 'inline-block';
+      document.getElementById('date_end').style.display = 'none';
+      document.getElementById('date_field').style.display = 'none';
     } else {
       document.getElementById('task_year').style.display = 'none';
     }
     if(selectorDuration == "month") {
-      document.getElementById('date_month').style.display = 'block';
-      document.getElementById('task_year').style.display = 'block';
+      document.getElementById('date_month').style.display = 'inline-block';
+      document.getElementById('task_year').style.display = 'inline-block';
+      document.getElementById('date_end').style.display = 'none';
+      document.getElementById('date_field').style.display = 'none';
     } else {
       document.getElementById('date_month').style.display = 'none';
     }
     if(selectorDuration == "week") {
-      document.getElementById('task_week').style.display = 'block';
-      document.getElementById('date_month').style.display = 'block';
-      document.getElementById('task_year').style.display = 'block';
+      document.getElementById('task_week').style.display = 'inline-block';
+      document.getElementById('date_month').style.display = 'inline-block';
+      document.getElementById('task_year').style.display = 'inline-block';
+      document.getElementById('date_end').style.display = 'none';
+      document.getElementById('date_field').style.display = 'none';
     } else {
       document.getElementById('task_week').style.display = 'none';
     }
+    if(selectorDuration == "day") {
+      document.getElementById('date_field').style.display = 'block';
+      document.getElementById('date_end').style.display = 'block';
+    }
   })
+});
+//get value selectors
+$(document).on('turbolinks:load', function() {
+  $("#sendFormTask").on('click', function() {
+    var selectorDuration = document.getElementById('task_duration').value
+    if(selectorDuration == "year") {
+      var taskYear = new Date(document.getElementById('task_year').value, 11, 31);
+      function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+    
+        return [year, month, day].join('-');
+    }
+      var formatYear = formatDate(taskYear)
+      document.getElementById('date_end').value = formatYear;
+    }
+    if(selectorDuration == "month") {
+      var taskMonth = new Date(document.getElementById('task_year').value, document.getElementById('date_month').value, 0);
+      function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+    
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+      var formatMonth = formatDate(taskMonth)
+      document.getElementById('date_end').value = formatMonth;
+    }
+    if(selectorDuration == "week") {
+      var taskWeek = new Date("Jan 01, " + document.getElementById('task_year').value + " 01:00:00");
+      var week = taskWeek.getTime() + 604800000 * (document.getElementById('task_week').value - 1);
+      var lastDayWeekTask = new Date(week + 518400000)
+      function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+    
+        return [year, month, day].join('-');
+    }
+      var formatWeek = formatDate(lastDayWeekTask)
+      document.getElementById('date_end').value = formatWeek;
+    }
+ })
 });
 //create task
 $(document).on('turbolinks:load', function() {
@@ -55,16 +120,12 @@ $(document).on('turbolinks:load', function() {
     var idDay = $(current_day).attr('data-day_id');
     var date_end = document.getElementById("date_end").value;
     var type_task = document.getElementById("task_duration").value
-    var taskYear = document.getElementById('task_year').value
-    var taskMoth = document.getElementById('date_month').value
-    var taskWeek = document.getElementById('task_week').value
     $.ajax({
         url: "/days/:day_id/tasks".replace(":day_id", idDay),
         type: "POST",
         beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
         dataType: "json",
-        data: { task: { list: task, date_end: date_end, duration: type_task},
-        dataTask:{task_year: taskYear, date_month: taskMoth, task_week: taskWeek} },
+        data: { task: { list: task, date_end: date_end, duration: type_task} },
         success: function(data) {
           addNewTask(data, container);           
         },

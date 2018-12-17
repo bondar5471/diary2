@@ -8,7 +8,7 @@ module DaysHelper
   end
 
   def formated_date(date)
-    date.strftime('%B %d, %Y')
+    date.strftime('%A, %B, %d, %Y')
   end
 
   def display_day(day_number, days)

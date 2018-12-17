@@ -35,16 +35,18 @@
 		<span id="hideform" class="glyphicon glyphicon-remove icoremove"></span>
 		<input type="text" name="task" id="task" autofocus />
 		<br>
-		<p>Date task</p>
-		<input type="date" name="date_end" id="date_end" value="<%=@day.date%>"/>
 		<p>Type task</p>
+		<div id = "selectorForm">
 		<%= select("task","duration", Task.durations.keys {|p| [ p.type ] } ) %>	
 		<%= select("task","year", (Time.zone.now.year)..(Time.zone.now.year + 1)) %>
 		<%= select_month(Date.today) %>
-		<%= select("task", "week", (@day.date.beginning_of_month.strftime("%U"))..(@day.date.end_of_month.strftime("%U"))) %>
+		<%= select("task", "week", (@day.date.beginning_of_year.strftime("%U"))..(@day.date.end_of_year.strftime("%U"))) %>
+		<p id="date_field">Date task</p>
+		<input type="date" name="date_end" id="date_end" value="<%=@day.date%>"/>
 		<hr>
-		<div class="sendtask"><button class="btn btn-primary">Add</button></div>
-	  </div>
+		<div class="sendtask"><button class="btn btn-primary" id="sendFormTask">Add</button></div>
+		</div>
+	</div>
 	</div>
     </div>
 	<br>
