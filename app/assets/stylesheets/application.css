@@ -3,6 +3,7 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
+ *= require_twitter/bootstrap
  *= require_tree .
 */
 
@@ -323,4 +324,16 @@ b.line-through {
 }
 #task_week {
   display: none;
+}
+/*clock index day*/
+.clock {
+  height: 30px;  
+  margin: 2px auto 0;
+  background: #87CEEB;
+  color: rgb(54, 54, 54);
+  text-align: center;
+  font-size: 26px;
+  font-family: 'liquid_crystalregular';
+  font-weight: bold;
+  border-radius: 10px;
 }

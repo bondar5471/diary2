@@ -9,4 +9,9 @@ class Task < ApplicationRecord
 
   enum status: %i[in_progress finished]
   enum duration: %i[day week month year]
+
+  scope :year, -> { where(duration: 3) }
+  scope :month, -> { where(duration: 2) }
+  scope :week, -> { where(duration: 1) }
+  scope :day, -> { where(duration: 0) }
 end

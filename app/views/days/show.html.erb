@@ -10,27 +10,84 @@
 		<%= @day.report %>
 	</div>
 	<br>
-	<h3>Tasks on day</h3>
+	<h3>Tasks creating</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
-		<div id="tasklist">
-		<%Task.all.sort_by(&:created_at).each do |task|%>
-		  <% if user_signed_in? && current_user.creator_of?(task) %>
-			<% if (task.date_end == @day.date)%>
+		<div id="tasklist"></div>
+<button class="accordion">Task on day</button>
+	<div class="panel">
+		<%Task.day.each do |task|%>
+		<% if user_signed_in? && current_user.creator_of?(task) %>
+		<% if (task.date_end == @day.date)%>
+		<div class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
+		<p title="<%= task.duration%>">
+			<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
+			<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+				<span class="glyphicon glyphicon-trash"></span>
+			<%end%>
+			</p>
+			</p>
+		</div>	
+	<%end%>
+	<%end%>
+	<%end%>
+	</div>
+<button class="accordion">Tasks on week</button>
+	<div class="panel">
+		<%Task.week.each do |task|%>
+			<% if user_signed_in? && current_user.creator_of?(task) %>
+			<% if ((@day.date.beginning_of_week..@day.date.end_of_week).include?(task.date_end) )%>
 			<div class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
 			<p title="<%= task.duration%>">
-				<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
+				<b class="line-through" data-toggle="modal" data-target="#editModalWeek "><%= task.list %> </b>
 				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
-				  <span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-trash"></span>
 				<%end%>
 				</p>
 				</p>
 			</div>	
-    <%end%>
 		<%end%>
 		<%end%>
-			</div>
-			<button type="button" id="taskButton" class="btn btn-primary">Add task</button>
-		<div id="taskform" autofocus>	
+		<%end%>
+	</div>
+<button class="accordion">Tasks on month</button>
+	<div class="panel">
+		<%Task.month.each do |task|%>
+			<% if user_signed_in? && current_user.creator_of?(task) %>
+			<% if ((@day.date.beginning_of_month..@day.date.end_of_month).include?(task.date_end) )%>
+			<div class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
+			<p title="<%= task.duration%>">
+				<b class="line-through" data-toggle="modal" data-target="#editModalMonth "><%= task.list %> </b>
+				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+					<span class="glyphicon glyphicon-trash"></span>
+				<%end%>
+				</p>
+				</p>
+			</div>	
+		<%end%>
+		<%end%>
+		<%end%>
+	</div>
+<button class="accordion">Tasks on year</button>
+	<div class="panel">
+		<%Task.year.each do |task|%>
+			<% if user_signed_in? && current_user.creator_of?(task) %>
+			<% if ((@day.date.beginning_of_year..@day.date.end_of_year).include?(task.date_end) )%>
+			<div class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
+			<p title="<%= task.duration%>">
+				<b class="line-through" data-toggle="modal" data-target="#editModalYear "><%= task.list %> </b>
+				<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+					<span class="glyphicon glyphicon-trash"></span>
+				<%end%>
+				</p>
+				</p>
+			</div>	
+		<%end%>
+		<%end%>
+		<%end%>
+	</div>
+						
+	<button type="button" id="taskButton" class="btn btn-primary">Add task</button>
+	<div id="taskform" autofocus>	
 		<p>Add tasks on day </p>
 		<span id="hideform" class="glyphicon glyphicon-remove icoremove"></span>
 		<input type="text" name="task" id="task" autofocus />
@@ -40,7 +97,8 @@
 		<%= select("task","duration", Task.durations.keys {|p| [ p.type ] } ) %>	
 		<%= select("task","year", (Time.zone.now.year)..(Time.zone.now.year + 1)) %>
 		<%= select_month(Date.today) %>
-		<%= select("task", "week", (@day.date.beginning_of_year.strftime("%U"))..(@day.date.end_of_year.strftime("%U"))) %>
+		<%= select("task", "week", (@day.date.beginning_of_month.strftime("%U"))..(@day.date.end_of_month.strftime("%U"))) %>
+		<p id="paragraphDateTask"></p>
 		<p id="date_field">Date task</p>
 		<input type="date" name="date_end" id="date_end" value="<%=@day.date%>"/>
 		<hr>
@@ -65,7 +123,7 @@
 				<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
 			</div>
 			<div class="modal-body">
-				<% Task.all.each do |task|%>
+				<% Task.day.each do |task|%>
 				<% if user_signed_in? && current_user.creator_of?(task) %>
 				<% if (task.date_end == @day.date)%>
 					<%= form_for([@day, task]) do |f| %>
@@ -100,7 +158,135 @@
 	  </div>
 	</div>
 </div>
-	
+<!-- modal edit week task -->
+<div class="modal fade" id="editModalWeek" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
+			</div>
+			<div class="modal-body">
+				<% Task.week.each do |task|%>
+				<% if user_signed_in? && current_user.creator_of?(task) %>
+				<% if ((@day.date.beginning_of_week..@day.date.end_of_week).include?(task.date_end) )%>
+					<%= form_for([@day, task]) do |f| %>
+					<div class="modaltask">
+					<div class="field">
+						<p>Task</p>
+						<%= f.text_area :list %>
+						<br>
+						<p>Date task</p>
+						<%= f.date_field :date_end %>
+						<p>Type</p>
+						<%= f.select :duration, Task.durations.keys %>
+						<p>Status</p>
+						<%= f.select :status, Task.statuses.keys %>
+						<br>
+					</div>
+					<div class="actions">
+						<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
+						<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+						<span class="glyphicon glyphicon-trash"></span>
+					<%end%>
+					</div>
+				</div>
+				<%end%> 
+				<%end%>	 
+				<%end%>
+				<%end%> 
+			</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+</div>
+<!-- edit moth modal -->
+<div class="modal fade" id="editModalMonth" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
+			</div>
+			<div class="modal-body">
+				<% Task.month.each do |task|%>
+				<% if user_signed_in? && current_user.creator_of?(task) %>
+				<% if ((@day.date.beginning_of_month..@day.date.end_of_month).include?(task.date_end) )%>
+					<%= form_for([@day, task]) do |f| %>
+					<div class="modaltask">
+					<div class="field">
+						<p>Task</p>
+						<%= f.text_area :list %>
+						<br>
+						<p>Date task</p>
+						<%= f.date_field :date_end %>
+						<p>Type</p>
+						<%= f.select :duration, Task.durations.keys %>
+						<p>Status</p>
+						<%= f.select :status, Task.statuses.keys %>
+						<br>
+					</div>
+					<div class="actions">
+						<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
+						<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+						<span class="glyphicon glyphicon-trash"></span>
+					<%end%>
+					</div>
+				</div>
+				<%end%> 
+				<%end%>	 
+				<%end%>
+				<%end%> 
+			</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+</div>
+<!-- edit year modal -->
+<div class="modal fade" id="editModalYear" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
+			</div>
+			<div class="modal-body">
+				<% Task.year.each do |task|%>
+				<% if user_signed_in? && current_user.creator_of?(task) %>
+				<% if ((@day.date.beginning_of_year..@day.date.end_of_year).include?(task.date_end) )%>
+					<%= form_for([@day, task]) do |f| %>
+					<div class="modaltask">
+					<div class="field">
+						<p>Task</p>
+						<%= f.text_area :list %>
+						<br>
+						<p>Date task</p>
+						<%= f.date_field :date_end %>
+						<p>Type</p>
+						<%= f.select :duration, Task.durations.keys %>
+						<p>Status</p>
+						<%= f.select :status, Task.statuses.keys %>
+						<br>
+					</div>
+					<div class="actions">
+						<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
+						<%= link_to day_task_path(task.day, task), remote: true, method: :delete do %>
+						<span class="glyphicon glyphicon-trash"></span>
+					<%end%>
+					</div>
+				</div>
+				<%end%> 
+				<%end%>	 
+				<%end%>
+				<%end%> 
+			</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+</div>
 <!-- Modal edit day -->
 <div class="modal fade" id="editDay" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -124,3 +310,4 @@
 	  </div>
 	</div>
 </div>
+

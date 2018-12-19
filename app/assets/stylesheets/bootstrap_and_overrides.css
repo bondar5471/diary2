@@ -86,9 +86,45 @@ footer{
   overflow-x: auto;
 } 
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin-bottom: 5px;
   border: 1px solid transparent;
   border-radius: 4px;
-  height: 100px;
+  height: 60px;
 } 
+/*accordion*/
+.accordion {
+  background-color: rgb(236, 246, 255);
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: rgb(236, 246, 255);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.9s ease-out;
+}
