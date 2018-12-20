@@ -1,0 +1,39 @@
+<div class="modal fade" id="editModalMonth" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Edit tasks</h4>
+			</div>
+			<div class="modal-body">
+				<% Task.month.each do |task|%>
+				<% if user_signed_in? && current_user.creator_of?(task) %>
+				<% if ((@day.date.beginning_of_month..@day.date.end_of_month).include?(task.date_end) )%>
+					<%= form_for([@day, task]) do |f| %>
+					<div class="modaltask">
+					<div class="field">
+						<p>Task</p>
+						<%= f.text_area :list %>
+						<br>
+						<p>Date task</p>
+						<%= f.date_field :date_end %>
+						<p>Type</p>
+						<%= f.select :duration, Task.durations.keys %>
+						<p>Status</p>
+						<%= f.select :status, Task.statuses.keys %>
+						<br>
+					</div>
+					<div class="actions">
+						<%= f.submit 'Edit', class: 'btn btn-warning btnedittask'%>
+					</div>
+				</div>
+				<%end%> 
+				<%end%>	 
+				<%end%>
+				<%end%> 
+			</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+	</div>
+</div>

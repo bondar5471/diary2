@@ -33,10 +33,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to request.referer }
-      format.json { head :list }
-    end
+    render json: { success: true }
   end
 
   private

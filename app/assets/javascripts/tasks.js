@@ -10,6 +10,7 @@ $(document).on('turbolinks:load', function() {
   })
   //create task
   $(".sendtask").click(function(){  
+
       var task = document.getElementById("task").value; 
       var current_day = $(this).parents('.task-container');
       var container = document.getElementById('tasklist');
@@ -31,27 +32,26 @@ $(document).on('turbolinks:load', function() {
   })
   function addNewTask(task, tasksListDiv) {
       $('#task').css('border-color','seagreen');
-      $('#date_end').css('border-color','seagreen');
-      var link = document.createElement('a');
-      link.className = "glyphicon glyphicon-trash"
-      link.setAttribute ("data-method", "delete");
-      link.href = ("/days/:day_id/tasks/".replace(":day_id", task.day_id) + task.id);
-      link.setAttribute("data-remote", "true");
-      
+			$('#date_end').css('border-color','seagreen');
+			
+      // var spanTrash = document.createElement("SPAN");
+      // spanTrash.className = "glyphicon glyphicon-trash"
+
       var paragraph = document.createElement('p')
       paragraph.innerText = task.list;
       paragraph.style.fontWeight = "bold";
       paragraph.style.display = "inline-block";
       
-      var onetask = document.createElement('div')
-      onetask.className = "onetask";
-      onetask.className = "bluetask";
+			var onetask = document.createElement('div');
+			onetask.className ="bluetask"
+      //onetask.className = "onetask";
+			onetask.setAttribute("data-task-id", task.id);
       onetask.style.borderRadius = "5px";
       onetask.style.marginTop = "2px";
       onetask.style.paddingLeft = "6px";
       
       onetask.appendChild(paragraph);
-      onetask.appendChild(link);
+      //onetask.appendChild(spanTrash);
   
       tasksListDiv.appendChild(onetask);
   
@@ -86,6 +86,27 @@ $(document).on('turbolinks:load', function() {
 			} 
 		});
 	}
+
+	//delete task 
+		$(".glyphicon-trash").click( function() {  
+		var current_day = $(this).parents('.task-container');
+		var idDay = $(current_day).attr('data-day_id');
+		var current_task = $(this).parents('.onetask')[0];
+		var idTask =  $(current_task).attr('data-task-id');
+		if(confirm("Deleted ?")) {
+			$.ajax({
+				url: "/days/:day_id/tasks/".replace(":day_id", idDay)+(idTask),
+				type: 'POST',
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				data: {_method: 'DELETE'},
+				success: function(result) {
+					$(current_task).fadeOut(200);
+					console.log(result);
+				}
+			});
+
+		};
+	});
 
 	//selectors task
 	
@@ -145,5 +166,6 @@ $(document).on('turbolinks:load', function() {
 		var dateDayWeekTask = document.getElementById('paragraphDateTask');
 		dateDayWeekTask.style.display = "block";
 		dateDayWeekTask.innerText = moment(lastDayWeekTask).format('MMMM D YYYY');
-	})	
+	})
 });
+

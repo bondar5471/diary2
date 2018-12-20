@@ -5,7 +5,7 @@ require 'rails_helper'
 feature 'Create task on day', '
 	click the add task button.
 	open the form enter valid data,
-	click the add task button
+	click add task button
 ' do
   given(:day) { create(:day) }
   given!(:user) { create(:user) }
@@ -23,7 +23,6 @@ feature 'Create task on day', '
     fill_in 'task',	with: 'Mytext'
     fill_in 'date_end', with: Time.zone.today
     select 'day', from: 'task_duration'
-    sleep 1
     click_on 'Add'
     within '#tasklist' do
       expect(page).to have_content 'Mytext'
@@ -31,13 +30,11 @@ feature 'Create task on day', '
   end
 
   scenario 'hide Add task ', js: true do
-    sleep 1
     expect('#taskform').to_not have_content 'Add task'
   end
 
   scenario 'visible buton Add task after close form', js: true do
     find('.glyphicon-remove.icoremove').click
-    sleep 1
     expect(page).to have_content 'Add task'
   end
 
@@ -45,10 +42,7 @@ feature 'Create task on day', '
     fill_in 'task',	with: ''
     fill_in 'date_end', with: Time.zone.today
     select 'day', from: 'task_duration'
-    sleep 1
     click_on 'Add'
-    within '#tasklist' do
-      expect(page).to have_content ''
-    end
+    expect(page).not_to have_content '#tasklist'
   end
 end

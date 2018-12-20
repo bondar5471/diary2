@@ -126,5 +126,5 @@ footer{
   background-color: rgb(236, 246, 255);
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.9s ease-out;
+  transition: max-height 0.1s ease-out;
 }

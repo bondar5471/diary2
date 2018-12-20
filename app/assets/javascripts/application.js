@@ -77,3 +77,4 @@ for (counter = 0; counter < acc.length; counter++) {
 	});
 }
 })	
+	

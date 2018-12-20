@@ -327,13 +327,17 @@ b.line-through {
 }
 /*clock index day*/
 .clock {
-  height: 30px;  
+  height: auto; 
+  float: right; 
   margin: 2px auto 0;
-  background: #87CEEB;
   color: rgb(54, 54, 54);
   text-align: center;
-  font-size: 26px;
+  font-size: 20px;
   font-family: 'liquid_crystalregular';
   font-weight: bold;
   border-radius: 10px;
+}
+.glyphicon-trash {
+  cursor: pointer;
+  color: red;
 }
