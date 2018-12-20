@@ -143,7 +143,6 @@ $(document).on('turbolinks:load', function() {
 	$("#sendFormTask").on('click', function() {
 		var selectorDuration = document.getElementById('task_duration').value
 		if(selectorDuration == "year") {
-				debugger;
 				var taskYear = new Date(document.getElementById('task_year').value, 11, 31);
 				document.getElementById('date_end').value =  moment(taskYear).format('YYYY-M-D');
 		}
@@ -168,4 +167,3 @@ $(document).on('turbolinks:load', function() {
 		dateDayWeekTask.innerText = moment(lastDayWeekTask).format('MMMM D YYYY');
 	})
 });
-

@@ -61,20 +61,3 @@ clock.innerHTML = moment().format('MMMM D YYYY, HH:mm:ss');
 }
 setInterval(update, 1000);
 });	 
-$(document).on('turbolinks:load', function() {
-var acc = document.getElementsByClassName("accordion");
-var counter;
-
-for (counter = 0; counter < acc.length; counter++) {
-	acc[counter].addEventListener("click", function() {
-	this.classList.toggle("active");
-	var panel = this.nextElementSibling;
-	if (panel.style.maxHeight){
-		panel.style.maxHeight = null;
-	} else {
-		panel.style.maxHeight = panel.scrollHeight + "px";
-	} 
-	});
-}
-})	
-	

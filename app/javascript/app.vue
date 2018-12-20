@@ -52,7 +52,6 @@ methods: {
   },
 
   listMoved: function(event){
-    debugger;
     console.log(event)
     var data = new FormData
     data.append("list[position]", event.newIndex + 1 )
