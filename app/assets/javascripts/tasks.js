@@ -35,7 +35,26 @@ $(document).on('turbolinks:load', function() {
 			$('#date_end').css('border-color','seagreen');
 			
       var spanTrash = document.createElement("SPAN");
-      spanTrash.className = "glyphicon glyphicon-trash"
+			spanTrash.className = "glyphicon glyphicon-trash"
+			$(document).on("click", '.glyphicon-trash', function(event) { 
+				var current_day = $(this).parents('.task-container');
+				var idDay = $(current_day).attr('data-day_id');
+				var current_task = $(this).parents('.onetask');
+				var idTask =  $(current_task).attr('data-task-id');
+				if(confirm("Deleted ?")) {
+					$.ajax({
+						url: "/days/:day_id/tasks/".replace(":day_id", idDay)+(idTask),
+						type: 'POST',
+						beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+						data: {_method: 'DELETE'},
+						success: function(result) {
+							$(current_task).fadeOut(200);
+							console.log(result);
+						}
+					});
+
+				};
+		  })
 
       var paragraph = document.createElement('p')
       paragraph.innerText = task.list;
@@ -121,7 +140,7 @@ $(document).on('turbolinks:load', function() {
 		$(".glyphicon-trash").click( function() {  
 		var current_day = $(this).parents('.task-container');
 		var idDay = $(current_day).attr('data-day_id');
-		var current_task = $(this).parents('.onetask')[0];
+		var current_task = $(this).parents('.onetask');
 		var idTask =  $(current_task).attr('data-task-id');
 		if(confirm("Deleted ?")) {
 			$.ajax({
@@ -137,7 +156,7 @@ $(document).on('turbolinks:load', function() {
 
 		};
 	});
-	
+
 	//selectors task
 	$("#task_duration").on('change', function() {
 		var selectorDuration = document.getElementById('task_duration').value
