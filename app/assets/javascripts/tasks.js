@@ -43,12 +43,13 @@ $(document).on('turbolinks:load', function() {
       paragraph.style.display = "inline-block";
       
 			var onetask = document.createElement('div');
-			onetask.className ="bluetask"
-      onetask.className = "onetask";
 			onetask.setAttribute("data-task-id", task.id);
+			onetask.className = "onetask greentask";
       onetask.style.borderRadius = "5px";
       onetask.style.marginTop = "2px";
-      onetask.style.paddingLeft = "6px";
+			onetask.style.paddingLeft = "6px";
+			onetask.style.height = "20px";
+			onetask.style.marginTop = "10px";
 			
 			var selectorDuration = document.getElementById('task_duration').value;
 			var tasksOnDay = document.getElementById('tasksOnDay');
@@ -118,6 +119,7 @@ $(document).on('turbolinks:load', function() {
 
 	//delete task 
 		$(".glyphicon-trash").click( function() {  
+			debugger;
 		var current_day = $(this).parents('.task-container');
 		var idDay = $(current_day).attr('data-day_id');
 		var current_task = $(this).parents('.onetask')[0];

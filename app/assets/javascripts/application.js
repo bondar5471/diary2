@@ -59,5 +59,5 @@ function update() {
 var clock = document.getElementById('clock');
 clock.innerHTML = moment().format('MMMM D YYYY, HH:mm:ss');
 }
-setInterval(update, 1000);
+setInterval(update, 100);
 });	 

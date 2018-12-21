@@ -35,10 +35,6 @@ p { color: #000;
   font-family: 'Courier New', Courier, monospace  
 }
 
-td {
-  margin: 10px;
-}
-
 tr {
   margin: 10px;
 }
@@ -168,29 +164,6 @@ ul.calendar {
 ul.calendar {
   margin-bottom: 60px;
 }
-/*boar notice*/
-#dropnotice {
-  overflow: auto;
-  background-color: rgb(132, 207, 236);
-  box-shadow: 0 0 15px rgba(35, 27, 102, 0.5);
-  border-bottom: 2px solid #184257;
-  border-radius: 7px;
-  height: 450px;
-  width: 250px;
-  padding: 15px;
-  cursor: pointer;
-  margin-right: -20px;
-}
-#dropnotice table tr td {
-  text-align: center;
-}
-#noticelist{
- background-color: #3a78d431;
- border-radius: 5px;
-}
-#new_notice{
-  border: #000, solid, 1px;
-}
 #container_report{
   cursor: pointer;
   height: auto;
@@ -291,6 +264,7 @@ th.calendarhead {
     display: none;
   }
 }
+
 /*text decoration for task*/
 
 .check {
@@ -304,18 +278,11 @@ b.line-through {
  .greentask {
    background-color: #4cae4c88
  }
- .redtask {
-   background-color: #d43f3a8c
- }
- .bluetask {
-   background-color: #4abdf779
- }
  .silvertask{
   background-color: #5e5e5e; 
   border-color: #7d7d7e;
   text-decoration: line-through;
 }
-
 #task_year {
   display: none;
 }

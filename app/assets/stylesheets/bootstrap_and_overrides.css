@@ -128,3 +128,9 @@ footer{
   overflow: hidden;
   transition: max-height 0.1s ease-out;
 }
+/*fire fox style corect*/
+@-moz-document url-prefix() {
+  .calendar td {
+    margin: -0.5px;
+  }
+}
