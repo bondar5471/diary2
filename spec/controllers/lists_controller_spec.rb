@@ -19,7 +19,10 @@ RSpec.describe ListsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'save the new list the database' do
-        expect { post :create, params: {  list: attributes_for(:list), format: :json } }.to change { List.count }.by(1)
+        def create_list
+          post :create, params: { list: attributes_for(:list), format: :json }
+        end
+        expect { create_list }.to change { List.count }.by(1)
       end
     end
   end

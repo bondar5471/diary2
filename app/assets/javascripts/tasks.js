@@ -58,7 +58,7 @@ $(document).on('turbolinks:load', function() {
 
       onetask.appendChild(paragraph);
       onetask.appendChild(spanTrash);
-       debugger;
+
 			if(selectorDuration == "day") 
 			{
 				tasksOnDay.appendChild(onetask)

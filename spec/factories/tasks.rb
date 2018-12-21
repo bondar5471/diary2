@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :task do
-    list 'Mytext'
+    list 'MyTask'
     day
     date_end '2018-10-18'
     duration 'day'

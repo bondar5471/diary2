@@ -16,7 +16,7 @@ feature 'accordion task panel' do
   scenario 'Accordion Panel Display', js: true do
     expect(page).to have_css '.panel'
     within '.onetask' do
-      expect(page).to have_content 'Mytext'
+      expect(page).to have_content 'MyTask'
     end
   end
 end

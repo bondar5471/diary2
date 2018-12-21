@@ -20,13 +20,11 @@ feature 'Create task on day', '
   end
 
   scenario 'click on create task on day', js: true do
-    fill_in 'task',	with: 'Mytext'
+    fill_in 'task',	with: 'MyTask'
     fill_in 'date_end', with: Time.zone.today
     select 'day', from: 'task_duration'
     click_on 'Add'
-    within '#tasklist' do
-      expect(page).to have_content 'Mytext'
-    end
+    expect(page).to have_content 'MyTask'
   end
 
   scenario 'hide Add task ', js: true do

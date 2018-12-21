@@ -8,8 +8,11 @@ RSpec.describe TasksController, type: :controller do
   before { sign_in_user }
   describe 'POST #create' do
     context 'with valid attributes' do
+      def create_task
+        post :create, params: { day_id: day, task: attributes_for(:task), format: :json }
+      end
       it 'saves a new task in the database' do
-        expect { post :create, params: { day_id: day, task: attributes_for(:task), format: :json } }.to change(day.tasks, :count).by(1)
+        expect { create_task }.to change(day.tasks, :count).by(1)
       end
       it 'test http status' do
         post :create, params: { day_id: day, task: attributes_for(:task), task_id: task, format: :json }
