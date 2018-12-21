@@ -89,18 +89,18 @@ $(document).on('turbolinks:load', function() {
   
   }
   function notValidTask() {
-      $('#task').each(function(){
-          if(!$(this).val() || $(this).val() === ""){
-              $(this).css('border-color','red');
-              send = false;
-              }
-          })
-          $('#date_end').each(function(){
-              if(!$(this).val() || $(this).val() === ""){
-                  $(this).css('border-color','red');
-                  send = false;
-                  }
-              }) 
+	$('#task').each(function(){
+			if(!$(this).val() || $(this).val() === ""){
+					$(this).css('border-color','red');
+					send = false;
+					}
+			})
+			$('#date_end').each(function(){
+					if(!$(this).val() || $(this).val() === ""){
+							$(this).css('border-color','red');
+							send = false;
+							}
+					}) 
 			}
 	var accordion = document.getElementsByClassName("accordion");
 	var counter;
@@ -119,7 +119,6 @@ $(document).on('turbolinks:load', function() {
 
 	//delete task 
 		$(".glyphicon-trash").click( function() {  
-			debugger;
 		var current_day = $(this).parents('.task-container');
 		var idDay = $(current_day).attr('data-day_id');
 		var current_task = $(this).parents('.onetask')[0];
@@ -138,9 +137,8 @@ $(document).on('turbolinks:load', function() {
 
 		};
 	});
-
-	//selectors task
 	
+	//selectors task
 	$("#task_duration").on('change', function() {
 		var selectorDuration = document.getElementById('task_duration').value
 		if(selectorDuration == "year") {
