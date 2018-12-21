@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-feature 'Delete task' do
 feature 'Delete task just creating' do
   given(:day) { create(:day) }
   given!(:user) { create(:user) }
@@ -14,13 +15,13 @@ feature 'Delete task just creating' do
     click_on 'Add task'
   end
 
-  scenario 'click on create task on day', js: true do
+  scenario 'click on create task on day and remove immediately', js: true do
     fill_in 'task',	with: 'MyTask'
     fill_in 'date_end', with: Time.zone.today
     select 'day', from: 'task_duration'
     click_on 'Add'
     find('.glyphicon-trash').click
+    page.driver.browser.switch_to.alert.accept
     expect(page).not_to have_content 'MyTask'
   end
-end
 end
