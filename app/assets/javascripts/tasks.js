@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
       var container = document.getElementById('tasklist');
       var idDay = $(current_day).attr('data-day_id');
       var date_end = document.getElementById("date_end").value;
-      var type_task = document.getElementById("task_duration").value
+			var type_task = document.getElementById("task_duration").value;
       $.ajax({
               url: "/days/:day_id/tasks".replace(":day_id", idDay),
               type: "POST",
@@ -34,8 +34,8 @@ $(document).on('turbolinks:load', function() {
       $('#task').css('border-color','seagreen');
 			$('#date_end').css('border-color','seagreen');
 			
-      // var spanTrash = document.createElement("SPAN");
-      // spanTrash.className = "glyphicon glyphicon-trash"
+      var spanTrash = document.createElement("SPAN");
+      spanTrash.className = "glyphicon glyphicon-trash"
 
       var paragraph = document.createElement('p')
       paragraph.innerText = task.list;
@@ -44,16 +44,45 @@ $(document).on('turbolinks:load', function() {
       
 			var onetask = document.createElement('div');
 			onetask.className ="bluetask"
-      //onetask.className = "onetask";
+      onetask.className = "onetask";
 			onetask.setAttribute("data-task-id", task.id);
       onetask.style.borderRadius = "5px";
       onetask.style.marginTop = "2px";
       onetask.style.paddingLeft = "6px";
-      
+			
+			var selectorDuration = document.getElementById('task_duration').value;
+			var tasksOnDay = document.getElementById('tasksOnDay');
+			var tasksOnWeek = document.getElementById('tasksOnWeek');
+			var tasksOnMonth = document.getElementById('tasksOnMonth');
+			var tasksOnYear = document.getElementById('tasksOnYear');
+
       onetask.appendChild(paragraph);
-      //onetask.appendChild(spanTrash);
-  
-      tasksListDiv.appendChild(onetask);
+      onetask.appendChild(spanTrash);
+       debugger;
+			if(selectorDuration == "day") 
+			{
+				tasksOnDay.appendChild(onetask)
+				tasksOnDay.style.maxHeight = "none";
+				tasksOnDay.style.height = "auto";		
+			}
+			if(selectorDuration == "week") 
+			{
+				tasksOnWeek.appendChild(onetask)	
+				tasksOnWeek.style.maxHeight = "none";
+				tasksOnWeek.style.height = "auto";		
+			}
+			if(selectorDuration == "month") 
+			{
+				tasksOnMonth.appendChild(onetask)
+				tasksOnMonth.style.maxHeight = "none";
+				tasksOnMonth.style.height = "auto";			
+			}
+			if(selectorDuration == "year") 
+			{ 
+				tasksOnYear.appendChild(onetask)
+				tasksOnYear.style.maxHeight = "none";
+				tasksOnYear.style.height = "auto";		
+			}
   
       $('#task').val('');
   
