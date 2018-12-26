@@ -11,6 +11,10 @@
 		<%= @day.report %>
 	</div>
 	<br>
+	<button class="btn btn-info" data-toggle="modal" data-target="#addFileDay">Add file</button>
+	<hr>
+	<%= image_tag @day.attach_file.url(:medium) %>
+	<hr>
 	<h3>Tasks creating</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist"></div>
@@ -112,3 +116,4 @@
 <%= render "days/modals/modal_edit_month_task" %>
 <%= render "days/modals/modal_edit_year_task" %>
 <%= render "days/modals/modal_edit_day" %>
+<%= render "days/modals/modal_add_file" %>

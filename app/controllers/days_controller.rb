@@ -3,6 +3,7 @@
 class DaysController < ApplicationController
   before_action :set_day, only: %i[show edit update destroy]
   respond_to :html, :json
+  
   def index
     @days = Day.order(:date)
     @day_months = @days.group_by { |day| day.date.beginning_of_month }
@@ -33,12 +34,8 @@ class DaysController < ApplicationController
   end
 
   def update
-    if @day.update(day_params.merge(user: current_user))
-      respond_to do |format|
-        format.html { redirect_to @day }
-        format.js
-      end
-    end
+    @day.update(day_params.merge(user: current_user))
+    redirect_to day_path
   end
 
   def destroy
@@ -58,6 +55,6 @@ class DaysController < ApplicationController
   end
 
   def day_params
-    params.require(:day).permit(:date, :successful, :report)
+    params.require(:day).permit(:date, :successful, :report, :attach_file)
   end
 end

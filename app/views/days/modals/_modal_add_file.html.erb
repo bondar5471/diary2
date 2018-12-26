@@ -1,0 +1,19 @@
+<div class="modal fade" id="addFileDay" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="exampleModalLabel">Edit</h4>
+			</div>
+				<div class="modal-body">
+        <br>
+          <%= simple_form_for @day, url: day_path, :html => { :multipart => true }  do |form| %>
+          <%= form.input :attach_file, as: :file %>
+          <%= form.submit 'Add file', url: @day%>
+          <% end %>
+        </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+	  </div>
+	</div>
+</div>
