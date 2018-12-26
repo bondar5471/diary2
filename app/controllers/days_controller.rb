@@ -58,6 +58,6 @@ class DaysController < ApplicationController
   end
 
   def day_params
-    params.require(:day).permit(:date, :successful, :report)
+    params.require(:day).permit(:date, :successful, :report, :attach_file)
   end
 end

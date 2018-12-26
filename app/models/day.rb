@@ -8,4 +8,5 @@ class Day < ApplicationRecord
   scope :unsuccessful, -> { where(successful: false) }
   scope :not_set, -> { where(successful: nil) }
   belongs_to :user
+  has_one_attached :attach_file
 end

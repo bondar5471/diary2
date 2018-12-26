@@ -10,7 +10,17 @@
 	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report">
 		<%= @day.report %>
 	</div>
-	<br>
+	<hr>
+	<button class="line-through btn btn-success" data-toggle="modal" data-target="#addFile"> Add file</button>
+	<hr>
+	<% if @day.attach_file.attached?%>
+  <div class="img-attach">
+	<%= link_to url_for(@day.attach_file) do %>
+	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto'%>
+  <% end %>
+	</div>
+	<%end%>
+	
 	<h3>Tasks creating</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist"></div>
@@ -112,3 +122,4 @@
 <%= render "days/modals/modal_edit_month_task" %>
 <%= render "days/modals/modal_edit_year_task" %>
 <%= render "days/modals/modal_edit_day" %>
+<%= render "days/modals/modal_add_file"%>

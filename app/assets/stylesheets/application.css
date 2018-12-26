@@ -308,3 +308,7 @@ b.line-through {
   cursor: pointer;
   color: red;
 }
+.img-attach{
+  height: auto;
+  width: 300px;
+}
