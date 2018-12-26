@@ -8,7 +8,7 @@
         <br>
           <%= simple_form_for @day, url: day_path, :html => { :multipart => true }  do |form| %>
           <%= form.input :attach_file, as: :file %>
-          <%= form.submit 'Add file', url: @day%>
+          <%= form.submit 'Add', url: @day%>
           <% end %>
         </div>
 				<div class="modal-footer">
