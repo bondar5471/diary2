@@ -7,36 +7,35 @@ $(document).on('turbolinks:load', function() {
   $("#hideform").click(function(){
       $("#taskform").hide();
       $("#taskButton").show();	
-  })
+	})
+
   //create task
   $(".sendtask").click(function(){  
-
-      var task = document.getElementById("task").value; 
-      var current_day = $(this).parents('.task-container');
-      var container = document.getElementById('tasklist');
-      var idDay = $(current_day).attr('data-day_id');
-      var date_end = document.getElementById("date_end").value;
-			var type_task = document.getElementById("task_duration").value;
-      $.ajax({
-              url: "/days/:day_id/tasks".replace(":day_id", idDay),
-              type: "POST",
-              beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-              dataType: "json",
-              data: { task: { list: task, date_end: date_end, duration: type_task} },
-              success: function(data) {
-                  addNewTask(data, container);           
-              },
-              error:  
-                  notValidTask()
-  })
-  })
+		const task = document.getElementById("task").value; 
+		const current_day = $(this).parents('.task-container');
+		const container = document.getElementById('tasklist');
+		const idDay = $(current_day).attr('data-day_id');
+		const date_end = document.getElementById("date_end").value;
+		const type_task = document.getElementById("task_duration").value;
+		$.ajax({
+						url: "/days/:day_id/tasks".replace(":day_id", idDay),
+						type: "POST",
+						beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+						dataType: "json",
+						data: { task: { list: task, date_end: date_end, duration: type_task} },
+						success: function(data) {
+							addNewTask(data, container);           
+						},
+						error:  
+							notValidTask()
+  	});
+  });
   function addNewTask(task, tasksListDiv) {
       $('#task').css('border-color','seagreen');
 			$('#date_end').css('border-color','seagreen');
-			
-      var spanTrash = document.createElement("SPAN");
-			spanTrash.className = "glyphicon glyphicon-trash"
-			$(document).on("click", '.glyphicon-trash', function(event) { 
+      let spanTrash = document.createElement("SPAN");
+			spanTrash.className = "glyphicon glyphicon-trash";
+			spanTrash.onclick = function() {  
 				var current_day = $(this).parents('.task-container');
 				var idDay = $(current_day).attr('data-day_id');
 				var current_task = $(this).parents('.onetask');
@@ -52,16 +51,15 @@ $(document).on('turbolinks:load', function() {
 							console.log(result);
 						}
 					});
-
 				};
-		  })
+			};
 
-      var paragraph = document.createElement('p')
+      let paragraph = document.createElement('p')
       paragraph.innerText = task.list;
       paragraph.style.fontWeight = "bold";
       paragraph.style.display = "inline-block";
       
-			var onetask = document.createElement('div');
+			let onetask = document.createElement('div');
 			onetask.setAttribute("data-task-id", task.id);
 			onetask.className = "onetask greentask";
       onetask.style.borderRadius = "5px";
@@ -70,14 +68,14 @@ $(document).on('turbolinks:load', function() {
 			onetask.style.height = "20px";
 			onetask.style.marginTop = "10px";
 			
-			var selectorDuration = document.getElementById('task_duration').value;
-			var tasksOnDay = document.getElementById('tasksOnDay');
-			var tasksOnWeek = document.getElementById('tasksOnWeek');
-			var tasksOnMonth = document.getElementById('tasksOnMonth');
-			var tasksOnYear = document.getElementById('tasksOnYear');
+			let selectorDuration = document.getElementById('task_duration').value;
+			let tasksOnDay = document.getElementById('tasksOnDay');
+			let tasksOnWeek = document.getElementById('tasksOnWeek');
+			let tasksOnMonth = document.getElementById('tasksOnMonth');
+			let tasksOnYear = document.getElementById('tasksOnYear');
 
       onetask.appendChild(paragraph);
-      onetask.appendChild(spanTrash);
+			onetask.appendChild(spanTrash);
 
 			if(selectorDuration == "day") 
 			{
@@ -103,24 +101,43 @@ $(document).on('turbolinks:load', function() {
 				tasksOnYear.style.maxHeight = "none";
 				tasksOnYear.style.height = "auto";		
 			}
-  
       $('#task').val('');
   
   }
   function notValidTask() {
 	$('#task').each(function(){
-			if(!$(this).val() || $(this).val() === ""){
-					$(this).css('border-color','red');
-					send = false;
-					}
+		if(!$(this).val() || $(this).val() === ""){
+				$(this).css('border-color','red');
+				send = false;
+				}
 			})
 			$('#date_end').each(function(){
-					if(!$(this).val() || $(this).val() === ""){
-							$(this).css('border-color','red');
-							send = false;
-							}
-					}) 
+				if(!$(this).val() || $(this).val() === ""){
+						$(this).css('border-color','red');
+						send = false;
+						}
+				}) 
 			}
+		//delete task 
+		$(".glyphicon-trash").click(function() {  
+			var current_day = $(this).parents('.task-container');
+			var idDay = $(current_day).attr('data-day_id');
+			var current_task = $(this).parents('.onetask');
+			var idTask =  $(current_task).attr('data-task-id');
+			if(confirm("Deleted ?")) {
+				$.ajax({
+					url: "/days/:day_id/tasks/".replace(":day_id", idDay)+(idTask),
+					type: 'POST',
+					beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+					data: {_method: 'DELETE'},
+					success: function(result) {
+						$(current_task).fadeOut(200);
+						console.log(result);
+					}
+				});
+			};
+		});
+	//accordion			
 	var accordion = document.getElementsByClassName("accordion");
 	var counter;
 	
@@ -135,27 +152,6 @@ $(document).on('turbolinks:load', function() {
 			} 
 		});
 	}
-
-	//delete task 
-		$(".glyphicon-trash").click( function() {  
-		var current_day = $(this).parents('.task-container');
-		var idDay = $(current_day).attr('data-day_id');
-		var current_task = $(this).parents('.onetask');
-		var idTask =  $(current_task).attr('data-task-id');
-		if(confirm("Deleted ?")) {
-			$.ajax({
-				url: "/days/:day_id/tasks/".replace(":day_id", idDay)+(idTask),
-				type: 'POST',
-				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-				data: {_method: 'DELETE'},
-				success: function(result) {
-					$(current_task).fadeOut(200);
-					console.log(result);
-				}
-			});
-
-		};
-	});
 
 	//selectors task
 	$("#task_duration").on('change', function() {
