@@ -16,7 +16,7 @@
 	<% if @day.attach_file.attached?%>
   <div class="img-attach">
 	<%= link_to url_for(@day.attach_file) do %>
-	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto'%>
+	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: 'myImg'%>
   <% end %>
 	</div>
 	<%end%>
@@ -117,6 +117,12 @@
   </div>
   </div>
 </div>
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: 'img01'%>
+  <div id="caption"></div>
+</div>
+
 <%= render 'days/modals/modal_edit_task' %>
 <%= render "days/modals/modal_edit_week_task" %>
 <%= render "days/modals/modal_edit_month_task" %>
