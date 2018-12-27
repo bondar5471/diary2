@@ -160,6 +160,7 @@ $(document).on('turbolinks:load', function() {
 				document.getElementById('task_year').style.display = 'inline-block';
 				document.getElementById('date_end').style.display = 'none';
 				document.getElementById('date_field').style.display = 'none';
+				document.getElementById('paragraphDateTask').style.display = 'none';
 		} else {
 				document.getElementById('task_year').style.display = 'none';
 		}
@@ -168,6 +169,7 @@ $(document).on('turbolinks:load', function() {
 				document.getElementById('task_year').style.display = 'inline-block';
 				document.getElementById('date_end').style.display = 'none';
 				document.getElementById('date_field').style.display = 'none';
+				document.getElementById('paragraphDateTask').style.display = 'none';
 		} else {
 				document.getElementById('date_month').style.display = 'none';
 		}
