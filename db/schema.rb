@@ -50,10 +50,6 @@ ActiveRecord::Schema.define(version: 2018_12_26_133707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "attach_file_file_name"
-    t.string "attach_file_content_type"
-    t.integer "attach_file_file_size"
-    t.datetime "attach_file_updated_at"
   end
 
   create_table "lists", force: :cascade do |t|

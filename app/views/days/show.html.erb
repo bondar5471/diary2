@@ -11,17 +11,17 @@
 		<%= @day.report %>
 	</div>
 	<hr>
+	<%if @day.successful != nil%>
 	<button class="line-through btn btn-success" data-toggle="modal" data-target="#addFile"> Add foto</button>
+	<%end%>
 	<hr>
 	<% if @day.attach_file.attached?%>
   <div class="img-attach">
-	<%= link_to url_for(@day.attach_file) do %>
-	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto'%>
-  <% end %>
+
+	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: "myImg"%>
+ 
 	</div>
 	<%end%>
-	
-	<h3>Tasks creating</h3>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist"></div>
 <button class="accordion">Task on day</button>
@@ -88,8 +88,9 @@
 		<%end%>
 		<%end%>
 	</div>
-						
+	<%if @day.successful != nil%>					
 	<button type="button" id="taskButton" class="btn btn-primary">Add task</button>
+	<%end%>
 	<div id="taskform" autofocus>	
 		<p>Add tasks on day </p>
 		<span id="hideform" class="glyphicon glyphicon-remove icoremove"></span>
@@ -116,6 +117,11 @@
 	  <span><%= link_to  "Back", days_path %></span>
   </div>
   </div>
+</div>
+<div id="myModal" class="modal">
+	<span class="close">&times;</span>
+	<img class="modal-content" id="img01">
+	<div id="caption"></div>
 </div>
 <%= render 'days/modals/modal_edit_task' %>
 <%= render "days/modals/modal_edit_week_task" %>
