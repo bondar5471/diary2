@@ -27,7 +27,6 @@ $(document).on('turbolinks:load', function() {
 	var modalImg = document.getElementById("img01");
 	var captionText = document.getElementById("caption");
 	img.onclick = function(){
-		debugger;
 		modal.style.display = "block";
 		modalImg.src = this.src;
 		captionText.innerHTML = this.alt;
@@ -38,7 +37,7 @@ $(document).on('turbolinks:load', function() {
 	span.onclick = function() { 
 		modal.style.display = "none";
 	}
-	}),
+	})
 $(document).on('turbolinks:load', function() {
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var success = document.getElementById("success").innerText;
@@ -72,7 +71,7 @@ $(document).on('turbolinks:load', function() {
 				}
 			}
 	})
-});
+})
 $(document).on('turbolinks:load', function() { 
 function update() {
 var clock = document.getElementById('clock');

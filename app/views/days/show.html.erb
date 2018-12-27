@@ -17,9 +17,7 @@
 	<hr>
 	<% if @day.attach_file.attached?%>
   <div class="img-attach">
-
 	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: "myImg"%>
- 
 	</div>
 	<%end%>
 	<div data-day_id="<%= @day.id %>", class="task-container">
@@ -118,14 +116,12 @@
   </div>
   </div>
 </div>
-<div id="myModal" class="modal">
-	<span class="close">&times;</span>
-	<img class="modal-content" id="img01">
-	<div id="caption"></div>
-</div>
+
 <%= render 'days/modals/modal_edit_task' %>
 <%= render "days/modals/modal_edit_week_task" %>
 <%= render "days/modals/modal_edit_month_task" %>
 <%= render "days/modals/modal_edit_year_task" %>
 <%= render "days/modals/modal_edit_day" %>
 <%= render "days/modals/modal_add_file"%>
+<%= render "days/modals/view_file"%>
+

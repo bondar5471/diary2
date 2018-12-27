@@ -22,7 +22,6 @@ feature 'Add file on day', '
     click_on 'Add foto'
     find('form input[type="file"]').set('/home/bondar/Изображения/photo_2018-07-26_18-46-16.jpg')
     click_on 'Attach'
-    sleep 10
     expect(page).to have_xpath("//img[contains(@src,'photo_2018-07-26_18-46-16.jpg')]")
   end
 end

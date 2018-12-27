@@ -379,3 +379,6 @@ b.line-through {
     width: 100%;
   }
 }
+.allert-file {
+  color: red;
+}

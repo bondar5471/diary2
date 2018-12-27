@@ -38,6 +38,9 @@ class DaysController < ApplicationController
         format.html { redirect_to @day }
         format.js
       end
+    else
+      flash[:error] = 'Something went wrong'
+      redirect_to day_url
     end
   end
 

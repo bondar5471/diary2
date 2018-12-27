@@ -15,7 +15,7 @@ Time.zone.today.end_of_year.yday.times do
     date: dates += 1.day,
     successful: nil,
     report: nil,
-    user_id: nil
+    user_id: 1
   )
 end
 p "Created #{Day.count} days"
