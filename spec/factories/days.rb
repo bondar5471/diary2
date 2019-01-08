@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :day do
-    date '2018-10-18'
+    date '2019-01-01'
     successful true
     report 'MyText'
     user

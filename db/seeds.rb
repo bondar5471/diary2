@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 dates = Time.zone.today.beginning_of_year - 1.day
 Day.destroy_all
 Time.zone.today.end_of_year.yday.times do
