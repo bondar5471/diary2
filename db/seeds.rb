@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-dates = Time.zone.today.beginning_of_year - 1.day
-Day.destroy_all
-Time.zone.today.end_of_year.yday.times do
-  Day.create!(
-    date: dates += 1.day,
-    successful: nil,
-    report: nil,
-    user_id: nil
-  )
-end
+# dates = Time.zone.today.beginning_of_year - 1.day
+time_create_days = Time.now
+Day.delete_all
+today = Time.zone.today
+records = (today.beginning_of_year..today.end_of_year).to_a.map { |date| Day.new(date: date, user_id: 1) }
+ActiveRecord::Base.transaction { records.each(&:save) }
+endtime = Time.now - time_create_days
+p "Time creating#{endtime}"
 p "Created #{Day.count} days"

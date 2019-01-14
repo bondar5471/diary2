@@ -19,7 +19,6 @@ $(document).on('turbolinks:load', function() {
 	
 		//create task
 		$(".sendtask").click(function(){  
-			debugger;
 			const task = document.getElementById("task").value; 
 			const current_day = $(this).parents('.task-container');
 			const container = document.getElementById('tasklist');
@@ -202,11 +201,13 @@ $(document).on('turbolinks:load', function() {
 					document.getElementById('date_end').value =  moment(taskYear).format('YYYY-M-D');
 			}
 			if(selectorDuration == "month") {
+				  debugger
 					var taskMonth = new Date(document.getElementById('task_year').value, document.getElementById('date_month').value, 0);
+					//calculate last day month
 					document.getElementById('date_end').value = moment(taskMonth).format('YYYY-M-D');
 			}
 			if(selectorDuration == "week") {
-					//calculate last day
+					//calculate last day week
 					var taskWeek = new Date("Jan 01, " + document.getElementById('task_year').value + " 01:00:00");
 					var week = taskWeek.getTime() + 604800000 * (document.getElementById('task_week').value - 1);
 					var lastDayWeekTask = new Date(week + 518400000);
