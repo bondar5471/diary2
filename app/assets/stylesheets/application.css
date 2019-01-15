@@ -173,6 +173,13 @@ ul.calendar {
 }
 .notices {
   float: right;
+  background-color: #4cae4c;
+  border-bottom-color: #5e5e5e;
+  border-radius: 5px;
+}
+#error_explanation {
+  background-color: #d43f3a;
+  padding: 2px;
 }
 /*card*/
 .card.card-body {
