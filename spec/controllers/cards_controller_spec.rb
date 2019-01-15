@@ -28,7 +28,7 @@ RSpec.describe CardsController, type: :controller do
         expect do
           post :create, params: { card: attributes_for(:card), list_id: card, format: :json }
         end.to change(Card, :count).by(2)
-        
+
         expect(response).to have_http_status(201)
       end
     end

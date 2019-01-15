@@ -271,7 +271,6 @@ $("#attach-fotos").on('click', function() {
 	debugger
 if (document.getElementById('day_attach_file').value === "") {
 	window.alert("File empty");
-  returnToPreviousPage();
     return false;}
 });
 })
