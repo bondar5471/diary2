@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DaysController < ApplicationController
-  before_action :set_day, only: %i[show edit update destroy]
+  before_action :set_day, only: %i[show edit update destroy file_uploads]
   respond_to :html, :json
   def index
     @days = Day.order(:date)
@@ -52,6 +52,11 @@ class DaysController < ApplicationController
       flash[:error] = 'Something went wrong'
       redirect_to days_url
     end
+  end
+
+  def file_uploads
+    @day.attach_file.purge
+    redirect_to day_url
   end
 
   private

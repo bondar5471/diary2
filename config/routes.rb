@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   devise_for :user
   resources :days do
+    member do
+      get :file_uploads
+    end
     resources :tasks
   end
   root to: 'days#index'

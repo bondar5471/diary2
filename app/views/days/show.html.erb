@@ -19,6 +19,7 @@
   <div class="img-attach">
 	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: "myImg"%>
 	</div>
+	<%= link_to 'Remove', file_uploads_day_url %>
 	<%end%>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist"></div>
