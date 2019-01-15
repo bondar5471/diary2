@@ -19,8 +19,6 @@
 //= require twitter/bootstrap
 //= require moment
 //= require_tree .
-
-	//success diagram
 $(document).on('turbolinks:load', function() {
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var success = document.getElementById("success").innerText;
