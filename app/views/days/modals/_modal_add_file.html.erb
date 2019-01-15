@@ -8,11 +8,12 @@
 					<%= form_for @day do |f| %>
 						<%= f.label :attach_file %>
 						<p>Сhoose Foto</p>
-						<%= f.file_field :attach_file, class: 'form-control-file'%>
+						<%= f.file_field :attach_file, class: 'form-control-file',
+						data: { max_file_size: 5.megabytes }%>
 						<br>
 						<p class="allert-file">Size file: 1-5 megabytes</p> 
 						<p class="allert-file">Type file: *.png *.jpg *.jpeg</p>
-						<%= f.submit 'Attach', class: 'btn btn-success'%>
+						<%= f.submit 'Attach', class: 'btn btn-success', id: 'attach-fotos'%>
 					<%end%>
 				</div>
 				<div class="modal-footer">

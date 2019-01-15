@@ -240,4 +240,38 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
   modal.style.display = "none";
 }
-	})
+//validation for upload file
+
+$(".form-control-file").on('change', function() {
+  var maxExceededMessage = "This file exceeds the maximum allowed file size (5 MB)";
+  var extErrorMessage = "Only image file with extension: .jpg, .jpeg or .png is allowed";
+  var allowedExtension = ["jpg", "jpeg", "png"];
+
+	var extName;
+  var maxFileSize = document.getElementById('day_attach_file').dataset.maxFileSize;
+  var sizeExceeded = false;
+  var extError = false;
+
+  $.each(document.getElementById('day_attach_file').files, function() {
+    if (this.size && maxFileSize && this.size > parseInt(maxFileSize)) {sizeExceeded=true;};
+    extName = this.name.split('.').pop();
+    if ($.inArray(extName, allowedExtension) == -1) {extError=true;};
+  });
+  if (sizeExceeded) {
+    window.alert(maxExceededMessage);
+    $(document.getElementById('day_attach_file')).val('');
+  };
+
+  if (extError) {
+    window.alert(extErrorMessage);
+    $(document.getElementById('day_attach_file')).val('');
+	};
+})
+$("#attach-fotos").on('click', function() {
+	debugger
+if (document.getElementById('day_attach_file').value === "") {
+	window.alert("File empty");
+  returnToPreviousPage();
+    return false;}
+});
+})
