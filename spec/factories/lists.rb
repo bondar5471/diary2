@@ -5,6 +5,5 @@ FactoryBot.define do
     name 'MyString'
     position 1
     user
-    user_id 1
   end
 end

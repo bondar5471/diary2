@@ -8,6 +8,5 @@ FactoryBot.define do
     duration 'day'
     status 'in_progress'
     user
-    user_id 1
   end
 end

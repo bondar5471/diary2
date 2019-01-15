@@ -9,6 +9,6 @@ class Day < ApplicationRecord
   scope :successful, -> { where(successful: true) }
   scope :unsuccessful, -> { where(successful: false) }
   scope :not_set, -> { where(successful: nil) }
-  belongs_to :user
+  belongs_to :user, optional: true
   has_one_attached :attach_file
 end

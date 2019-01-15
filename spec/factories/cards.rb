@@ -5,7 +5,6 @@ FactoryBot.define do
     name 'MyString'
     position 1
     list
-    list_id 1
     user
   end
 end

@@ -5,5 +5,5 @@ class List < ApplicationRecord
   has_many :cards, -> { order(position: :asc) }, dependent: :destroy, inverse_of: :list
   validates :name, presence: true, length: { maximum: 50 }
   scope :sorted, -> { order(position: :asc) }
-  belongs_to :user
+  belongs_to :user, optional: true
 end

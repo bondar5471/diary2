@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CardsController, type: :controller do
-  let!(:list) { create(:list) }
+  let(:list) { create(:list) }
   let(:card) { create(:card) }
   before { sign_in_user }
 
@@ -26,8 +26,9 @@ RSpec.describe CardsController, type: :controller do
     context 'with valid attributes' do
       it 'saves a new card in the database responce status' do
         expect do
-          post :create, params: { card: attributes_for(:card), list_id: list, format: :json }
-        end.to change(list.cards, :count).by(1)
+          post :create, params: { card: attributes_for(:card), list_id: card, format: :json }
+        end.to change(Card, :count).by(2)
+        
         expect(response).to have_http_status(201)
       end
     end

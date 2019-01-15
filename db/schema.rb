@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2018_12_26_133707) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2018_12_26_133707) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.integer "list_id"
+    t.bigint "list_id"
     t.string "name"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -93,4 +93,5 @@ ActiveRecord::Schema.define(version: 2018_12_26_133707) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "lists"
 end

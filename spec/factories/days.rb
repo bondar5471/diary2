@@ -6,6 +6,5 @@ FactoryBot.define do
     successful true
     report 'MyText'
     user
-    user_id 1
   end
 end
