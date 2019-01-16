@@ -198,20 +198,20 @@ $(document).on('turbolinks:load', function() {
 			var selectorDuration = document.getElementById('task_duration').value
 			if(selectorDuration == "year") {
 					var taskYear = new Date(document.getElementById('task_year').value, 11, 31);
-					document.getElementById('date_end').value =  moment(taskYear).format('YYYY-MM-D');
+					document.getElementById('date_end').value =  moment(taskYear).format('YYYY-MM-DD');
 			}
 			if(selectorDuration == "month") {
 				  debugger
 					var taskMonth = new Date(document.getElementById('task_year').value, document.getElementById('date_month').value, 0);
 					//calculate last day month
-					document.getElementById('date_end').value = moment(taskMonth).format('YYYY-MM-D');
+					document.getElementById('date_end').value = moment(taskMonth).format('YYYY-MM-DD');
 			}
 			if(selectorDuration == "week") {
 					//calculate last day week
 					var taskWeek = new Date("Jan 01, " + document.getElementById('task_year').value + " 01:00:00");
 					var week = taskWeek.getTime() + 604800000 * (document.getElementById('task_week').value - 1);
 					var lastDayWeekTask = new Date(week + 518400000);
-					document.getElementById('date_end').value = moment(lastDayWeekTask).format('YYYY-MM-D');
+					document.getElementById('date_end').value = moment(lastDayWeekTask).format('YYYY-MM-DD');
 				}  
 		}),
 		$("#task_week").on('change', function() {
