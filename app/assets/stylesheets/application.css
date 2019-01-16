@@ -389,3 +389,17 @@ b.line-through {
 .allert-file {
   color: red;
 }
+/*user edit*/
+.edit_profile {
+  border: #22436b solid;
+  width:800px; 
+  margin:0 auto;
+  padding-left: 2%;
+}
+.login_google {
+    display: inline-block;
+    margin-bottom: -16px;
+    width: 191px;
+    height: 46px;
+  background-image: url('btn_google_signin.png');
+}

@@ -10,10 +10,17 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :cards, dependent: :destroy
   validate :password_complexity
+  devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   def password_complexity
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[_#?!@$%^&*-]).{8,70}$/
     errors.add :password, 'Password not valid 8-20 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
+  end
+  
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+    user
   end
 
   # after_create :create_days
