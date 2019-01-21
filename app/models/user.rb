@@ -16,7 +16,7 @@ class User < ApplicationRecord
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[_#?!@$%^&*-]).{8,70}$/
     errors.add :password, 'Password not valid 8-20 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
   end
-  
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
