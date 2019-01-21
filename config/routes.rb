@@ -20,5 +20,8 @@ Rails.application.routes.draw do
     end
     resources :tasks
   end
+  resources :conversations, only: [:index, :create]
+  resources :messages, only: [:create]
+  mount ActionCable.server => '/cable'
   root to: 'days#index'
 end
