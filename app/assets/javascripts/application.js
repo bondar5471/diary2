@@ -19,3 +19,4 @@
 //= require twitter/bootstrap
 //= require moment
 //= require_tree .
+import "path to application.css"
