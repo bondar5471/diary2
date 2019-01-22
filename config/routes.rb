@@ -21,4 +21,6 @@ Rails.application.routes.draw do
     resources :tasks
   end
   root to: 'days#index'
+  mount ActionCable.server => '/cable'
+  resources :chats
 end
