@@ -388,7 +388,7 @@ b.line-through {
   }
 }
 .allert-file {
-  color: red;
+  color: rgb(250, 87, 87);
 }
 /*user edit*/
 .edit_profile {
