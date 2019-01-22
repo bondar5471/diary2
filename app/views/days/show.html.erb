@@ -7,19 +7,19 @@
 		<% @day.successful %>
 	</p>
 	<p id='report'>Report on day</p>
-	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report">
+	<div id="container_report" data-toggle="modal" data-target="#editDay" title="Click for edit report for create tasks">
 		<%= @day.report %>
 	</div>
 	<hr>
 	<%if @day.successful != nil%>
-	<button class="line-through btn btn-success" data-toggle="modal" data-target="#addFile"> Add foto</button>
+	<button class="line-through btn btn-success" data-toggle="modal" data-target="#addFile"  id='attach'> Add foto</button>
 	<%end%>
 	<hr>
 	<% if @day.attach_file.attached?%>
   <div class="img-attach">
 	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: "myImg"%>
 	</div>
-	<%= link_to 'Remove', file_uploads_day_url %>
+	<%= link_to 'Remove photo', file_uploads_day_url %>
 	<%end%>
 	<div data-day_id="<%= @day.id %>", class="task-container">
 		<div id="tasklist"></div>
@@ -30,8 +30,8 @@
 		<% if (task.date_end == @day.date)%>
 		<div data-task-id= "<%=task.id%>" class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
 		<p title="<%= task.duration%>">
-			<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %> </b>
-			<span class="glyphicon glyphicon-trash"></span>
+			<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %></b>
+			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
 			</p>
 			</p>
 		</div>	
@@ -47,7 +47,7 @@
 		<div data-task-id= "<%=task.id%>" class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask ">	
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalWeek "><%= task.list %> </b>
-				<span class="glyphicon glyphicon-trash"></span>
+				<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
 			</p>
 			</p>
 		</div>	
@@ -63,7 +63,7 @@
 		<div data-task-id= "<%=task.id%>" class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalMonth "><%= task.list %> </b>
-			<span class="glyphicon glyphicon-trash"></span>
+			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
 			</p>
 			</p>
 		</div>	
@@ -79,7 +79,7 @@
 		<div data-task-id= "<%=task.id%>" class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalYear "><%= task.list %> </b>
-			<span class="glyphicon glyphicon-trash"></span>
+			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
 			</p>
 			</p>
 		</div>	

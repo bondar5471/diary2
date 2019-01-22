@@ -2,18 +2,18 @@
 	<div class="modal-dialog" role="document">
 	  <div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="exampleModalLabel">Foto</h4>
+				<h4 class="modal-title" id="exampleModalLabel">Photo</h4>
 			</div>
 				<div class="modal-body">
 					<%= form_for @day do |f| %>
 						<%= f.label :attach_file %>
-						<p>Сhoose Foto</p>
+						<p>Сhoose photo</p>
 						<%= f.file_field :attach_file, class: 'form-control-file',
 						data: { max_file_size: 5.megabytes }%>
 						<br>
-						<p class="allert-file">Size file: 1-5 megabytes</p> 
-						<p class="allert-file">Type file: *.png *.jpg *.jpeg</p>
-						<%= f.submit 'Attach', class: 'btn btn-success', id: 'attach-fotos'%>
+						<p class="allert-file"><i>Size file: 1-5 megabytes</i></p> 
+						<p class="allert-file"><i>Type file: *.png *.jpg *.jpeg</i></p>
+						<%= f.submit 'Attach', class: 'btn btn-success', id: 'attachFotos'%>
 					<%end%>
 				</div>
 				<div class="modal-footer">

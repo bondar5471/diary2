@@ -83,7 +83,7 @@ footer{
   background-color: #87CEEB;
   border-top: 2px solid #99ddff;
   height: 50px;
-  margin-top: 100px;
+  margin-top: 440px;
 }
 
 /*task*/
@@ -347,7 +347,8 @@ b.line-through {
   margin: auto;
   display: block;
   width: 80%;
-  max-width: 700px;
+  max-width: 900px;
+  max-height: 1000px;
 }
 
 /* Caption of Modal Image */
@@ -402,4 +403,12 @@ b.line-through {
     width: 191px;
     height: 46px;
   background-image: url('btn_google_signin.png');
+}
+#attachFotos {
+  display: none;
+}
+.dateTasks{
+  float: right;
+  font-family: 'Open sans', sans-serif;
+  margin-right: 2px;
 }

@@ -222,24 +222,6 @@ $(document).on('turbolinks:load', function() {
 			dateDayWeekTask.style.display = "block";
 			dateDayWeekTask.innerText = moment(lastDayWeekTask).format('MMMM D YYYY');
 		})
-
-		//open foto
-var modal = document.getElementById('myModal');
-	
-var img = document.getElementById('myImg');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
-
-var span = document.getElementsByClassName("close")[0];
-
-span.onclick = function() { 
-  modal.style.display = "none";
-}
 //validation for upload file
 
 $(".form-control-file").on('change', function() {
@@ -267,10 +249,64 @@ $(".form-control-file").on('change', function() {
     $(document.getElementById('day_attach_file')).val('');
 	};
 })
-$("#attach-fotos").on('click', function() {
-	debugger
-if (document.getElementById('day_attach_file').value === "") {
-	window.alert("File empty");
-    return false;}
+$("#diagrammYear").on('click', function() {
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var success = document.getElementById("success").innerText;
+	var notsuccess = document.getElementById("notsuccess").innerText;
+	var notset = document.getElementById("notset").innerText;
+	var myChart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+					labels: ["Not Success", "Success", "Not set"],
+					datasets: [{
+							data: [notsuccess, success, notset],
+							backgroundColor: [
+									'rgb(212, 63, 58)',
+									'rgb(76, 174, 76)',
+									'rgba(135, 204, 250)'
+	
+							],
+							borderColor: [
+									'rgb(150, 57, 57)',
+									'rgb(57, 150, 59)',
+									'rgb(57, 113, 150)'
+							],
+							borderWidth: 2
+					}]
+			},
+			options: {
+				title: {
+					display: true,
+					text: 'Success of the year',
+					fontSize: 20
+				}
+			}
+	})
 });
+//open foto
+$("#attachFotos").on('click', function() {
+	if (document.getElementById('day_attach_file').value === "") {
+		window.alert("File empty");
+			return false;}
+	});
+	
+	$(".form-control-file").on('change', function() {
+			document.getElementById('attachFotos').style.display = "block";		
+		});		
+var modal = document.getElementById('myModal');
+	
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+var span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() { 
+  modal.style.display = "none";
+}
 })
