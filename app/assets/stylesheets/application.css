@@ -412,3 +412,11 @@ b.line-through {
   font-family: 'Open sans', sans-serif;
   margin-right: 2px;
 }
+.glyphicon-thumbs-up {
+  color: #4cae4c;
+  font-size: 30px;
+}
+.glyphicon-thumbs-down {
+  color: #d43f3a;
+  font-size: 30px
+}

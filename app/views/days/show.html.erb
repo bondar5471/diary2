@@ -3,7 +3,7 @@
 	<div class="container_day">
 	<p><span class="glyphicon glyphicon-calendar">&nbsp;</span><%= formated_date(@day.date) %></p>
 	<p>Success of the day</p>
-	<p class="<%=@day.successful ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-minus'%>">
+	<p class="<%=@day.successful ? 'glyphicon glyphicon-thumbs-up' : '	glyphicon glyphicon-thumbs-down'%>">
 		<% @day.successful %>
 	</p>
 	<p id='report'>Report on day</p>
