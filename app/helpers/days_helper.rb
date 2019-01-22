@@ -12,7 +12,7 @@ module DaysHelper
   end
 
   def display_day(day_number, days)
-    detected_day = days.detect { |day| day_number == day.date.day }
+    detected_day = days.detect { |day| day_number == day.date.day && current_user.creator_of?(day)  }
     if detected_day
       color = detected_day.successful ? 'greentd' : 'redtd'
       colorday = detected_day.successful.nil? ? 'bluetd' : 'greentd'

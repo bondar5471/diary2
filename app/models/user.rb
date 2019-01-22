@@ -23,19 +23,15 @@ class User < ApplicationRecord
     user
   end
 
-  # after_create :create_days
+  after_create :create_days
 
-  # def create_days
-  #   dates = Time.zone.today.beginning_of_year - 1.day
-  #   Time.zone.today.end_of_year.yday.times do
-  #   Day.create!(
-  #     date: dates += 1.day,
-  #     successful: nil,
-  #     report: nil,
-  #     user_id: id
-  #   )
-  #   end
-  # end
+  def create_days
+    today = Time.zone.today
+    dates = (today.beginning_of_year..today.end_of_year).to_a
+    sql_dates = dates.map { |d| "('#{d}', '#{User.last.id}', '#{Time.now}', '#{Time.now}')" }.join(', ')
+    ActiveRecord::Base.connection.execute("INSERT INTO days (date, user_id, created_at, updated_at) VALUES #{sql_dates}")
+  end
+  
   def creator_of?(thing)
     id == thing.user_id
   end
