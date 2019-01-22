@@ -18,6 +18,7 @@
 //= require Chart.min
 //= require twitter/bootstrap
 //= require moment
+//= require jquery3
 //= require_tree .
 $(document).on('turbolinks:load', function() {
 	var ctx = document.getElementById("myChart").getContext('2d');
