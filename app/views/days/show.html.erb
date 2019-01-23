@@ -33,6 +33,9 @@
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModal "><%= task.list %></b>
 			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
+			<%if task.importance == true%>
+			<span class="fa fa-star">
+			<%end%>
 			</p>
 			</p>
 		</div>	
@@ -49,6 +52,9 @@
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalWeek "><%= task.list %> </b>
 				<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
+			<%if task.importance == true%>
+			<span class="fa fa-star">
+			<%end%>
 			</p>
 			</p>
 		</div>	
@@ -65,6 +71,9 @@
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalMonth "><%= task.list %> </b>
 			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
+			<%if task.importance == true%>
+			<span class="fa fa-star">
+			<%end%>
 			</p>
 			</p>
 		</div>	
@@ -81,6 +90,9 @@
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalYear "><%= task.list %> </b>
 			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
+			<%if task.importance == true%>
+			<span class="fa fa-star">
+			<%end%>
 			</p>
 			</p>
 		</div>

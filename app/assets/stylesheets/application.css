@@ -91,6 +91,8 @@ footer{
   border-radius: 5px;
   margin-top: 2px;
   padding-left: 6px;
+  height: auto;
+  overflow: hidden;
 }
 .modaltask{
   margin: 5px;
@@ -419,4 +421,7 @@ b.line-through {
 .glyphicon-thumbs-down {
   color: #d43f3a;
   font-size: 30px
+}
+.fa-star {
+  color: yellow;
 }

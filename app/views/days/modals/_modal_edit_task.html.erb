@@ -20,6 +20,8 @@
 						<%= f.select :duration, Task.durations.keys %>
 						<p>Status</p>
 						<%= f.select :status, Task.statuses.keys %>
+						<p>Importance</p>
+						<%= f.check_box :importance %>
 						<br>
 					</div>
 					<div class="actions">
