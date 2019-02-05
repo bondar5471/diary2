@@ -20,5 +20,12 @@ Rails.application.routes.draw do
     end
     resources :tasks
   end
+  namespace :api do
+    namespace :v1 do
+      resources :days do
+        resources :tasks
+      end
+    end
+  end
   root to: 'days#index'
 end
