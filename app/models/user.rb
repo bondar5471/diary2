@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validate :password_complexity
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   
-  devise :timeoutable, :timeout_in => 30.minutes
+  devise :timeoutable, :timeout_in => 60.minutes
 
   def password_complexity
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[_#?!@$%^&*-]).{6,70}$/

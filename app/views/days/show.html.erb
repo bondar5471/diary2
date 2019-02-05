@@ -19,7 +19,7 @@
   <div class="img-attach">
 	<%=image_tag @day.attach_file , style: 'width: 100%; heigth: auto',id: "myImg"%>
 	</div>
-	<%= link_to 'Remove photo', file_uploads_day_url %>
+	<%= link_to '', file_uploads_day_url , class: "glyphicon glyphicon-remove-sign"  %>
 	<%end%>
 	<h2>List tasks</h2>
 	<div data-day_id="<%= @day.id %>", class="task-container">
@@ -86,6 +86,25 @@
 	<%Task.year.each do |task|%>
 		<% if user_signed_in? && current_user.creator_of?(task) %>
 		<% if ((@day.date.beginning_of_year..@day.date.end_of_year).include?(task.date_end) )%>
+		<div data-task-id= "<%=task.id%>" class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
+		<p title="<%= task.duration%>">
+			<b class="line-through" data-toggle="modal" data-target="#editModalYear "><%= task.list %> </b>
+			<span class="glyphicon glyphicon-trash"></span><span class="dateTasks">Date end:<%=formated_date(task.date_end)%></span>
+			<%if task.importance == true%>
+			<span class="fa fa-star">
+			<%end%>
+			</p>
+			</p>
+		</div>
+		<%end%>
+		<%end%>
+		<%end%>
+	</div>
+	<button class="accordion">Tasks importance</button>
+	<div class="panel"  id="tasksImportance">
+	<%Task.all.each do |task|%>
+		<% if user_signed_in? && current_user.creator_of?(task) %>
+		<% if (@day.date == (task.date_end) && task.importance == true )%>
 		<div data-task-id= "<%=task.id%>" class="onetask  <%= task.status == "finished" ? 'silvertask' : ''%> greentask">	
 		<p title="<%= task.duration%>">
 			<b class="line-through" data-toggle="modal" data-target="#editModalYear "><%= task.list %> </b>
