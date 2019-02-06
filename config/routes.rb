@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Routes for Google authentication
+  
+  namespace :api do
+    namespace :v1 do
+      resources :days do
+        resources :tasks
+      end
+    end
+  end
+  
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   resources :lists do
@@ -19,13 +27,6 @@ Rails.application.routes.draw do
       get :file_uploads
     end
     resources :tasks
-  end
-  namespace :api do
-    namespace :v1 do
-      resources :days do
-        resources :tasks
-      end
-    end
   end
   root to: 'days#index'
 end

@@ -8,7 +8,7 @@
 	<i>&nbsp;<div id="notset"><%=Day.not_set.select { |day| day.user == current_user }.count %></div>day not set&nbsp;</i>
 </div>
 
-    <%= render  "calendar", collection: @days, cached: true %>
+  <%= render  "calendar", collection: @days, cached: true %>
 
 <button class="btn btn-info" data-toggle="modal" data-target="#successYear" id="diagrammYear">Success Year</button>
 <div class="modal fade" id="successYear" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
