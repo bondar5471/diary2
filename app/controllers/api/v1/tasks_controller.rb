@@ -1,8 +1,8 @@
-class Api::V1::TasksController < ApplicationController
+class Api::V1::TasksController < ActionController::API
   respond_to :json
 
   before_action :find_day
-  before_action :find_task, only: %i[show edit update destroy]
+  before_action :find_task, only: %i[show edit update]
   
   def index 
     @tasks = Task.all
@@ -16,18 +16,32 @@ class Api::V1::TasksController < ApplicationController
   def create 
     @task = Task.new(task_params)
 
-    if task.save
+    if @task.save
       render json: @task, status: :created
     else
-      render json: @task.error , status: :unprocessable_entity
+      render json: @task.errors , status: :unprocessable_entity
     end    
   end 
 
   def edit;end
 
-  def update;end
+  def update
+    if @task.update(task_params)
+      render json: @task
+    else
+      render json: @task.errors , status: :unprocessable_entity 
+    end  
+  end
 
-  def destroy;end
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    if @task.destroy
+      head :no_content, status: :ok
+    else
+      render json: @task.errors , status: :unprocessable_entity  
+    end  
+  end
 
   private
 
