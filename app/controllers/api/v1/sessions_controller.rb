@@ -1,4 +1,4 @@
-class Api::V1::SessionsController < ActionController::API  
+class Api::V1::SessionsController < ActionController::API
 
   def create
     @user = User.find_by(email: params[:email])
@@ -6,8 +6,8 @@ class Api::V1::SessionsController < ActionController::API
     if @user&.valid_password?(params[:password])
       render :create, status: :created
     else
-      head(:unauthorized)  
-    end  
+      head(:unauthorized)
+    end
   end
 
   def destroy
@@ -16,6 +16,6 @@ class Api::V1::SessionsController < ActionController::API
       head(:ok)
     else
       head(:unauthorized)
-    end    
+    end
   end
 end
