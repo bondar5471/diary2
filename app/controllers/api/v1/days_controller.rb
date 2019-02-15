@@ -1,4 +1,6 @@
 class Api::V1::DaysController < ActionController::API
+  before_action :authenticate_user!
+
   respond_to :json
   before_action :find_day, only: [:edit, :update, :show]
   def index 
@@ -27,7 +29,9 @@ class Api::V1::DaysController < ActionController::API
   private
 
   def find_day
-    @day = Day.find(params[:id])
+    if current_user
+      @day = Day.find(params[:id])
+    end
   end
 
   def day_params
