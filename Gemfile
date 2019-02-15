@@ -24,7 +24,8 @@ gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.5'
 gem 'rack-cors', require: 'rack/cors'
-gem 'devise-jwt', '~> 0.5.8'
+gem 'knock'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -41,7 +42,7 @@ end
 
 group :test, :development do
   gem 'database_cleaner'
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '~> 4.11.0'
   gem 'jasmine-rails'
   gem 'rspec-rails'
 end

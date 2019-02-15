@@ -4,15 +4,18 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   has_many :days, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :cards, dependent: :destroy
   validate :password_complexity
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
+
   
   devise :timeoutable, :timeout_in => 60.minutes
 
+  alias_method :authenticate, :valid_password?
+  
   def password_complexity
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[_#?!@$%^&*-]).{6,70}$/
     errors.add :password, 'Password not valid 8-20 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
@@ -22,6 +25,13 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data['email']).first
     user
+  end
+
+  def to_token_payload
+    {
+        id: id,
+        email: email
+    }
   end
 
   after_create :create_days
