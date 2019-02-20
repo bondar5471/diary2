@@ -11,10 +11,8 @@ class User < ApplicationRecord
   has_many :cards, dependent: :destroy
   validate :password_complexity
 
-  
-  devise :timeoutable, :timeout_in => 60.minutes
 
-  alias_method :authenticate, :valid_password?
+  alias authenticate valid_password?
   
   def password_complexity
     return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[_#?!@$%^&*-]).{6,70}$/
@@ -29,7 +27,7 @@ class User < ApplicationRecord
 
   def to_token_payload
     {
-        id: id,
+        sub: id,
         email: email
     }
   end

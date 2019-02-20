@@ -2,6 +2,7 @@ module Api
   class UsersController < ApiController
 
     skip_before_action :verify_authenticity_token
+    skip_before_action :authenticate_user
 
     def create
       @user = User.create!(user_params)

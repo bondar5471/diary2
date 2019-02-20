@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :api, defaults: { format: :json } do
     resources :users, only: %i[create]
+    resources :days do
+      resources :tasks
+    end
   end
 
   namespace :api do
     namespace :v1 do
       resources :sessions, only: [:create, :destroy]
-      resources :days do
-        resources :tasks
-      end
     end
   end    
 
