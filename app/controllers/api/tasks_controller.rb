@@ -45,7 +45,7 @@ module  Api
     private
 
     def find_task
-      @day = Task.find(params[:id])
+      @task = Task.find(params[:id])
     end
 
     def find_day
