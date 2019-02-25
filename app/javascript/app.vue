@@ -61,6 +61,7 @@ methods: {
       data: data,
       dataType: "json",
     })
+    return
   },
   submitMessages: function(list_id){
     var data = new FormData

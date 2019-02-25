@@ -4,6 +4,16 @@ Rails.application.routes.draw do
   post 'user_token' => 'user_token#create'
   devise_for :users
   namespace :api, defaults: { format: :json } do
+    resources :lists do
+      member do
+        patch :move
+      end
+    end
+    resources :cards do
+      member do
+        patch :move
+      end
+    end
     resources :users, only: %i[create]
     resources :days do
       resources :tasks
