@@ -1,0 +1,13 @@
+current directory: /home/bondar/proj_ruby/diary2/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+/usr/share/rvm/rubies/ruby-2.6.0/bin/ruby -I /usr/share/rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0 -r ./siteconf20190225-408-1vmgjzb.rb extconf.rb
+creating Makefile
+
+current directory: /home/bondar/proj_ruby/diary2/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR=" clean
+
+current directory: /home/bondar/proj_ruby/diary2/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR="
+make: Цель «all» не требует выполнения команд.
+
+current directory: /home/bondar/proj_ruby/diary2/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR=" install
