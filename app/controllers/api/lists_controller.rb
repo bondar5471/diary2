@@ -7,7 +7,7 @@ module  Api
     before_action :set_list, only: %i[show edit update destroy move]
 
     def index
-      @lists = List.sorted
+      @lists = List.sorted.to_json(:include => :cards)
       render json: @lists
     end
 
@@ -49,8 +49,8 @@ module  Api
     end
 
     def move
-      @list.insert_at(list_params[:position].to_i)
-      render action: :show
+      @list.insert_at(list_params[:position])
+      render json: @list
     end
 
     private

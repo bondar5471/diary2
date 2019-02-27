@@ -44,7 +44,7 @@ module  Api
 
     def move
       @card.update(card_params)
-      render action: :show
+      render json: @card, status: :ok
     end
 
     private
@@ -54,7 +54,7 @@ module  Api
     end
 
     def card_params
-      params.require(:card).permit(:list_id, :name, :position)
+      params.require(:card).permit(:list_id, :title, :position, :description)
     end
   end
 end
