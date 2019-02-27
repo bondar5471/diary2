@@ -56,7 +56,7 @@ module  Api
     private
 
     def set_list
-      @list = List.find(params[:id])
+      @list = List.find(params[:id].to_i)
     end
 
     def list_params
