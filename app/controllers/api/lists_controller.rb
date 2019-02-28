@@ -1,13 +1,13 @@
 module  Api
   class ListsController < ApiController
-    skip_before_action :verify_authenticity_token
-    skip_before_action :authenticate_user
+    skip_before_action :verify_authenticity_token, only: [:move]
+    skip_before_action :authenticate_user, only: [:move]
 
     respond_to :json
     before_action :set_list, only: %i[show edit update destroy move]
 
     def index
-      @lists = List.sorted.to_json(:include => :cards)
+      @lists = current_user.lists.sorted.to_json(:include => :cards)
       render json: @lists
     end
 

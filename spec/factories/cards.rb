@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :card do
-    name 'MyString'
+    title 'MyString'
     position 1
     list
     user

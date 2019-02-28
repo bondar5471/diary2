@@ -28,7 +28,6 @@ describe 'Day API' do
     it 'respomse after uddate day' do
 
       put "/api/days/#{day.id}",headers: {format: JSON, 'Authorization': "bearer " + jwt}, params:  {day: {report:"dsfsdf", successful: true}}
-      binding.pry
       expect(response).to have_http_status(200)
     end
   end
