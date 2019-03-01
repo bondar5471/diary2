@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'POST /api/v1/sessions', type: :request do
+RSpec.describe 'POST /api/v1/user_token', type: :request do
   let(:user) { create(:user) }
   let(:jwt) { Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:url) { '/user_token' }
@@ -30,10 +30,10 @@ RSpec.describe 'POST /api/v1/sessions', type: :request do
   context 'when login params are incorrect' do
     let(:params_undef) do
       {
-          auth: {
-              email: 'dfssdfsdf@gmail.com',
-              password: 'B5o4n7d1!',
-          }
+        auth: {
+            email: 'dfssdfsdf@gmail.com',
+            password: 'B5o4n7d1!',
+        }
       }
     end
     before do
