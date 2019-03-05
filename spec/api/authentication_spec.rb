@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'POST /api/v1/user_token', type: :request do
@@ -7,10 +9,10 @@ RSpec.describe 'POST /api/v1/user_token', type: :request do
 
   let(:params) do
     {
-        auth: {
-            email: user.email,
-            password: user.password,
-        }
+      auth: {
+        email: user.email,
+        password: user.password
+      }
     }
   end
 
@@ -31,8 +33,8 @@ RSpec.describe 'POST /api/v1/user_token', type: :request do
     let(:params_undef) do
       {
         auth: {
-            email: 'dfssdfsdf@gmail.com',
-            password: 'B5o4n7d1!',
+          email: 'dfssdfsdf@gmail.com',
+          password: 'B5o4n7d1!'
         }
       }
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module  Api
   class CardsController < ApiController
     skip_before_action :verify_authenticity_token, only: [:move]
@@ -6,7 +8,7 @@ module  Api
     before_action :set_card, only: %i[show edit update destroy move]
 
     def index
-      @cards =current_user.cards.all
+      @cards = current_user.cards.all
       render json: @cards
     end
 
@@ -22,19 +24,19 @@ module  Api
 
     def create
       @card = Card.new(card_params.merge(user: current_user))
-        if @card.save
-          render json: @card, status: :created
-        else
-          render json: @card.errors, status: :unprocessable_entity
-        end
+      if @card.save
+        render json: @card, status: :created
+      else
+        render json: @card.errors, status: :unprocessable_entity
+      end
     end
 
     def update
-        if @card.update(card_params)
-          render json: @card, status: :ok
-        else
-          render json: @card.errors, status: :unprocessable_entity
-        end
+      if @card.update(card_params)
+        render json: @card, status: :ok
+      else
+        render json: @card.errors, status: :unprocessable_entity
+      end
     end
 
     def destroy

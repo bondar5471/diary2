@@ -14,7 +14,8 @@ Rails.application.routes.draw do
         patch :move
       end
     end
-    resources :users, only: %i[create]
+    resources :users, only: %i[create destroy]
+
     resources :days do
       resources :tasks
     end
@@ -22,11 +23,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :sessions, only: [:create, :destroy]
+      resources :sessions, only: %i[create destroy]
     end
-  end    
+  end
 
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   resources :lists do
     member do
       patch :move

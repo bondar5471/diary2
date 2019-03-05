@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module  Api
   class ListsController < ApiController
     skip_before_action :verify_authenticity_token, only: [:move]
@@ -7,7 +9,7 @@ module  Api
     before_action :set_list, only: %i[show edit update destroy move]
 
     def index
-      @lists = current_user.lists.sorted.to_json(:include => :cards)
+      @lists = current_user.lists.sorted.to_json(include: :cards)
       render json: @lists
     end
 
@@ -23,19 +25,19 @@ module  Api
 
     def create
       @list = List.new(list_params.merge(user: current_user))
-        if @list.save
-          render json: @list, status: :created
-        else
-          render json: @list.errors , status: :unprocessable_entity
-        end
+      if @list.save
+        render json: @list, status: :created
+      else
+        render json: @list.errors, status: :unprocessable_entity
+      end
     end
 
     def update
-        if @list.update(list_params)
-          render json: @list
-        else
-          render json: @list.errors, status: :unprocessable_entity
-        end
+      if @list.update(list_params)
+        render json: @list
+      else
+        render json: @list.errors, status: :unprocessable_entity
+      end
     end
 
     def destroy
@@ -44,7 +46,7 @@ module  Api
       if @list.destroy
         head :no_content, status: :ok
       else
-        render json: @list.errors , status: :unprocessable_entity
+        render json: @list.errors, status: :unprocessable_entity
       end
     end
 

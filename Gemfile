@@ -13,19 +13,20 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'knock'
 gem 'momentjs-rails'
 gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'puma', '~> 3.11'
+gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.1'
+gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
+gem 'therubyracer'
 gem 'turbolinks', '~> 5'
 gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.5'
-gem 'rack-cors', require: 'rack/cors'
-gem 'knock'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module Concerns
     module ExceptionHandler
@@ -11,7 +13,6 @@ module Api
           json_response({ message: e.message }, :unprocessable_entity)
         end
       end
-
     end
   end
 end

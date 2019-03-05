@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: %i[edit update destroy]
 
   def create
+    binding.pry
     @task = @day.tasks.create(task_params.merge(user: current_user))
     if @task.persisted?
       render json: @task, status: :ok

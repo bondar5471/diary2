@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Day API' do
   let(:user) { create(:user) }
   let(:jwt) { Knock::AuthToken.new(payload: { sub: user.id }).token }
 
-  before { get  '/api/days',headers: {format: JSON, 'Authorization': "bearer " + jwt}}
+  before { get '/api/days', headers: { format: JSON, 'Authorization': 'bearer ' + jwt } }
 
-  let(:day) {days.first}
-
+  let(:day) { days.first }
 
   describe 'GET index' do
     context 'authorize' do
-
       it 'return 200 status code' do
         expect(response).to have_http_status(200)
       end
@@ -22,12 +22,12 @@ describe 'Day API' do
     end
   end
   describe 'PUT day' do
-    let(:user) {create(:user)}
+    let(:user) { create(:user) }
     let(:jwt) { Knock::AuthToken.new(payload: { sub: user.id }).token }
-    let (:day) {create(:day)}
+    let (:day) { create(:day) }
     it 'respomse after uddate day' do
-
-      put "/api/days/#{day.id}",headers: {format: JSON, 'Authorization': "bearer " + jwt}, params:  {day: {report:"dsfsdf", successful: true}}
+      put "/api/days/#{day.id}", headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
+                                 params: { day: { report: 'dsfsdf', successful: true } }
       expect(response).to have_http_status(200)
     end
   end

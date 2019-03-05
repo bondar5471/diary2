@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 module  Api
-  class TasksController < ApiController
+  class SubtaskController < ApiController
     respond_to :json
-    before_action :find_day, only:  %i[create]
-    before_action :find_task, only: %i[show edit update]
+    before_action :find_task, only:  %i[create]
+    before_action :find_subtask, only: %i[show edit update]
 
     def index
-      @tasks = current_user.tasks
+      @subtasks = current_user.subtasks
       render json: @tasks
     end
 
     def show
-      render json: @task
+      render json: @subtask
     end
 
     def create
-      @task = @day.tasks.create(task_params.merge(user: current_user))
+      @task = @task.subtasks.create(subtask_params.merge(user: current_user))
       if @task.persisted?
         render json: @task, status: :created
       else
@@ -46,16 +46,16 @@ module  Api
 
     private
 
+    def find_subtask
+      @subtask = Subtask.find(params[:id])
+    end
+
     def find_task
-      @task = Task.find(params[:id])
+      @task = current_user.tasks.find(params[:task_id])
     end
 
-    def find_day
-      @day = current_user.days.find(params[:day_id])
-    end
-
-    def task_params
-      params.require(:task).permit(:list, :date_end, :status, :duration, :importance)
+    def subtask_params
+      params.require(:subtask).permit(:description, :date)
     end
   end
 end

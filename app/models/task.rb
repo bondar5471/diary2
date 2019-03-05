@@ -3,7 +3,8 @@
 class Task < ApplicationRecord
   belongs_to :day, required: false, touch: true
   belongs_to :user, optional: true
-  validates :list, presence: true, length: {maximum:50}
+  has_many :subtasks
+  validates :list, presence: true, length: { maximum: 50 }
   validates :date_end, presence: true
   validates :duration, presence: true
 
