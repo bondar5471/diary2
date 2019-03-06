@@ -3,11 +3,11 @@
 module  Api
   class SubtasksController < ApiController
     respond_to :json
-    before_action :find_task, only:  %i[index create]
+    before_action :find_task, only:  %i[index create update]
     before_action :find_subtask, only: %i[show edit update]
 
     def index
-      @subtasks = @task.subtasks
+      @subtasks = @task.subtasks.order(:date)
       render json: @subtasks
     end
 
@@ -56,7 +56,7 @@ module  Api
     end
 
     def subtask_params
-      params.require(:subtask).permit(:subtask_list)
+      params.require(:subtask).permit(:subtask_list, :resolved)
     end
     def select_permited(subtask_params)
       subtask_params.permit(:description, :date, :task_id)
