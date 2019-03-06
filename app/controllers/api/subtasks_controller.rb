@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module  Api
-  class SubtaskController < ApiController
+  class SubtasksController < ApiController
     respond_to :json
-    before_action :find_task, only:  %i[create]
+    before_action :find_task, only:  %i[index create]
     before_action :find_subtask, only: %i[show edit update]
 
     def index
-      @subtasks = current_user.subtasks
-      render json: @tasks
+      @subtasks = @task.subtasks
+      render json: @subtasks
     end
 
     def show
@@ -16,18 +16,19 @@ module  Api
     end
 
     def create
-      @task = @task.subtasks.create(subtask_params.merge(user: current_user))
-      if @task.persisted?
-        render json: @task, status: :created
-      else
-        render json: @task.errors, status: :unprocessable_entity
-      end
-    end
+      subtasks = []
+      params[:subtask_list].each do |subtask_params|
+        auth = Subtask.new(select_permited(subtask_params).merge(user: current_user))
+        subtasks << ( auth.save!)
+    end if params[:subtask_list]
+
+    render json: subtasks
+  end
 
     def edit; end
 
     def update
-      if @task.update(task_params)
+      if @subtask.update(subtask_params)
         render json: @task
       else
         render json: @task.errors, status: :unprocessable_entity
@@ -35,12 +36,12 @@ module  Api
     end
 
     def destroy
-      @task = Task.find(params[:id])
-      @task.destroy
-      if @task.destroy
+      @subtask = Subtask.find(params[:id])
+      subtask.destroy
+      if @subtask.destroy
         head :no_content, status: :ok
       else
-        render json: @task.errors, status: :unprocessable_entity
+        render json: subtask.errors, status: :unprocessable_entity
       end
     end
 
@@ -55,7 +56,10 @@ module  Api
     end
 
     def subtask_params
-      params.require(:subtask).permit(:description, :date)
+      params.require(:subtask).permit(:subtask_list)
+    end
+    def select_permited(subtask_params)
+      subtask_params.permit(:description, :date, :task_id)
     end
   end
 end

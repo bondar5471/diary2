@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     resources :users, only: %i[create destroy]
 
     resources :days do
-      resources :tasks
+      resources :tasks do
+        resources :subtasks
+      end
     end
   end
 

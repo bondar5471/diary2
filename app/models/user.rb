@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :cards, dependent: :destroy
+  has_many :subtasks, dependent: :destroy
+
   validate :password_complexity
 
   alias authenticate valid_password?
