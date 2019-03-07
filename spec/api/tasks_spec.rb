@@ -8,7 +8,10 @@ describe 'Day API' do
   let(:day) { create(:day) }
   let(:task) { create(:task) }
 
-  before { get  "/api/days/#{day.id}/tasks", headers: { format: JSON, 'Authorization': 'bearer ' + jwt } }
+  before do
+    get  "/api/days/#{day.id}/tasks",
+         headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
+  end
 
   describe 'GET index' do
     context 'authorize' do
@@ -26,7 +29,6 @@ describe 'Day API' do
     it 'response after create task' do
       post "/api/days/#{day.id}/tasks/", headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
                                          params: { task: { list: 'dsfsdf', date_end: task.date_end, duration: 'day' } }
-      binding.pry
       expect(response).to have_http_status(201)
     end
   end

@@ -3,8 +3,9 @@
 module  Api
   class SubtasksController < ApiController
     respond_to :json
-    before_action :find_task, only:  %i[index create update]
+    before_action :find_task, only: %i[index create update]
     before_action :find_subtask, only: %i[show edit update]
+    after_action :mark_task, only: %i[update]
 
     def index
       @subtasks = @task.subtasks.order(:date)
@@ -17,12 +18,12 @@ module  Api
 
     def create
       subtasks = []
-      params[:subtask_list].each do |subtask_params|
+      params[:subtask_list]&.each do |subtask_params|
         auth = Subtask.new(select_permited(subtask_params).merge(user: current_user))
-        subtasks << ( auth.save!)
-    end if params[:subtask_list]
+        subtasks << auth.save!
+      end
 
-    render json: subtasks
+      render json: subtasks
   end
 
     def edit; end
@@ -30,6 +31,7 @@ module  Api
     def update
       if @subtask.update(subtask_params)
         render json: @task
+        # MarkTaskWorker.perform_at(1.seconds.from_now, @task.id)
       else
         render json: @task.errors, status: :unprocessable_entity
       end
@@ -45,6 +47,10 @@ module  Api
       end
     end
 
+    def mark_task
+      @task.mark_task!(@task.id)
+    end
+
     private
 
     def find_subtask
@@ -58,6 +64,7 @@ module  Api
     def subtask_params
       params.require(:subtask).permit(:subtask_list, :resolved)
     end
+
     def select_permited(subtask_params)
       subtask_params.permit(:description, :date, :task_id)
     end

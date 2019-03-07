@@ -22,12 +22,12 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.1'
 gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
+gem 'sidekiq'
 gem 'therubyracer'
 gem 'turbolinks', '~> 5'
 gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.5'
-gem 'sidekiq', '~> 5.0', '>= 5.0.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

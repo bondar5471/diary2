@@ -10,7 +10,7 @@ Rails:
   Enabled: true
 
 Metrics/LineLength:
-  Max: 120
+  Max: 125
 
 Style/Documentation:
   Enabled: false
