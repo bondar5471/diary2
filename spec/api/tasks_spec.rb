@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'Day API' do
+describe 'Task API' do
   let(:user) { create(:user) }
   let(:jwt) { Knock::AuthToken.new(payload: { sub: user.id }).token }
   let(:day) { create(:day) }

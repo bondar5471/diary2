@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :subtask do
     description 'MyString'
     resolved false
-    task_id
+    task
     user
   end
 end
