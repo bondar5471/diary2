@@ -11,6 +11,9 @@ require 'capybara/rails'
 require 'selenium/webdriver'
 require 'support/controller_macros'
 require 'database_cleaner'
+require 'simplecov'
+
+SimpleCov.start
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 

@@ -31,7 +31,6 @@ module  Api
     def update
       if @subtask.update(subtask_params)
         render json: @task
-        # MarkTaskWorker.perform_at(1.seconds.from_now, @task.id)
       else
         render json: @task.errors, status: :unprocessable_entity
       end
