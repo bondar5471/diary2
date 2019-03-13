@@ -45,16 +45,24 @@ module  Api
     end
 
     def multi_create
-      statuses = []
-      task_slice = Task.find(params[:task_id])
-      set_days = params[:days].map(&:to_i)
-      dates = (task_slice.date_end.beginning_of_week..task_slice.date_end).to_a.select { |day| set_days.include?(day.wday) }
-      dates.each do |date|
-        task = Task.new(list: task_slice.list, day_id: task_slice.day_id, date_end: date,
-                        status: 'in_progress', duration: 0, user_id: task_slice.user_id)
-        statuses << (task.save ? task : task.errors)
+      tasks = []
+      task_parent = Task.find(params[:task_id])
+      task_parent.with_lock do
+        set_days = params[:days]
+        dates_range = (task_parent.date_end.beginning_of_week..task_parent.date_end)
+        dates = dates_range.to_a.select { |day| set_days.include?(day.wday.to_s) }
+        dates.each do |date|
+          task = Task.new(description: params[:task].values.join(', '),
+                          day_id: task_parent.day_id,
+                          date_end: date,
+                          status: :in_progress,
+                          duration: 0,
+                          importance: task_parent.importance,
+                          user_id: task_parent.user_id)
+          tasks << (task.save ? task : task.errors)
+        end
       end
-      render json: statuses
+      render json: tasks
     end
 
     private
@@ -72,7 +80,7 @@ module  Api
     end
 
     def task_params
-      params.require(:task).permit(:list, :date_end, :status, :duration, :importance)
+      params.require(:task).permit(:description, :date_end, :status, :duration, :importance)
     end
   end
 end
