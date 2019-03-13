@@ -16,9 +16,10 @@ Rails.application.routes.draw do
     end
     resources :users, only: %i[create destroy]
     resources :days do
-      resources :tasks do
-        resources :subtasks
-      end
+      resources :tasks
+    end
+    resources :tasks do
+      post 'multi_create', on: :collection
     end
   end
 
