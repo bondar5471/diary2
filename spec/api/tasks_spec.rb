@@ -30,7 +30,8 @@ describe 'Task API' do
     let(:jwt) { Knock::AuthToken.new(payload: { sub: day.user_id }).token }
     it 'response after create task' do
       post "/api/days/#{day.id}/tasks/", headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-                                         params: { task: { list: task.list, date_end: task.date_end, duration: 'day' } }
+                                         params: { task: { description: task.description,
+                                                           date_end: task.date_end, duration: 'day' } }
       expect(response).to have_http_status(201)
     end
   end
@@ -41,7 +42,7 @@ describe 'Task API' do
     it 'response after update day' do
       put "/api/days/#{day.id}/tasks/#{task.id}",
           headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-          params: { task: { list: 'dsfsdf', date_end: task.date_end, duration: 'day' } }
+          params: { task: { description: 'dsfsdf', date_end: task.date_end, duration: 'day' } }
       expect(response).to have_http_status(200)
     end
   end

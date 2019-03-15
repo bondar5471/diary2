@@ -5,9 +5,10 @@ module  Api
     respond_to :json
     before_action :find_day, only:  %i[create]
     before_action :find_task, only: %i[show edit update]
+    after_action :make_status, only: %i[update]
 
     def index
-      @tasks = current_user.tasks
+      @tasks = current_user.tasks.order(:id)
       render json: @tasks
     end
 
@@ -58,11 +59,16 @@ module  Api
                           status: :in_progress,
                           duration: 0,
                           importance: task_parent.importance,
+                          parent_id: task_parent.id,
                           user_id: task_parent.user_id)
           tasks << (task.save ? task : task.errors)
         end
       end
       render json: tasks
+    end
+
+    def make_status
+      @task.make_status!
     end
 
     private
@@ -80,7 +86,7 @@ module  Api
     end
 
     def task_params
-      params.require(:task).permit(:description, :date_end, :status, :duration, :importance)
+      params.require(:task).permit(:description, :date_end, :status, :duration, :importance, :parent_id)
     end
   end
 end

@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_313_103_752) do
+ActiveRecord::Schema.define(version: 20_190_314_084_506) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -65,24 +65,6 @@ ActiveRecord::Schema.define(version: 20_190_313_103_752) do
     t.integer 'user_id'
   end
 
-  create_table 'notices', force: :cascade do |t|
-    t.string 'title'
-    t.text 'text'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-  end
-
-  create_table 'subtasks', force: :cascade do |t|
-    t.integer 'task_id'
-    t.text 'description'
-    t.date 'date'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'user_id'
-    t.boolean 'resolved', default: false
-    t.index ['user_id'], name: 'index_subtasks_on_user_id'
-  end
-
   create_table 'tasks', force: :cascade do |t|
     t.text 'description'
     t.datetime 'created_at', null: false
@@ -93,6 +75,7 @@ ActiveRecord::Schema.define(version: 20_190_313_103_752) do
     t.integer 'duration'
     t.integer 'user_id'
     t.boolean 'importance', default: false
+    t.integer 'parent_id'
   end
 
   create_table 'users', force: :cascade do |t|
