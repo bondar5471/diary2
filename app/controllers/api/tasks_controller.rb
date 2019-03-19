@@ -53,8 +53,10 @@ module  Api
         dates_range = (task_parent.date_end.beginning_of_week..task_parent.date_end)
         dates = dates_range.to_a.select { |day| set_days.include?(day.wday.to_s) }
         dates.each do |date|
+          day = current_user.days.find_by(date: date)
+          binding.pry
           task = Task.new(description: params[:task].values.join(', '),
-                          day_id: task_parent.day_id,
+                          day_id: day.id,
                           date_end: date,
                           status: :in_progress,
                           duration: 0,

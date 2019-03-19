@@ -5,8 +5,14 @@ module Api
     before_action :find_day, only: %i[edit update show]
 
     def index
-      @days = current_user.days.order(:id)
-      render json: @days
+      if params[:status] == "manually" || params[:status].nil?
+        @days = current_user.days.order(:id)
+        render json: @days
+      else
+        @days = current_user.days.order(:id)
+        @days.complete_successful
+        render json: @days
+      end
     end
 
     def show
