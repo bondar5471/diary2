@@ -31,4 +31,15 @@ describe 'Day API' do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe 'GET day autocomplete successful' do
+    let(:user) { create(:user) }
+    let(:jwt) { Knock::AuthToken.new(payload: { sub: user.id }).token }
+    let (:day) { create(:day) }
+    it 'response after autocomplete' do
+      get '/api/days', headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
+          params: {status: 'auto'}
+      expect(response).to have_http_status(200)
+    end
+  end
 end

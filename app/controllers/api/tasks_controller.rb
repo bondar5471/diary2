@@ -54,7 +54,6 @@ module  Api
         dates = dates_range.to_a.select { |day| set_days.include?(day.wday.to_s) }
         dates.each do |date|
           day = current_user.days.find_by(date: date)
-          binding.pry
           task = Task.new(description: params[:task].values.join(', '),
                           day_id: day.id,
                           date_end: date,

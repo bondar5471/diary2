@@ -5,7 +5,7 @@ module Api
     before_action :find_day, only: %i[edit update show]
 
     def index
-      if params[:status] == "manually" || params[:status].nil?
+      if params[:status].nil?
         @days = current_user.days.order(:id)
         render json: @days
       else
@@ -27,7 +27,7 @@ module Api
       if @day.update(day_params)
         render json: @day
       else
-        render json: @day.errors, status: :unprocessable_entity
+        render json: @day.errors, status: :unauthorized
       end
     end
 
@@ -40,7 +40,7 @@ module Api
     end
 
     def day_params
-      params.require(:day).permit(:date, :successful, :report, :attach_file)
+      params.require(:day).permit(:date, :successful, :report)
     end
   end
 end
