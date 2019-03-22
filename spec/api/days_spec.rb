@@ -38,7 +38,7 @@ describe 'Day API' do
     let (:day) { create(:day) }
     it 'response after autocomplete' do
       get '/api/days', headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-          params: {status: 'auto'}
+                       params: { status: 'auto' }
       expect(response).to have_http_status(200)
     end
   end

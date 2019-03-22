@@ -20,7 +20,7 @@ describe 'Task API' do
       end
 
       it 'return array task' do
-        expect(user.days.length).to eq(365||366)
+        expect(user.days.length).to eq(365 || 366)
       end
     end
   end
@@ -44,7 +44,7 @@ describe 'Task API' do
     end
     it 'response after error ' do
       post "/api/days/#{day.id}/tasks/", headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-           params: { task: { description: task.description, duration: 'day' } }
+                                         params: { task: { description: task.description, duration: 'day' } }
       expect(response).to have_http_status(422)
     end
   end
@@ -70,8 +70,8 @@ describe 'Task API' do
     let(:user) { create(:user) }
     let(:jwt) { Knock::AuthToken.new(payload: { sub: day.user_id }).token }
     it 'response after multi_create' do
-      post "/api/tasks/multi_create",headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-           params:{days: %w[4, 2, 5], task_id: task.id, task: {description: task.description}}
+      post '/api/tasks/multi_create', headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
+                                      params: { days: %w[4 2 5], task_id: task.id, task: { description: task.description } }
       expect(response).to have_http_status(200)
     end
   end

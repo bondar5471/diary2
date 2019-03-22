@@ -31,7 +31,7 @@ describe 'List API' do
   end
   describe 'GET new' do
     it 'return new' do
-      get "/api/lists/new", headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
+      get '/api/lists/new', headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
       expect(response).to have_http_status(204)
     end
   end

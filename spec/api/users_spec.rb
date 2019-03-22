@@ -42,7 +42,6 @@ describe 'POST /api/users', type: :request do
   end
 end
 
-
 describe 'DELETE /api/users', type: :request do
   context 'when params are correct' do
     let(:user) { create(:user) }

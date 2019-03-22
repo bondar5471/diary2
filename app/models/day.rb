@@ -11,13 +11,15 @@ class Day < ApplicationRecord
   belongs_to :user, optional: true
 
   def self.complete_successful
-    Day.all.each do |day|
-      if day.tasks.count == 0
-        day.update!(report: day.report, successful: nil)
-      elsif  day.tasks.count == day.task_done.count
-        day.update!(report: day.report, successful: true)
-      else
-        day.update!(report: day.report, successful: false)
+    ActiveRecord::Base.transaction do
+      Day.all.find_each do |day|
+        if day.tasks.count == 0
+          day.update!(report: day.report, successful: nil)
+        elsif day.tasks.count == day.task_done.count
+          day.update!(report: day.report, successful: true)
+        else
+          day.update!(report: day.report, successful: false)
+        end
       end
     end
   end

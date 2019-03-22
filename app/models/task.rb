@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Task < ApplicationRecord
-  belongs_to :day, required: false, touch: true
+  belongs_to :day, optional: true, touch: true
   belongs_to :user, optional: true
   has_many :subtasks_finish, -> { where(status: 'finished') }, class_name: 'Task', foreign_key: 'parent_id'
   has_many :subtasks, class_name: 'Task', foreign_key: 'parent_id'

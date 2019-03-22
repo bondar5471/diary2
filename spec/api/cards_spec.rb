@@ -32,7 +32,7 @@ describe 'Card API' do
 
   describe 'GET new' do
     it 'return new' do
-      get "/api/cards/new", headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
+      get '/api/cards/new', headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
       expect(response).to have_http_status(204)
     end
   end
@@ -45,7 +45,7 @@ describe 'Card API' do
     end
     it 'response after create error' do
       post '/api/cards/', headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-           params: { card: { title: '', list_id: list.id } }
+                          params: { card: { title: '', list_id: list.id } }
       expect(response).to have_http_status(422)
     end
   end
