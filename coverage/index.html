@@ -14,26 +14,26 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-03-21T18:22:15+02:00">2019-03-21T18:22:15+02:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-03-25T10:28:12+02:00">2019-03-25T10:28:12+02:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">92.67%</span></span>
+    (<span class="covered_percent"><span class="green">92.69%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.11
+         3.1
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>24</b> files in total.
-    <b>423</b> relevant lines. 
-    <span class="green"><b>392</b> lines covered</span> and
+    <b>424</b> relevant lines. 
+    <span class="green"><b>393</b> lines covered</span> and
     <span class="red"><b>31</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -162,12 +162,12 @@
       
       <tr>
         <td class="strong"><a href="#f7ba418d3adb60b33ffc14684437af6c9e9dfec1" class="src_link" title="app/models/day.rb">app/models/day.rb</a></td>
-        <td class="red strong">80.0 %</td>
-        <td>24</td>
-        <td>15</td>
-        <td>12</td>
+        <td class="yellow strong">81.25 %</td>
+        <td>26</td>
+        <td>16</td>
+        <td>13</td>
         <td>3</td>
-        <td>49.3</td>
+        <td>46.3</td>
       </tr>
       
       <tr>
@@ -233,7 +233,7 @@
       <tr>
         <td class="strong"><a href="#ac02b1759beb909101cad40f0bc7b0e362494b72" class="src_link" title="spec/api/users_spec.rb">spec/api/users_spec.rb</a></td>
         <td class="yellow strong">83.33 %</td>
-        <td>59</td>
+        <td>58</td>
         <td>24</td>
         <td>20</td>
         <td>4</td>
@@ -2672,10 +2672,10 @@
         <div class="source_table" id="f7ba418d3adb60b33ffc14684437af6c9e9dfec1">
   <div class="header">
     <h3>app/models/day.rb</h3>
-    <h4><span class="red">80.0 %</span> covered</h4>
+    <h4><span class="yellow">81.25 %</span> covered</h4>
     <div>
-      <b>15</b> relevant lines. 
-      <span class="green"><b>12</b> lines covered</span> and
+      <b>16</b> relevant lines. 
+      <span class="green"><b>13</b> lines covered</span> and
       <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
@@ -2764,64 +2764,76 @@
         <li class="covered" data-hits="1" data-linenumber="14">
           <span class="hits">1</span>
           
-          <code class="ruby">    Day.all.each do |day|</code>
+          <code class="ruby">    ActiveRecord::Base.transaction do</code>
         </li>
       
-        <li class="covered" data-hits="365" data-linenumber="15">
-          <span class="hits">365</span>
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
           
-          <code class="ruby">      if day.tasks.count == 0</code>
+          <code class="ruby">      Day.all.find_each do |day|</code>
         </li>
       
         <li class="covered" data-hits="365" data-linenumber="16">
           <span class="hits">365</span>
           
-          <code class="ruby">        day.update!(report: day.report, successful: nil)</code>
+          <code class="ruby">        if day.tasks.count == 0</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="17">
+        <li class="covered" data-hits="365" data-linenumber="17">
+          <span class="hits">365</span>
           
-          
-          <code class="ruby">      elsif  day.tasks.count == day.task_done.count</code>
+          <code class="ruby">          day.update!(report: day.report, successful: nil)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="18">
           
           
-          <code class="ruby">        day.update!(report: day.report, successful: true)</code>
+          <code class="ruby">        elsif day.tasks.count == day.task_done.count</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="missed" data-hits="0" data-linenumber="19">
           
           
-          <code class="ruby">      else</code>
+          <code class="ruby">          day.update!(report: day.report, successful: true)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="20">
+        <li class="never" data-hits="" data-linenumber="20">
           
           
-          <code class="ruby">        day.update!(report: day.report, successful: false)</code>
+          <code class="ruby">        else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="21">
+        <li class="missed" data-hits="0" data-linenumber="21">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">          day.update!(report: day.report, successful: false)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="23">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="24">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
           
           
           <code class="ruby">end</code>
@@ -2940,7 +2952,7 @@
         <li class="covered" data-hits="1" data-linenumber="4">
           <span class="hits">1</span>
           
-          <code class="ruby">  belongs_to :day, required: false, touch: true</code>
+          <code class="ruby">  belongs_to :day, optional: true, touch: true</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="5">
@@ -3319,7 +3331,7 @@
         <li class="covered" data-hits="1" data-linenumber="35">
           <span class="hits">1</span>
           
-          <code class="ruby">      get &quot;/api/cards/new&quot;, headers: { format: JSON, &#39;Authorization&#39;: &#39;bearer &#39; + jwt }</code>
+          <code class="ruby">      get &#39;/api/cards/new&#39;, headers: { format: JSON, &#39;Authorization&#39;: &#39;bearer &#39; + jwt }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="36">
@@ -3397,7 +3409,7 @@
         <li class="never" data-hits="" data-linenumber="48">
           
           
-          <code class="ruby">           params: { card: { title: &#39;&#39;, list_id: list.id } }</code>
+          <code class="ruby">                          params: { card: { title: &#39;&#39;, list_id: list.id } }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="49">
@@ -3728,7 +3740,7 @@
         <li class="never" data-hits="" data-linenumber="41">
           
           
-          <code class="ruby">          params: {status: &#39;auto&#39;}</code>
+          <code class="ruby">                       params: { status: &#39;auto&#39; }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="42">
@@ -3975,7 +3987,7 @@
         <li class="covered" data-hits="1" data-linenumber="34">
           <span class="hits">1</span>
           
-          <code class="ruby">      get &quot;/api/lists/new&quot;, headers: { format: JSON, &#39;Authorization&#39;: &#39;bearer &#39; + jwt }</code>
+          <code class="ruby">      get &#39;/api/lists/new&#39;, headers: { format: JSON, &#39;Authorization&#39;: &#39;bearer &#39; + jwt }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="35">
@@ -4306,7 +4318,7 @@
         <li class="covered" data-hits="1" data-linenumber="23">
           <span class="hits">1</span>
           
-          <code class="ruby">        expect(user.days.length).to eq(365||366)</code>
+          <code class="ruby">        expect(user.days.length).to eq(365 || 366)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="24">
@@ -4450,7 +4462,7 @@
         <li class="never" data-hits="" data-linenumber="47">
           
           
-          <code class="ruby">           params: { task: { description: task.description, duration: &#39;day&#39; } }</code>
+          <code class="ruby">                                         params: { task: { description: task.description, duration: &#39;day&#39; } }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="48">
@@ -4606,13 +4618,13 @@
         <li class="covered" data-hits="1" data-linenumber="73">
           <span class="hits">1</span>
           
-          <code class="ruby">      post &quot;/api/tasks/multi_create&quot;,headers: { format: JSON, &#39;Authorization&#39;: &#39;bearer &#39; + jwt },</code>
+          <code class="ruby">      post &#39;/api/tasks/multi_create&#39;, headers: { format: JSON, &#39;Authorization&#39;: &#39;bearer &#39; + jwt },</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="74">
           
           
-          <code class="ruby">           params:{days: %w[4, 2, 5], task_id: task.id, task: {description: task.description}}</code>
+          <code class="ruby">                                      params: { days: %w[4 2 5], task_id: task.id, task: { description: task.description } }</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="75">
@@ -5006,91 +5018,85 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="46">
+        <li class="covered" data-hits="1" data-linenumber="45">
           <span class="hits">1</span>
           
           <code class="ruby">describe &#39;DELETE /api/users&#39;, type: :request do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="47">
+        <li class="covered" data-hits="1" data-linenumber="46">
           <span class="hits">1</span>
           
           <code class="ruby">  context &#39;when params are correct&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="48">
+        <li class="covered" data-hits="2" data-linenumber="47">
           <span class="hits">2</span>
           
           <code class="ruby">    let(:user) { create(:user) }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="49">
+        <li class="covered" data-hits="2" data-linenumber="48">
           <span class="hits">2</span>
           
           <code class="ruby">    let(:url) { &quot;/api/users/#{user.id}&quot; }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="50">
+        <li class="never" data-hits="" data-linenumber="49">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="51">
+        <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
           <code class="ruby">    before do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="52">
+        <li class="covered" data-hits="1" data-linenumber="51">
           <span class="hits">1</span>
           
           <code class="ruby">      delete url</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="53">
+        <li class="never" data-hits="" data-linenumber="52">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="55">
+        <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
           <code class="ruby">    it &#39;User destroy&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="56">
+        <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(response).to have_http_status(204)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="57">
+        <li class="never" data-hits="" data-linenumber="56">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="58">
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="58">
           
           
           <code class="ruby">end</code>
