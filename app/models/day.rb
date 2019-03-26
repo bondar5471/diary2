@@ -12,9 +12,9 @@ class Day < ApplicationRecord
 
   def self.complete_successful
     ActiveRecord::Base.transaction do
-      Day.all.find_each do |day|
+      Day.all.each do |day|
         if day.tasks.count == 0
-          day.update!(report: day.report, successful: nil)
+          day.destroy
         elsif day.tasks.count == day.task_done.count
           day.update!(report: day.report, successful: true)
         else

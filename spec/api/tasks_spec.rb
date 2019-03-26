@@ -18,10 +18,6 @@ describe 'Task API' do
       it 'return 200 status code' do
         expect(response).to have_http_status(200)
       end
-
-      it 'return array task' do
-        expect(user.days.length).to eq(365 || 366)
-      end
     end
   end
 
