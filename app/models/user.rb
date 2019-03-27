@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :cards, dependent: :destroy
+
   validate :password_complexity
 
   alias authenticate valid_password?
@@ -20,7 +21,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.where(email: data['email']).first
+    user = User.find_by(email: data['email'])
     user
   end
 
@@ -31,7 +32,7 @@ class User < ApplicationRecord
     }
   end
 
-  after_create :create_days
+  #after_create :create_days
 
   def create_days
     today = Time.zone.today

@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :task do
-    list 'MyTask'
+    description 'MyTask'
     day
-    date_end '2019-01-01'
+    date_end '2019-01-07'
     duration 'day'
     status 'in_progress'
     user

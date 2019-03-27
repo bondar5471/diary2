@@ -2,18 +2,35 @@
 
 module Api
   class DaysController < ApiController
-    before_action :find_day, only: %i[edit update show]
+    before_action :find_day, only: %i[edit update show destroy]
 
     def index
-      @days = current_user.days.order(:id)
-      render json: @days
+      if params[:status].nil?
+        @days = current_user.days.order(:id)
+        render json: @days
+      else
+        @days = current_user.days.order(:id)
+        @days.complete_successful
+        render json: @days
+      end
+    end
+
+    def new
+      @day = Day.new
     end
 
     def show
       render json: @day
     end
 
-    def create; end
+    def create
+      @day = Day.new(day_params.merge(user: current_user))
+      if @day.save
+        render json: @day, status: :created
+      else
+        render json: @day.errors, status: :unprocessable_entity
+      end
+    end
 
     def edit; end
 
@@ -21,11 +38,18 @@ module Api
       if @day.update(day_params)
         render json: @day
       else
-        render json: @day.errors, status: :unprocessable_entity
+        render json: @day.errors, status: :unauthorized
       end
     end
 
-    def destroy; end
+    def destroy
+      @day.destroy
+      if @day.destroy
+        head :no_content, status: :ok
+      else
+        render json: @day.errors, status: 401
+      end
+    end
 
     private
 
@@ -34,7 +58,7 @@ module Api
     end
 
     def day_params
-      params.require(:day).permit(:date, :successful, :report, :attach_file)
+      params.require(:day).permit(:date, :successful, :report)
     end
   end
 end

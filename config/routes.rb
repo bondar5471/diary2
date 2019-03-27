@@ -15,9 +15,11 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only: %i[create destroy]
-
     resources :days do
       resources :tasks
+    end
+    resources :tasks do
+      post 'multi_create', on: :collection
     end
   end
 
@@ -25,23 +27,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :sessions, only: %i[create destroy]
     end
-  end
-
-  resources :lists do
-    member do
-      patch :move
-    end
-  end
-  resources :cards do
-    member do
-      patch :move
-    end
-  end
-  resources :days do
-    member do
-      get :file_uploads
-    end
-    resources :tasks
   end
   root to: 'days#index'
 end

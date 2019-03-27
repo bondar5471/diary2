@@ -11,6 +11,9 @@ require 'capybara/rails'
 require 'selenium/webdriver'
 require 'support/controller_macros'
 require 'database_cleaner'
+require 'simplecov'
+
+SimpleCov.start
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
@@ -24,7 +27,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :deletion
     DatabaseCleaner.clean_with(:truncation)
   end
 

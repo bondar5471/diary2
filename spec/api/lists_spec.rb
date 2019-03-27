@@ -22,13 +22,31 @@ describe 'List API' do
     end
   end
 
+  describe 'GET show' do
+    let(:list) { create(:list) }
+    it 'return 200 show' do
+      get "/api/lists/#{list.id}", headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
+      expect(response).to have_http_status(200)
+    end
+  end
+  describe 'GET new' do
+    it 'return new' do
+      get '/api/lists/new', headers: { format: JSON, 'Authorization': 'bearer ' + jwt }
+      expect(response).to have_http_status(204)
+    end
+  end
   describe 'POST lost' do
     let(:user) { create(:user) }
     let(:jwt) { Knock::AuthToken.new(payload: { sub: user.id }).token }
-    it 'respomse after create list' do
+    it 'response after create list' do
       post '/api/lists/',
            headers: { format: JSON, 'Authorization': 'bearer ' + jwt }, params: { list: { name: 'To do' } }
       expect(response).to have_http_status(201)
+    end
+    it 'response after create list' do
+      post '/api/lists/',
+           headers: { format: JSON, 'Authorization': 'bearer ' + jwt }, params: { list: { name: '' } }
+      expect(response).to have_http_status(422)
     end
   end
 
