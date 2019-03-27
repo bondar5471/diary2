@@ -57,6 +57,9 @@ GEM
     bootsnap (1.4.1)
       msgpack (~> 1.0)
     builder (3.2.3)
+    bullet (5.9.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.0)
     capybara (3.14.0)
       addressable
@@ -270,6 +273,7 @@ GEM
       unicode-display_width (~> 1.4.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
+    ruby_gntp (0.3.4)
     rubyzip (1.2.2)
     sass (3.7.3)
       sass-listen (~> 4.0.0)
@@ -328,6 +332,7 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.1)
+    uniform_notifier (1.12.1)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -352,6 +357,7 @@ DEPENDENCIES
   activestorage-validator
   acts_as_list
   bootsnap (>= 1.1.0)
+  bullet
   byebug
   capybara (>= 2.15)
   capybara-webkit
@@ -377,6 +383,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   rubocop
+  ruby_gntp
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers
