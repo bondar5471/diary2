@@ -10,7 +10,7 @@ module Api
         render json: @days
       else
         @days = current_user.days.order(:id)
-        @days.complete_successful
+        CompleteDaysSuccessful.complete_successful(@days)
         render json: @days
       end
     end

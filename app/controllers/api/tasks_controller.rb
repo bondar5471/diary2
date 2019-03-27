@@ -39,6 +39,10 @@ module  Api
       @task = Task.find(params[:id])
       @task.destroy
       if @task.destroy
+        @day = current_user.days.find(params[:day_id])
+        if @day.tasks.count == 0
+          @day.destroy!
+        end
         head :no_content, status: :ok
       else
         render json: @task.errors, status: :unprocessable_entity
