@@ -40,9 +40,7 @@ module  Api
       @task.destroy
       if @task.destroy
         @day = current_user.days.find(params[:day_id])
-        if @day.tasks.count == 0
-          @day.destroy!
-        end
+        @day.destroy! if @day.tasks.count.zero?
         head :no_content, status: :ok
       else
         render json: @task.errors, status: :unprocessable_entity
@@ -58,9 +56,7 @@ module  Api
         dates = dates_range.to_a.select { |day| set_days.include?(day.wday.to_s) }
         dates.each do |date|
           day = current_user.days.find_by(date: date)
-          if day.nil?
-            day = Day.create!(date: date, successful: false, user_id: task_parent.user_id)
-          end
+          day = Day.create!(date: date, successful: false, user_id: task_parent.user_id) if day.nil?
           task = Task.new(description: params[:task].values.join(', '),
                           day_id: day.id,
                           date_end: date,

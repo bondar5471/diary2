@@ -28,10 +28,10 @@ describe 'Day API' do
     end
   end
 
-  describe  'POST create' do
+  describe 'POST create' do
     it 'response after create task' do
-      post "/api/days/", headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
-           params: { day: { date: DateTime.now, report: 'dsfsdf', successful: true }  }
+      post '/api/days/', headers: { format: JSON, 'Authorization': 'bearer ' + jwt },
+                         params: { day: { date: Time.zone.now, report: 'dsfsdf', successful: true } }
       expect(response).to have_http_status(201)
     end
   end

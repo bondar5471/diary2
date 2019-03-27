@@ -32,7 +32,7 @@ class User < ApplicationRecord
     }
   end
 
-  #after_create :create_days
+  # after_create :create_days
 
   def create_days
     today = Time.zone.today

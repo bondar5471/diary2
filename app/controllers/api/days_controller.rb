@@ -47,7 +47,7 @@ module Api
       if @day.destroy
         head :no_content, status: :ok
       else
-        render json: @day.errors, status: 401
+        render json: @day.errors, status: :unauthorized
       end
     end
 
