@@ -19,7 +19,7 @@ module  Api
     def create
       @task = @day.tasks.create(task_params.merge(user: current_user))
       if @task.persisted?
-        render json: @task, status: :created
+        render json: { task: @task, day: @task.day }, status: :created
       else
         render json: @task.errors, status: :unprocessable_entity
       end
@@ -40,7 +40,6 @@ module  Api
       @task.destroy
       if @task.destroy
         @day = current_user.days.find(params[:day_id])
-        @day.destroy! if @day.tasks.count.zero?
         head :no_content, status: :ok
       else
         render json: @task.errors, status: :unprocessable_entity
@@ -82,7 +81,11 @@ module  Api
     end
 
     def find_day
-      @day = current_user.days.find(params[:day_id])
+      @day = if params[:day_id] == 'newDay'
+               Day.create(day_params.merge(user: current_user))
+             else
+               current_user.days.find(params[:day_id])
+             end
     end
 
     def select_permited(task_params)
@@ -91,6 +94,10 @@ module  Api
 
     def task_params
       params.require(:task).permit(:description, :date_end, :status, :duration, :importance, :parent_id)
+    end
+
+    def day_params
+      params.require(:day).permit(:date, :successful, :report)
     end
   end
 end
