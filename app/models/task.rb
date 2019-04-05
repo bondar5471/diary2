@@ -8,6 +8,11 @@ class Task < ApplicationRecord
   validates :description, presence: true, length: { maximum: 50 }
   validates :date_end, presence: true
   validates :duration, presence: true
+  belongs_to :parent_task, class_name: 'Task', foreign_key: 'parent_id', optional: true
+
+  #after_destroy :destroy_day, if: ->(object) { object.day.tasks.empty? }
+  after_update :complete_day, if: ->(object) { object.day.task_done.count == object.day.tasks.count }
+  after_update :uncomplete_day, if: ->(object) { object.day.task_done.count != object.day.tasks.count }
 
   enum status: %i[in_progress finished]
   enum duration: %i[day week month year]
@@ -18,12 +23,26 @@ class Task < ApplicationRecord
   scope :day, -> { where(duration: 0) }
 
   def make_status!
-    Task.week.each do |task|
-      if task.subtasks.count == task.subtasks_finish.count
-        task.update!(status: :finished)
+    if parent_id
+      if parent_task.subtasks.count == parent_task.subtasks_finish.count
+        parent_task.update!(status: :finished)
       else
-        task.update!(status: :in_progress)
+        parent_task.update!(status: :in_progress)
       end
     end
+  end
+
+  private
+
+  # def destroy_day
+  #   day.destroy
+  # end
+
+  def complete_day
+    day.update(report: day.report, successful: true)
+  end
+
+  def uncomplete_day
+    day.update(report: day.report, successful: false)
   end
 end

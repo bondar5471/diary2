@@ -5,7 +5,6 @@ module  Api
     respond_to :json
     before_action :find_day, only:  %i[create]
     before_action :find_task, only: %i[show edit update]
-    after_action :make_status, only: %i[update]
 
     def index
       @tasks = current_user.tasks.order(:id)
@@ -29,7 +28,8 @@ module  Api
 
     def update
       if @task.update(task_params)
-        render json: @task
+        @task.make_status!
+        render json: { task: @task, parent_task: @task.parent_task, day: @task.day }
       else
         render json: @task.errors, status: :unprocessable_entity
       end
@@ -39,7 +39,6 @@ module  Api
       @task = Task.find(params[:id])
       @task.destroy
       if @task.destroy
-        @day = current_user.days.find(params[:day_id])
         head :no_content, status: :ok
       else
         render json: @task.errors, status: :unprocessable_entity
@@ -68,10 +67,6 @@ module  Api
         end
       end
       render json: tasks
-    end
-
-    def make_status
-      @task.make_status!
     end
 
     private

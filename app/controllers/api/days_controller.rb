@@ -5,14 +5,8 @@ module Api
     before_action :find_day, only: %i[edit update show destroy]
 
     def index
-      if params[:status].nil?
-        @days = current_user.days.order(:id)
-        render json: @days
-      else
-        @days = current_user.days.order(:id)
-        CompleteDaysSuccessful.complete_successful(@days)
-        render json: @days
-      end
+      @days = current_user.days.order(:id)
+      render json: @days
     end
 
     def new
