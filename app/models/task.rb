@@ -10,7 +10,7 @@ class Task < ApplicationRecord
   validates :duration, presence: true
   belongs_to :parent_task, class_name: 'Task', foreign_key: 'parent_id', optional: true
 
-  #after_destroy :destroy_day, if: ->(object) { object.day.tasks.empty? }
+  after_destroy :destroy_subtask, if: ->(object) { object.duration == 'week' }
   after_update :complete_day, if: ->(object) { object.day.task_done.count == object.day.tasks.count }
   after_update :uncomplete_day, if: ->(object) { object.day.task_done.count != object.day.tasks.count }
 
@@ -34,9 +34,9 @@ class Task < ApplicationRecord
 
   private
 
-  # def destroy_day
-  #   day.destroy
-  # end
+   def destroy_subtask
+     subtasks.destroy_all
+   end
 
   def complete_day
     day.update(report: day.report, successful: true)

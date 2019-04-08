@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  post 'user_token' => 'user_token#create'
   devise_for :users
   namespace :api, defaults: { format: :json } do
+    post 'user_token' => 'user_token#create'
     resources :lists do
       member do
         patch :move
